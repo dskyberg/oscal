@@ -1,0 +1,23 @@
+{
+    "id": "s1.1.2_gdn",
+    "name": "guidance",
+    "parts": [
+        {
+            "id": "s1.1.2_gdn.1",
+            "name": "item",
+            "prose": "Care should be taken that no single person can access, modify or use assets without authorization or detection. The initiation of an event should be separated from its authorization. The possibility of collusion should be considered in designing the controls."
+        },
+        {
+            "id": "s1.1.2_gdn.2",
+            "name": "item",
+            "prose": "Small organizations may find segregation of duties difficult to achieve, but the principle should be applied as far as is possible and practicable. Whenever it is difficult to segregate, other controls such as monitoring of activities, audit trails and management supervision should be considered.",
+            "parts": [
+                {
+                    "id": "s1.1.2_gdn.4",
+                    "name": "item",
+                    "prose": "Care should be taken that no single person can access, modify or use assets without authorization or detection. The initiation of an event should be separated from its authorization. The possibility of collusion should be considered in designing the controls."
+                }
+            ]
+        }
+    ]
+}
