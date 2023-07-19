@@ -5,13 +5,17 @@
 use serde::{Deserialize, Serialize};
 
 use catalog::Catalog;
+use profile::Profile;
 
 pub mod catalog;
 pub mod global;
+pub mod profile;
+mod utils;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Oscal {
     pub catalog: Option<Catalog>,
+    pub profile: Option<Profile>,
 }
 
 #[cfg(test)]

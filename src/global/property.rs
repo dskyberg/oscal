@@ -4,7 +4,7 @@ use uuid::Uuid;
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct Prop {
+pub struct Property {
     name: String,
     uuid: Option<Uuid>,
     ns: Option<String>, // TODO: turn into a valid Uri, or add validation
@@ -14,7 +14,7 @@ pub struct Prop {
     remarks: Option<String>, // TODO: Multi-line markdown validation
 }
 
-pub type Props = Vec<Prop>;
+pub type Properties = Vec<Property>;
 
 #[cfg(test)]
 mod tests {
@@ -35,7 +35,7 @@ mod tests {
         "#
             .to_string(),
         );
-        let prop = Prop {
+        let prop = Property {
             uuid,
             name,
             value,
@@ -46,7 +46,7 @@ mod tests {
 
         let json = serde_json::to_string(&prop);
         assert!(json.is_ok());
-        let result = serde_json::from_str::<Prop>(&json.unwrap());
+        let result = serde_json::from_str::<Property>(&json.unwrap());
         assert!(result.is_ok());
     }
 }

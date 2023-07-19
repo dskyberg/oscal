@@ -2,4 +2,4 @@
 
 ## Catalog
 
-Basic parsing for Catalog is complete with minimal validations.
+## Profile

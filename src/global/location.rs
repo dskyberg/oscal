@@ -2,7 +2,7 @@ use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 use uuid::Uuid;
 
-use crate::global::{Address, Links, Props, TelephoneNumbers};
+use crate::global::{Address, Links, Properties, TelephoneNumbers};
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -22,7 +22,7 @@ pub struct Location {
     ///The uniform resource locator (URL) for a web site or Internet presence associated with the location.
     pub urls: Option<Vec<String>>,
     /// An attribute, characteristic, or quality of the containing object expressed as a namespace qualified name/value pair.
-    pub props: Option<Props>,
+    pub props: Option<Properties>,
     /// A reference to a local or remote resource
     pub links: Option<Links>,
     /// Additional commentary on the containing object.

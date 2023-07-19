@@ -2,7 +2,7 @@ use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 use uuid::Uuid;
 
-use crate::global::{Addresses, Props};
+use crate::global::{Addresses, Properties};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "lowercase")]
@@ -22,7 +22,7 @@ pub struct Party {
     short_name: Option<String>,
     #[serde(rename = "external-ids")]
     external_ids: Option<Vec<String>>, // TODO: validate as Uri
-    props: Option<Props>,
+    props: Option<Properties>,
     links: Option<Vec<String>>,
     #[serde(rename = "email-addresses")]
     email_addresses: Option<Vec<String>>,

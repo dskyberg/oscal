@@ -1,24 +1,24 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use super::{control::Controls, part::Parts};
-use crate::global::{Links, Params, Props};
+use super::{Controls, Parts};
+use crate::global::{Links, Parameters, Properties};
 // Provides information about the publication and availability of the containing document.
 #[skip_serializing_none]
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct Group {
+pub struct ControlGroup {
     pub id: Option<String>,
     pub class: Option<String>,
     pub title: String,
-    pub params: Option<Params>,
-    pub props: Option<Props>,
+    pub params: Option<Parameters>,
+    pub props: Option<Properties>,
     pub links: Option<Links>,
     pub parts: Option<Parts>,
-    pub groups: Option<Groups>,
+    pub groups: Option<ControlGroups>,
     pub controls: Option<Controls>,
 }
 
-pub type Groups = Vec<Group>;
+pub type ControlGroups = Vec<ControlGroup>;
 
 #[cfg(test)]
 mod tests {
@@ -27,7 +27,7 @@ mod tests {
     #[test]
     fn test_de() {
         let json = include_str!("../../tests/group_1.json");
-        let result = serde_json::from_str::<Group>(json);
+        let result = serde_json::from_str::<ControlGroup>(json);
         assert!(result.is_ok());
     }
 }

@@ -2,7 +2,7 @@ use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 use uuid::Uuid;
 
-use crate::global::{Base64Binary, Citation, DocumentIds, Links, Props};
+use crate::global::{Base64Binary, Citation, DocumentIds, Links, Properties};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "lowercase")]
@@ -17,7 +17,7 @@ pub struct Resource {
     pub uuid: Uuid,
     pub title: Option<String>,
     pub description: Option<String>,
-    pub props: Option<Props>,
+    pub props: Option<Properties>,
     #[serde(rename = "document-ids")]
     pub document_ids: Option<DocumentIds>,
     pub citation: Option<Citation>,

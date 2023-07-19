@@ -1,13 +1,13 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use super::{Links, Props};
+use super::{Links, Properties};
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Citation {
     pub text: String,
-    pub props: Option<Props>,
+    pub props: Option<Properties>,
     pub links: Option<Links>,
 }
 

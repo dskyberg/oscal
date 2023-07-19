@@ -3,7 +3,7 @@ use semver::Version;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::global::{Props, VersionVar};
+use crate::global::{Properties, VersionVar};
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -15,7 +15,7 @@ pub struct Revision {
     pub version: VersionVar,
     #[serde(rename = "oscal-version")]
     pub oscal_version: Option<Version>,
-    pub props: Option<Props>,
+    pub props: Option<Properties>,
     pub links: Option<Vec<String>>,
 }
 

@@ -4,7 +4,7 @@ use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
 use crate::global::{
-    DocumentIds, Locations, Parties, Props, ResponsibleParties, Revisions, Roles, VersionVar,
+    DocumentIds, Locations, Parties, Properties, ResponsibleParties, Revisions, Roles, VersionVar,
 };
 
 /// Provides information about the publication and availability of the containing document.
@@ -29,7 +29,7 @@ pub struct Metadata {
     #[serde(rename = "document-ids")]
     pub document_ids: Option<DocumentIds>,
     /// An attribute, characteristic, or quality of the containing object expressed as a namespace qualified name/value pair. The value of a property is a simple scalar value, which may be expressed as a list of values.
-    pub props: Option<Props>,
+    pub props: Option<Properties>,
     /// A reference to a local or remote resource
     pub links: Option<Vec<String>>, // TODO: validate as URIs
     /// Defines a function assumed or expected to be assumed by a party in a specific situation.

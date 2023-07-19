@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::global::{Links, Props};
+use crate::global::{Links, Properties};
 
 // Provides information about the publication and availability of the containing document.
 #[skip_serializing_none]
@@ -12,7 +12,7 @@ pub struct Part {
     pub ns: Option<String>,
     pub class: Option<String>,
     pub title: Option<String>,
-    pub props: Option<Props>,
+    pub props: Option<Properties>,
     pub prose: Option<String>,
     pub links: Option<Links>,
     pub parts: Option<Parts>,

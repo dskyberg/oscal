@@ -1,19 +1,13 @@
+/// A collection of controls.
+///
+/// Catalogs may use one or more group objects to subdivide the control contents of a catalog.
+
+/// An OSCAL catalog model provides a structured representation of control information.
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 use uuid::Uuid;
 
-use back_matter::BackMatter;
-use control::Controls;
-use group::Groups;
-use metadata::Metadata;
-
-use crate::global::Params;
-
-pub mod back_matter;
-pub mod control;
-pub mod group;
-pub mod metadata;
-pub mod part;
+use crate::global::{BackMatter, ControlGroups, Controls, Metadata, Parameters};
 
 // Provides information about the publication and availability of the containing document.
 #[skip_serializing_none]
@@ -21,9 +15,9 @@ pub mod part;
 pub struct Catalog {
     pub uuid: Uuid,
     pub metadata: Metadata,
-    pub params: Option<Params>,
+    pub params: Option<Parameters>,
     pub controls: Option<Controls>,
-    pub groups: Option<Groups>,
+    pub groups: Option<ControlGroups>,
     #[serde(rename = "back-matter")]
     pub back_matter: Option<BackMatter>,
 }

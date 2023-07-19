@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::global::Props;
+use crate::global::Properties;
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -16,7 +16,7 @@ pub struct Role {
     /// A summary of the role's purpose and associated responsibilities.
     pub description: Option<String>,
     /// An attribute, characteristic, or quality of the containing object expressed as a namespace qualified name/value pair
-    pub props: Option<Props>,
+    pub props: Option<Properties>,
     /// A reference to a local or remote resource
     pub links: Option<Vec<String>>,
     /// Additional commentary on the containing object.
