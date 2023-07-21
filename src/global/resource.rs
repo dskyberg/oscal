@@ -13,12 +13,12 @@ pub enum AddressType {
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "kebab-case")]
 pub struct Resource {
     pub uuid: Uuid,
     pub title: Option<String>,
     pub description: Option<String>,
     pub props: Option<Properties>,
-    #[serde(rename = "document-ids")]
     pub document_ids: Option<DocumentIds>,
     pub citation: Option<Citation>,
     pub rlinks: Option<Links>, // TODO: define rlinks - it' different from links

@@ -35,13 +35,11 @@ pub struct IncludeControlConstraint {
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "kebab-case")]
 pub struct Import {
     pub href: String, // TODO: validate as Uri
-    #[serde(rename = "include-all")]
     pub include_all: Option<IncludeAllControlsConstraint>,
-    #[serde(rename = "include-controls")]
     pub include_controls: Option<IncludeControlConstraint>,
-    #[serde(rename = "exclude-controls")]
     pub exclude_controls: Option<IncludeControlConstraint>,
 }
 

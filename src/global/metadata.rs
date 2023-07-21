@@ -10,23 +10,21 @@ use crate::global::{
 /// Provides information about the publication and availability of the containing document.
 #[skip_serializing_none]
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "kebab-case")]
 pub struct Metadata {
     /// A name given to the document, which may be used by a tool for display and navigation.
     pub title: String,
     ///  The date and time the document was published. The date-time value must be formatted according to RFC 3339 with full time and time zone included.
     pub published: Option<DateTime<Utc>>,
     /// The date and time the document was last modified. The date-time value must be formatted according to RFC 3339 with full time and time zone included.
-    #[serde(rename = "last-modified")]
     pub last_modified: DateTime<Utc>,
     /// A string used to distinguish the current version of the document from other previous (and future) versions.
     pub version: VersionVar,
     /// The OSCAL model version the document was authored against.
-    #[serde(rename = "oscal-version")]
     pub oscal_version: Version,
     /// An entry in a sequential list of revisions to the containing document in reverse chronological order (i.e., most recent previous revision first).
     pub revisions: Option<Revisions>,
     /// A document identifier qualified by an identifier scheme.
-    #[serde(rename = "document-ids")]
     pub document_ids: Option<DocumentIds>,
     /// An attribute, characteristic, or quality of the containing object expressed as a namespace qualified name/value pair. The value of a property is a simple scalar value, which may be expressed as a list of values.
     pub props: Option<Properties>,

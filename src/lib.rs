@@ -5,9 +5,11 @@
 use serde::{Deserialize, Serialize};
 
 use catalog::Catalog;
+use error::{OscalError, Result};
 use profile::Profile;
 
 pub mod catalog;
+pub mod error;
 pub mod global;
 pub mod profile;
 mod utils;

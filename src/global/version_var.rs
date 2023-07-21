@@ -11,7 +11,7 @@ use semver::Version;
 use serde::{de::Visitor, Deserialize, Serialize};
 use std::fmt;
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 #[serde(untagged)]
 pub enum VersionVar {
     /// Version is in SemVer format

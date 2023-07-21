@@ -3,6 +3,7 @@ use serde_with::skip_serializing_none;
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "kebab-case")]
 pub struct Base64Binary {
     pub filename: Option<String>,
     pub media_type: Option<String>,

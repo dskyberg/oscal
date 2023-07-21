@@ -1,19 +1,19 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::global::{Constraints, Guidelines, Links, Properties, Select};
+use crate::global::{Constraints, Guidelines, Links, NCName, Properties, Select};
 
 /// Provides information about the publication and availability of the containing document.
 #[skip_serializing_none]
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "kebab-case")]
 pub struct Parameter {
     /// **(deprecated)** Another parameter invoking this one. This construct has been deprecated and should not be used.
-    pub id: String,
+    pub id: NCName,
     /// **(deprecated)** Another parameter invoking this one. This construct has been deprecated and should not be used.
-    pub class: Option<String>,
+    pub class: Option<NCName>,
     /// **(deprecated)** Another parameter invoking this one. This construct has been deprecated and should not be used.
-    #[serde(rename = "depends-on")]
-    pub depends_on: Option<Vec<String>>,
+    pub depends_on: Option<Vec<NCName>>,
     /// An attribute, characteristic, or quality of the containing object expressed as a namespace qualified name/value pair. The value of a property is a simple scalar value, which may be expressed as a list of values.
     pub props: Option<Properties>,
     /// Describes the purpose and use of a parameter

@@ -7,13 +7,12 @@ use crate::global::{Properties, VersionVar};
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "kebab-case")]
 pub struct Revision {
     pub title: Option<String>,
     pub published: Option<DateTime<Utc>>,
-    #[serde(rename = "last-modified")]
     pub last_modified: Option<DateTime<Utc>>,
     pub version: VersionVar,
-    #[serde(rename = "oscal-version")]
     pub oscal_version: Option<Version>,
     pub props: Option<Properties>,
     pub links: Option<Vec<String>>,

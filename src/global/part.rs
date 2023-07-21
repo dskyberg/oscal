@@ -1,16 +1,16 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::global::{Links, Properties};
+use crate::global::{Links, NCName, Properties};
 
 // Provides information about the publication and availability of the containing document.
 #[skip_serializing_none]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Part {
-    pub id: Option<String>,
-    pub name: String,
+    pub id: Option<NCName>,
+    pub name: NCName,
     pub ns: Option<String>,
-    pub class: Option<String>,
+    pub class: Option<NCName>,
     pub title: Option<String>,
     pub props: Option<Properties>,
     pub prose: Option<String>,

@@ -2,16 +2,18 @@ use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 use uuid::Uuid;
 
+use crate::global::NCName;
+
 #[skip_serializing_none]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Property {
-    name: String,
-    uuid: Option<Uuid>,
-    ns: Option<String>, // TODO: turn into a valid Uri, or add validation
-    value: String,
+    pub name: NCName,
+    pub uuid: Option<Uuid>,
+    pub ns: Option<String>, // TODO: turn into a valid Uri, or add validation
+    pub value: String,
     ///A textual label that provides a sub-type or characterization of the property's name
-    class: Option<String>, // TODO: validation pattern: "^(\\p{L}|_)(\\p{L}|\\p{N}|[.\\-_])*$"
-    remarks: Option<String>, // TODO: Multi-line markdown validation
+    pub class: Option<NCName>, // TODO: validation pattern: "^(\\p{L}|_)(\\p{L}|\\p{N}|[.\\-_])*$"
+    pub remarks: Option<String>, // TODO: Multi-line markdown validation
 }
 
 pub type Properties = Vec<Property>;
@@ -23,7 +25,7 @@ mod tests {
     #[test]
     fn test_serialize() {
         let uuid = Some(Uuid::new_v4());
-        let name = "my-name".to_string();
+        let name = NCName::try_from("my-name").expect("oops");
         let value = "my value".to_string();
         let ns = None;
         let class = None;
