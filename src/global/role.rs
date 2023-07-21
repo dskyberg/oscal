@@ -1,14 +1,14 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::global::{NCName, Properties};
+use crate::global::{Properties, Token};
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "kebab-case")]
 pub struct Role {
     /// A human-oriented, locally unique identifier with cross-instance scope that can be used to reference this defined role elsewhere in this or other OSCAL instances.
-    pub id: NCName,
+    pub id: Token,
     /// A name given to the role, which may be used by a tool for display and navigation.
     pub title: String,
     /// A short common name, abbreviation, or acronym for the role.

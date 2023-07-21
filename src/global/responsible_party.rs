@@ -2,14 +2,14 @@ use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 use uuid::Uuid;
 
-use crate::global::{Links, NCName, Properties};
+use crate::global::{Links, Properties, Token};
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "kebab-case")]
 pub struct ResponsibleParty {
     /// A human-oriented identifier reference to roles served by the user.
-    pub role_id: NCName,
+    pub role_id: Token,
 
     /// A machine-oriented identifier reference to another party defined in metadata. The UUID of the party in the source OSCAL instance is sufficient to reference the data item locally or globally (e.g., in an imported OSCAL instance).
     pub party_uuids: Vec<Uuid>,

@@ -2,13 +2,13 @@ use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
 use super::{Controls, Parts};
-use crate::global::{Links, NCName, Parameters, Properties};
+use crate::global::{Links, Parameters, Properties, Token};
 // Provides information about the publication and availability of the containing document.
 #[skip_serializing_none]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ControlGroup {
-    pub id: Option<NCName>,
-    pub class: Option<NCName>,
+    pub id: Option<Token>,
+    pub class: Option<Token>,
     pub title: String,
     pub params: Option<Parameters>,
     pub props: Option<Properties>,

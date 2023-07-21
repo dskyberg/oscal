@@ -2,14 +2,15 @@ use serde::{Deserialize, Serialize};
 
 use crate::OscalError;
 
+/// An XML non-colonized name value
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(transparent)]
-pub struct NCName {
+pub struct Token {
     #[serde(serialize_with = "serialize", deserialize_with = "deserialize")]
     pub inner: String,
 }
 
-impl NCName {
+impl Token {
     fn new(value: &str) -> Self {
         Self {
             inner: value.to_string(),
@@ -68,7 +69,7 @@ impl NCName {
         for (idx, c) in ts.enumerate() {
             match idx {
                 0 => {
-                    if idx == 0 && !NCName::is_valid_start_char(c) {
+                    if idx == 0 && !Token::is_valid_start_char(c) {
                         println!("Bad first char: {}", c);
                         return Err(
                             OscalError::BadNCName(format!("illegal starting char: {}", c)).into(),
@@ -76,7 +77,7 @@ impl NCName {
                     }
                 }
                 _ => {
-                    if !NCName::is_valid_char(c) {
+                    if !Token::is_valid_char(c) {
                         return Err(OscalError::BadNCName(format!("illegal char: {}", c)).into());
                     }
                 }
@@ -87,11 +88,11 @@ impl NCName {
     }
 }
 
-impl TryFrom<&str> for NCName {
+impl TryFrom<&str> for Token {
     type Error = Box<dyn std::error::Error>;
     fn try_from(value: &str) -> Result<Self, Self::Error> {
-        match NCName::validate(value) {
-            Ok(()) => Ok(NCName::new(value)),
+        match Token::validate(value) {
+            Ok(()) => Ok(Token::new(value)),
             Err(e) => Err(e),
         }
     }
@@ -105,9 +106,9 @@ where
 {
     let s: &str = de::Deserialize::deserialize(deserializer)?;
 
-    match NCName::validate(s) {
+    match Token::validate(s) {
         Ok(()) => Ok(s.to_string()),
-        _ => Err(de::Error::unknown_variant(s, &["NCName"])),
+        _ => Err(de::Error::unknown_variant(s, &["Token"])),
     }
 }
 
@@ -124,21 +125,21 @@ mod tests {
 
     #[derive(Serialize, Deserialize)]
     struct Outer {
-        pub id: NCName,
+        pub id: Token,
     }
 
     #[test]
     fn test_from_str() {
-        let result = NCName::try_from("goodValue");
+        let result = Token::try_from("goodValue");
         assert!(result.is_ok());
 
-        let result = NCName::try_from("0_bad_value");
+        let result = Token::try_from("0_bad_value");
         assert!(result.is_err());
     }
 
     #[test]
     fn test_se() {
-        let token: NCName = NCName::new("good_value");
+        let token: Token = Token::new("good_value");
         let outer = Outer { id: token };
         let result = serde_json::to_string(&outer);
         assert!(result.is_ok());

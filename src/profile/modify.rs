@@ -1,17 +1,15 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::global::{
-    Constraints, Guidelines, Links, NCName, Parameters, Parts, Properties, Select,
-};
+use crate::global::{Constraints, Guidelines, Links, Parameters, Parts, Properties, Select, Token};
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "kebab-case")]
 struct SetParameter {
-    pub param_id: NCName,
-    pub class: Option<NCName>,
-    pub depends_on: Option<NCName>,
+    pub param_id: Token,
+    pub class: Option<Token>,
+    pub depends_on: Option<Token>,
     pub props: Option<Properties>,
     pub links: Option<Links>,
     pub label: Option<String>,
@@ -27,15 +25,15 @@ type SetParameters = Vec<SetParameter>;
 #[derive(Debug, Clone, Serialize, Deserialize)]
 struct Remove {
     #[serde(rename = "by-name")]
-    pub by_name: Option<NCName>,
+    pub by_name: Option<Token>,
     #[serde(rename = "by-class")]
-    pub by_class: Option<NCName>,
+    pub by_class: Option<Token,
     #[serde(rename = "by-id")]
-    pub by_id: Option<NCName>,
+    pub by_id: Option<Token>,
     #[serde(rename = "by-item-name")]
-    pub by_item_name: Option<NCName>,
+    pub by_item_name: Option<Token>,
     #[serde(rename = "by-ns")]
-    pub by_ns: Option<NCName>,
+    pub by_ns: Option<Token>,
 }
 type Removes = Vec<Remove>;
 
@@ -44,7 +42,7 @@ type Removes = Vec<Remove>;
 struct Add {
     pub position: Option<String>,
     #[serde(rename = "by-id")]
-    pub by_id: Option<NCName>,
+    pub by_id: Option<Token>,
     pub title: Option<String>,
     pub params: Option<Parameters>,
     pub props: Option<Properties>,
@@ -57,7 +55,7 @@ type Adds = Vec<Add>;
 #[derive(Debug, Clone, Serialize, Deserialize)]
 struct Alter {
     #[serde(rename = "control-id")]
-    pub control_id: NCName,
+    pub control_id: Token,
     pub removes: Option<Removes>,
     pub adds: Option<Adds>,
 }
