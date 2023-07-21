@@ -27,7 +27,7 @@ struct Remove {
     #[serde(rename = "by-name")]
     pub by_name: Option<Token>,
     #[serde(rename = "by-class")]
-    pub by_class: Option<Token,
+    pub by_class: Option<Token>,
     #[serde(rename = "by-id")]
     pub by_id: Option<Token>,
     #[serde(rename = "by-item-name")]
