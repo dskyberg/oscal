@@ -1,0 +1,56 @@
+/// BooleanDatatype
+/// 
+/// $id: #/definitions/boolean_datatype
+
+use serde::{de, Deserialize, Serialize, Serializer};
+
+#[derive(Debug, Clone, Deserialize, Serialize)]
+#[serde(rename_all ="kebab-case")]
+#[serde(transparent)]
+pub struct BooleanDatatype {
+#[serde(serialize_with = "serialize", deserialize_with = "deserialize")]
+	pub inner: bool
+}
+
+impl BooleanDatatype {
+    pub fn new(value: bool) -> Self {
+        Self{inner: value}
+    }
+
+    /// String references are established so that the value can be
+    /// validated against a pattern or other connstraint.
+    pub fn validate(_value: bool) -> crate::error::Result<()> {
+        // todo!(); // Replace with appropriate validation method.
+        Ok(())
+    }
+}
+
+
+impl TryFrom<bool> for BooleanDatatype {
+    type Error = Box<dyn std::error::Error>;
+    fn try_from(value: bool) -> Result<Self, Self::Error> {
+        match Self::validate(value) {
+            Ok(()) => Ok(Self::new(value)),
+            Err(e) => Err(e),
+        }
+    }
+}
+
+fn deserialize<'de, D>(deserializer: D) -> Result<bool, D::Error>
+where
+    D: de::Deserializer<'de>,
+{
+    let s: bool = de::Deserialize::deserialize(deserializer)?;
+
+    match BooleanDatatype::validate(s) {
+        Ok(()) => Ok(s),
+        _ => Err(de::Error::custom("not a boolean"))
+    }
+}
+
+fn serialize<S>(value: &bool, serializer: S) -> Result<S::Ok, S::Error>
+where
+    S: Serializer,
+{
+    serializer.serialize_bool(*value)
+}
