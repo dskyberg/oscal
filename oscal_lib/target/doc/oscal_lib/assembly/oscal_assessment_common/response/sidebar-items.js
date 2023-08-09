@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["remediation_intent","required_asset"],"struct":["Response"]};

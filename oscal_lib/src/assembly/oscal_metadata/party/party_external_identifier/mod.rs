@@ -15,8 +15,8 @@ use crate::definitions::StringDatatype;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct PartyExternalIdentifier {
-	pub id: StringDatatype,
 	/// External Identifier Schema
 	/// Indicates the type of external identifier.
 	pub scheme: ExternalIdentifierSchema,
+	pub id: StringDatatype,
 }

@@ -15,8 +15,8 @@ use crate::field::oscal_metadata::Remarks;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct Status {
-	pub remarks: Option<Remarks>,
 	/// State
 	/// The current operating status.
 	pub state: State,
+	pub remarks: Option<Remarks>,
 }

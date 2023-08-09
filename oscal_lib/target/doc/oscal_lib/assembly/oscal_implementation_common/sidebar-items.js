@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["authorized_privilege","implementation_status","inventory_item","port_range","protocol","set_parameter","system_component","system_user"]};

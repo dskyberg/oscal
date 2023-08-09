@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["associated_risk","origin","related_observation"],"struct":["PoamItem"]};

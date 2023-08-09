@@ -1,7 +1,7 @@
 pub use assessment_platform::*;
 
+
 pub mod assessment_platform;
-pub mod uses_component;
 
 /// Assessment Assets
 /// Identifies the assets used to perform this assessment, such as the assessment team, scanning tools, and assumptions.
@@ -13,8 +13,8 @@ use crate::assembly::oscal_implementation_common::SystemComponent;
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, Deserialize, Serialize)]
-#[serde(rename_all = "kebab-case")]
+#[serde(rename_all ="kebab-case")]
 pub struct AssessmentAssets {
-    pub components: Option<Vec<SystemComponent>>,
-    pub assessment_platforms: Vec<AssessmentPlatform>,
+	pub assessment_platforms: Vec<AssessmentPlatform>,
+	pub components: Option<Vec<SystemComponent>>,
 }

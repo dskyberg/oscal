@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["finding_target_type","objective_status"],"struct":["FindingTarget"]};

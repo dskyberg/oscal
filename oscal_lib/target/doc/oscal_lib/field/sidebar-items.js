@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["oscal_assessment_common","oscal_catalog_common","oscal_implementation_common","oscal_metadata","oscal_ssp"]};

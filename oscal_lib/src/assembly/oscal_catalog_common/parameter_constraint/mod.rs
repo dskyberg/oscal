@@ -14,8 +14,8 @@ use serde_with::skip_serializing_none;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct ParameterConstraint {
-	pub tests: Option<Vec<ConstraintTest>>,
 	/// Constraint Description
 	/// A textual summary of the constraint to be applied.
 	pub description: Option<String>,
+	pub tests: Option<Vec<ConstraintTest>>,
 }

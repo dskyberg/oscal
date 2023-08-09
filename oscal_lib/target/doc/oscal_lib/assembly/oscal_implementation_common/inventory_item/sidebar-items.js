@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["implemented_component"],"struct":["InventoryItem"]};

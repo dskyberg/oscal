@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["constraint_test"],"struct":["ParameterConstraint"]};

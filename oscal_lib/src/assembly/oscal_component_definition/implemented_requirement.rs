@@ -17,19 +17,19 @@ use crate::field::oscal_metadata::Remarks;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct ImplementedRequirement {
-	pub remarks: Option<Remarks>,
-	/// Control Implementation Description
-	/// A suggestion for how the specified control may be implemented if the containing component or capability is instantiated in a system security plan.
-	pub description: String,
 	pub links: Option<Vec<Link>>,
 	pub responsible_roles: Option<Vec<ResponsibleRole>>,
-	pub set_parameters: Option<Vec<SetParameter>>,
-	pub statements: Option<Vec<Statement>>,
-	/// Control Identifier Reference
-	/// A human-oriented identifier reference to a control with a corresponding id value. When referencing an externally defined control, the Control Identifier Reference must be used in the context of the external / imported OSCAL instance (e.g., uri-reference).
-	pub control_id: TokenDatatype,
 	pub props: Option<Vec<Property>>,
+	pub set_parameters: Option<Vec<SetParameter>>,
 	/// Control Implementation Identifier
 	/// A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference a specific control implementation elsewhere in this or other OSCAL instances. The locally defined UUID of the control implementation can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance).This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document.
 	pub uuid: UuidDatatype,
+	/// Control Implementation Description
+	/// A suggestion for how the specified control may be implemented if the containing component or capability is instantiated in a system security plan.
+	pub description: String,
+	/// Control Identifier Reference
+	/// A human-oriented identifier reference to a control with a corresponding id value. When referencing an externally defined control, the Control Identifier Reference must be used in the context of the external / imported OSCAL instance (e.g., uri-reference).
+	pub control_id: TokenDatatype,
+	pub remarks: Option<Remarks>,
+	pub statements: Option<Vec<Statement>>,
 }

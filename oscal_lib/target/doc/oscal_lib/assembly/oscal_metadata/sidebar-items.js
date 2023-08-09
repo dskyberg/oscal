@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["address","back_matter","link","location","metadata","party","property","responsible_party","responsible_role","revision","role"]};

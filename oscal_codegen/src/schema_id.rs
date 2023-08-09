@@ -54,14 +54,6 @@ impl SchemaId {
         a == b
     }
 
-    pub fn same_path_and_name(&self) -> bool {
-        if self.path.is_empty() {
-            return false;
-        }
-        let last = self.path.last().unwrap();
-        &self.name == last
-    }
-
     /// Thurn the path and name into a rust name space
     pub fn rustify(&self) -> String {
         match self.path.is_empty() {
@@ -107,6 +99,8 @@ impl SchemaId {
     /// This method converts long id's with embedded namespaces into
     /// a pathed id
     pub fn from_embedded_id(value: &str) -> Result<Self, ParserError> {
+        let mut path: Vec<String> = Vec::new();
+
         if !value.starts_with('#') {
             // This isn't an embedded id
             log::error!("Value doesn't start with '#': {}", value);
@@ -114,12 +108,11 @@ impl SchemaId {
         }
 
         // Remove the leading '#'.  This is safe, since we've already verified the first
-        // char is '#'
+        // char is '#
+
         let line = value.get(1..).unwrap();
 
         let split_parts: Vec<&str> = line.split('_').collect();
-
-        let mut path: Vec<String> = Vec::new();
 
         // If there are any parts left...
         for part in split_parts {
@@ -155,10 +148,8 @@ mod tests {
             SchemaId::try_from("#assembly_oscal-ssp_system-implementation").expect("left failed");
         let right =
             SchemaId::try_from("#assembly_oscal-ssp_system-implementation_leveraged-authorization_leveraged-authorization").expect("right faile");
-        assert!(!left.same_path_and_name());
         assert!(left.is_descendant(&right));
 
-        assert!(right.same_path_and_name());
         assert!(!right.is_descendant(&left));
 
         dbg!(left.rustify());

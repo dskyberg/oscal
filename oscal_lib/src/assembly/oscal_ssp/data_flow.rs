@@ -14,10 +14,10 @@ use crate::field::oscal_metadata::Remarks;
 #[serde(rename_all ="kebab-case")]
 pub struct DataFlow {
 	pub diagrams: Option<Vec<Diagram>>,
+	pub props: Option<Vec<Property>>,
+	pub remarks: Option<Remarks>,
 	pub links: Option<Vec<Link>>,
 	/// Data Flow Description
 	/// A summary of the system's data flow.
 	pub description: String,
-	pub props: Option<Vec<Property>>,
-	pub remarks: Option<Remarks>,
 }

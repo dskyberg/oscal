@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["base_64","citation","resource_link"],"struct":["Resource"]};

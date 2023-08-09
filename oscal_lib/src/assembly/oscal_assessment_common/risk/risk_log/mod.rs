@@ -1,7 +1,7 @@
 pub use risk_log_entry::*;
 
+
 pub mod risk_log_entry;
-pub mod risk_response_reference;
 
 /// Risk Log
 /// A log of all risk-related tasks taken.
@@ -9,9 +9,10 @@ pub mod risk_response_reference;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
+
 #[skip_serializing_none]
 #[derive(Debug, Clone, Deserialize, Serialize)]
-#[serde(rename_all = "kebab-case")]
+#[serde(rename_all ="kebab-case")]
 pub struct RiskLog {
-    pub entries: Vec<RiskLogEntry>,
+	pub entries: Vec<RiskLogEntry>,
 }

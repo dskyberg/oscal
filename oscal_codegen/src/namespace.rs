@@ -171,7 +171,12 @@ impl NameSpace {
 
     /// Called by an object that has properties.
     /// Called by [Schema::parse] to add the properties under "definitions".
-    pub fn add_property(&mut self, value: &Value, id: &SchemaId, name: Option<&str>) -> Result<()> {
+    pub fn add_property(
+        &mut self,
+        value: &Value,
+        id: &SchemaId,
+        name: Option<&str>,
+    ) -> Result<PropertyType> {
         //let ns = self.upsert(id);
         let ns = self;
         // Create the namespace for the value. and add it.
@@ -186,7 +191,7 @@ impl NameSpace {
         })?;
 
         // Add the object to the namespace
-        let leaf = NameSpace::new_leaf(id.name.as_str(), prop).map_err(|e| {
+        let leaf = NameSpace::new_leaf(id.name.as_str(), prop.clone()).map_err(|e| {
             log::error!("Failed to create a new leaf");
             e
         })?;
@@ -195,7 +200,7 @@ impl NameSpace {
         // And add the new namespace to the parent
         ns.push(node);
 
-        Ok(())
+        Ok(prop)
     }
 
     pub fn show(&self, depth: usize) {
@@ -272,6 +277,10 @@ impl Generate for NameSpace {
 
                 for child in children {
                     let cname = child.generate(&path)?;
+                    if &cname == "oscal" && name == "src" {
+                        // Don't add `pub use oscal`
+                        continue;
+                    }
 
                     if child.name() == name {
                         let path = format!("{}/{}.rs", path, name);
@@ -292,7 +301,14 @@ impl Generate for NameSpace {
                     _ => "mod.rs",
                 };
 
-                let mod_file_inner = format!("{}\n\n{}\n{}", uses, mods, child_contents);
+                let mut mod_file_inner = String::new();
+                if file_name == "lib.rs" {
+                    mod_file_inner.push_str(r##"#![doc = include_str!("../README.md")]"##);
+                    mod_file_inner.push('\n');
+                    mod_file_inner.push_str(r##"#![allow(ambiguous_glob_reexports)]"##);
+                    mod_file_inner.push('\n');
+                }
+                mod_file_inner.push_str(&format!("{}\n\n{}\n{}", uses, mods, child_contents));
 
                 // If there's a leaf with the same name as this, then generate it
                 // right here in the mod file.

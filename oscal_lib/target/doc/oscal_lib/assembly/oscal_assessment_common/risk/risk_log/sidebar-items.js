@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["risk_log_entry"],"struct":["RiskLog"]};

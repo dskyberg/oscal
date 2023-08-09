@@ -50,6 +50,7 @@ impl PropertyType {
         }
     }
 }
+
 impl Property for PropertyType {
     fn description(&self) -> Option<String> {
         match self {

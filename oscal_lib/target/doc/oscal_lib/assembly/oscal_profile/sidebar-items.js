@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["add","alter","group","import","insert_controls","merge","modify","profile","remove","select_control_by_id"]};

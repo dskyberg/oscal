@@ -22,28 +22,28 @@ use crate::field::oscal_ssp::DateAuthorized;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct SystemCharacteristics {
-	pub system_ids: Vec<SystemId>,
-	pub status: Status,
-	/// System Description
-	/// A summary of the system.
-	pub description: String,
-	/// System Name - Full
-	/// The full name of the system.
-	pub system_name: StringDatatype,
 	pub props: Option<Vec<Property>>,
-	pub date_authorized: Option<DateAuthorized>,
-	/// Security Sensitivity Level
-	/// The overall information system sensitivity categorization, such as defined by FIPS-199.
-	pub security_sensitivity_level: StringDatatype,
-	pub links: Option<Vec<Link>>,
-	pub responsible_parties: Option<Vec<ResponsibleParty>>,
-	pub remarks: Option<Remarks>,
-	pub security_impact_level: SecurityImpactLevel,
-	pub authorization_boundary: AuthorizationBoundary,
-	pub network_architecture: Option<NetworkArchitecture>,
-	pub system_information: SystemInformation,
-	pub data_flow: Option<DataFlow>,
 	/// System Name - Short
 	/// A short name for the system, such as an acronym, that is suitable for display in a data table or summary list.
 	pub system_name_short: Option<StringDatatype>,
+	pub system_ids: Vec<SystemId>,
+	pub network_architecture: Option<NetworkArchitecture>,
+	pub remarks: Option<Remarks>,
+	pub status: Status,
+	pub data_flow: Option<DataFlow>,
+	pub system_information: SystemInformation,
+	pub date_authorized: Option<DateAuthorized>,
+	/// System Description
+	/// A summary of the system.
+	pub description: String,
+	pub links: Option<Vec<Link>>,
+	pub responsible_parties: Option<Vec<ResponsibleParty>>,
+	/// Security Sensitivity Level
+	/// The overall information system sensitivity categorization, such as defined by FIPS-199.
+	pub security_sensitivity_level: StringDatatype,
+	pub authorization_boundary: AuthorizationBoundary,
+	pub security_impact_level: SecurityImpactLevel,
+	/// System Name - Full
+	/// The full name of the system.
+	pub system_name: StringDatatype,
 }

@@ -16,18 +16,18 @@ use crate::field::oscal_metadata::Remarks;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct Capability {
+	/// Capability Name
+	/// The capability's human-readable name.
+	pub name: StringDatatype,
+	pub control_implementations: Option<Vec<ControlImplementation>>,
 	/// Capability Description
 	/// A summary of the capability.
 	pub description: String,
-	pub incorporates_components: Option<Vec<IncorporatesComponent>>,
 	pub links: Option<Vec<Link>>,
 	/// Capability Identifier
 	/// A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this capability elsewhere in this or other OSCAL instances. The locally defined UUID of the capability can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance).This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document.
 	pub uuid: UuidDatatype,
-	pub props: Option<Vec<Property>>,
-	/// Capability Name
-	/// The capability's human-readable name.
-	pub name: StringDatatype,
 	pub remarks: Option<Remarks>,
-	pub control_implementations: Option<Vec<ControlImplementation>>,
+	pub props: Option<Vec<Property>>,
+	pub incorporates_components: Option<Vec<IncorporatesComponent>>,
 }

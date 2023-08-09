@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["associated_activity","event_timing","task_dependency","task_type"],"struct":["Task"]};

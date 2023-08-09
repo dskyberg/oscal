@@ -19,6 +19,12 @@ pub struct Address {
 	/// State
 	/// State, province or analogous geographical region for mailing address
 	pub state: Option<StringDatatype>,
+	/// Postal Code
+	/// Postal or ZIP code for mailing address
+	pub postal_code: Option<StringDatatype>,
+	/// Country Code
+	/// The ISO 3166-1 alpha-2 country code for the mailing address.
+	pub country: Option<StringDatatype>,
 	/// Address Type
 	/// Indicates the type of address.
 	#[serde(rename = "type")]
@@ -27,10 +33,4 @@ pub struct Address {
 	/// City
 	/// City, town or geographical region for the mailing address.
 	pub city: Option<StringDatatype>,
-	/// Country Code
-	/// The ISO 3166-1 alpha-2 country code for the mailing address.
-	pub country: Option<StringDatatype>,
-	/// Postal Code
-	/// Postal or ZIP code for mailing address
-	pub postal_code: Option<StringDatatype>,
 }

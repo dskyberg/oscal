@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["actor_type"],"struct":["OriginActor"]};

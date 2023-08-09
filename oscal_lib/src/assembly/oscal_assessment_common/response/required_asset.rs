@@ -17,14 +17,14 @@ pub struct RequiredAsset {
 	/// Description of Required Asset
 	/// A human-readable description of this required asset.
 	pub description: String,
-	pub remarks: Option<Remarks>,
-	pub props: Option<Vec<Property>>,
-	pub subjects: Option<Vec<SubjectReference>>,
 	/// Title for Required Asset
 	/// The title for this required asset.
 	pub title: Option<String>,
+	pub subjects: Option<Vec<SubjectReference>>,
+	pub remarks: Option<Remarks>,
+	pub props: Option<Vec<Property>>,
+	pub links: Option<Vec<Link>>,
 	/// Required Universally Unique Identifier
 	/// A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this required asset elsewhere in this or other OSCAL instances. The locally defined UUID of the asset can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document.
 	pub uuid: UuidDatatype,
-	pub links: Option<Vec<Link>>,
 }

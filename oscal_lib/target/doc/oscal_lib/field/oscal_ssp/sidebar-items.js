@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["adjustment_justification","base","date_authorized","selected"]};

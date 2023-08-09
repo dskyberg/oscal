@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["assessment_log_entry"],"struct":["AssessmentLog"]};

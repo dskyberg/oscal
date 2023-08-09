@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["assessment_plan_terms_and_conditions","local_definitions"],"struct":["AssessmentPlan"]};

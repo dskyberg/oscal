@@ -22,23 +22,23 @@ use crate::field::oscal_metadata::Remarks;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct Resource {
-	/// Resource Universally Unique Identifier
-	/// A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this defined resource elsewhere in this or other OSCAL instances. This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document.
-	pub uuid: UuidDatatype,
-	pub props: Option<Vec<Property>>,
-	pub remarks: Option<Remarks>,
 	/// Base64
 	/// The Base64 alphabet in RFC 2045 - aligned with XSD.
 	pub base_64: Option<Base64>,
-	/// Resource Title
-	/// A name given to the resource, which may be used by a tool for display and navigation.
-	pub title: Option<String>,
-	pub document_ids: Option<Vec<DocumentId>>,
-	pub rlinks: Option<Vec<ResourceLink>>,
-	/// Resource Description
-	/// A short summary of the resource used to indicate the purpose of the resource.
-	pub description: Option<String>,
 	/// Citation
 	/// A citation consisting of end note text and optional structured bibliographic data.
 	pub citation: Option<Citation>,
+	pub document_ids: Option<Vec<DocumentId>>,
+	pub rlinks: Option<Vec<ResourceLink>>,
+	/// Resource Title
+	/// A name given to the resource, which may be used by a tool for display and navigation.
+	pub title: Option<String>,
+	pub props: Option<Vec<Property>>,
+	pub remarks: Option<Remarks>,
+	/// Resource Description
+	/// A short summary of the resource used to indicate the purpose of the resource.
+	pub description: Option<String>,
+	/// Resource Universally Unique Identifier
+	/// A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this defined resource elsewhere in this or other OSCAL instances. This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document.
+	pub uuid: UuidDatatype,
 }

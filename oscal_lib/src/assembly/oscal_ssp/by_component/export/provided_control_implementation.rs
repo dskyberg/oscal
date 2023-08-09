@@ -15,13 +15,13 @@ use crate::field::oscal_metadata::Remarks;
 #[serde(rename_all ="kebab-case")]
 pub struct ProvidedControlImplementation {
 	pub remarks: Option<Remarks>,
-	pub responsible_roles: Option<Vec<ResponsibleRole>>,
-	pub links: Option<Vec<Link>>,
-	/// Provided Universally Unique Identifier
-	/// A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this provided entry elsewhere in this or other OSCAL instances. The locally defined UUID of the provided entry can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document.
-	pub uuid: UuidDatatype,
+	pub props: Option<Vec<Property>>,
 	/// Provided Control Implementation Description
 	/// An implementation statement that describes the aspects of the control or control statement implementation that can be provided to another system leveraging this system.
 	pub description: String,
-	pub props: Option<Vec<Property>>,
+	pub links: Option<Vec<Link>>,
+	pub responsible_roles: Option<Vec<ResponsibleRole>>,
+	/// Provided Universally Unique Identifier
+	/// A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this provided entry elsewhere in this or other OSCAL instances. The locally defined UUID of the provided entry can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document.
+	pub uuid: UuidDatatype,
 }

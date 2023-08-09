@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["document_identification_scheme"],"struct":["DocumentId"]};

@@ -11,6 +11,6 @@ use crate::assembly::oscal_metadata::ResponsibleParty;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct AttestationStatements {
-	pub parts: Vec<AssessmentPart>,
 	pub responsible_parties: Option<Vec<ResponsibleParty>>,
+	pub parts: Vec<AssessmentPart>,
 }

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["threat_type_identification_system"],"struct":["ThreatId"]};

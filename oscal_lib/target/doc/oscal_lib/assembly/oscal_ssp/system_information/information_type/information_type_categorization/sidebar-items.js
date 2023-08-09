@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["information_type_identification_system"],"struct":["InformationTypeCategorization"]};

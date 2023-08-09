@@ -1,5 +1,6 @@
 pub use resource::*;
 
+
 pub mod resource;
 
 /// Back matter
@@ -8,9 +9,10 @@ pub mod resource;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
+
 #[skip_serializing_none]
 #[derive(Debug, Clone, Deserialize, Serialize)]
-#[serde(rename_all = "kebab-case")]
+#[serde(rename_all ="kebab-case")]
 pub struct BackMatter {
-    pub resources: Option<Vec<Resource>>,
+	pub resources: Option<Vec<Resource>>,
 }

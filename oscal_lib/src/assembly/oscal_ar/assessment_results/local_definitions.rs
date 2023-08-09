@@ -12,7 +12,7 @@ use crate::field::oscal_metadata::Remarks;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct LocalDefinitions {
+	pub objectives_and_methods: Option<Vec<LocalObjective>>,
 	pub remarks: Option<Remarks>,
 	pub activities: Option<Vec<Activity>>,
-	pub objectives_and_methods: Option<Vec<LocalObjective>>,
 }

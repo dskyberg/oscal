@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["assessment_log","attestation_statements","local_definitions"],"struct":["Result"]};

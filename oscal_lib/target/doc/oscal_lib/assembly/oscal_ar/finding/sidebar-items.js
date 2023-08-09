@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["associated_risk","related_observation"],"struct":["Finding"]};

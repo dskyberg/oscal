@@ -20,11 +20,11 @@ use crate::field::oscal_metadata::Remarks;
 #[serde(rename_all ="kebab-case")]
 pub struct ReviewedControls {
 	pub remarks: Option<Remarks>,
+	pub control_objective_selections: Option<Vec<ReferencedControlObjectives>>,
+	pub props: Option<Vec<Property>>,
 	/// Control Objective Description
 	/// A human-readable description of control objectives.
 	pub description: Option<String>,
-	pub control_selections: Vec<AssessedControls>,
-	pub control_objective_selections: Option<Vec<ReferencedControlObjectives>>,
 	pub links: Option<Vec<Link>>,
-	pub props: Option<Vec<Property>>,
+	pub control_selections: Vec<AssessedControls>,
 }
