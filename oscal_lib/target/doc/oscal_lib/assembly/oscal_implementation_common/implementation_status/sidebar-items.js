@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"mod":["implementation_state"],"struct":["ImplementationStatus"]};

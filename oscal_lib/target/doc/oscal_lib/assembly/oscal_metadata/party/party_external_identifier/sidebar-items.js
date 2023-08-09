@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"mod":["external_identifier_schema"],"struct":["PartyExternalIdentifier"]};

@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"mod":["component_type","status"],"struct":["SystemComponent"]};

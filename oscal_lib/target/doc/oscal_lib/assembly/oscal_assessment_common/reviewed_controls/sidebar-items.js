@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"mod":["assessed_controls","referenced_control_objectives"],"struct":["ReviewedControls"]};

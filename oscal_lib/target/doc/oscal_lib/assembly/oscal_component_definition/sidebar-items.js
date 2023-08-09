@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"mod":["capability","component_definition","control_implementation","defined_component","implemented_requirement","import_component_definition","incorporates_component","statement"]};

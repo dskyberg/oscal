@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"mod":["identified_subject"],"struct":["RelatedTask"]};

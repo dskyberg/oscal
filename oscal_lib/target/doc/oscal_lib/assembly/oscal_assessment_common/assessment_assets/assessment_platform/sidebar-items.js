@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"mod":["uses_component"],"struct":["AssessmentPlatform"]};

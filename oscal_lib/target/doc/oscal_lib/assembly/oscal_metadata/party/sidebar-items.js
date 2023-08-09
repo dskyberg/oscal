@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"mod":["party_external_identifier","party_type"],"struct":["Party"]};

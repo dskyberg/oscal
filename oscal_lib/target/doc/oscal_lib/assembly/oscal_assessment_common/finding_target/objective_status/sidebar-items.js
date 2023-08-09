@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"mod":["objective_status_reason","objective_status_state"],"struct":["ObjectiveStatus"]};

@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"mod":["subject_universally_unique_identifier_reference_type"],"struct":["SubjectReference"]};

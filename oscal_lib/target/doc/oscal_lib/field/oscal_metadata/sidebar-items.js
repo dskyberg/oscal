@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"mod":["addr_line","document_id","email_address","hash","last_modified","location_uuid","oscal_version","party_uuid","published","remarks","role_id","telephone_number","version"]};

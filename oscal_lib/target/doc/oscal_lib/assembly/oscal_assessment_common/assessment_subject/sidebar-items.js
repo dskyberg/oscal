@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"mod":["subject_type"],"struct":["AssessmentSubject"]};

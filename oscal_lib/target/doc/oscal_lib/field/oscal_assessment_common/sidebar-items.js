@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"mod":["risk_status","threat_id"]};

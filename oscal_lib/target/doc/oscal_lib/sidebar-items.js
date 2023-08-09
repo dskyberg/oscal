@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"mod":["assembly","definitions","error","field"],"struct":["Oscal"]};

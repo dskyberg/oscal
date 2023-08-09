@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"mod":["function_performed","system_id"]};

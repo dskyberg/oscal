@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"mod":["information_type"],"struct":["SystemInformation"]};

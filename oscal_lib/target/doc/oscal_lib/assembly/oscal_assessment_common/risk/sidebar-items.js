@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"mod":["mitigating_factor","related_observation","risk_log"],"struct":["Risk"]};

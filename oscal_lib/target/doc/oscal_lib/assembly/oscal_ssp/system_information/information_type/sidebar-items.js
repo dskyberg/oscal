@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"mod":["availability_impact_level","confidentiality_impact_level","information_type_categorization","integrity_impact_level"],"struct":["InformationType"]};
