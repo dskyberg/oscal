@@ -11,8 +11,8 @@ use crate::field::oscal_metadata::Remarks;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct TaskDependency {
+	pub remarks: Option<Remarks>,
 	/// Task Universally Unique Identifier Reference
 	/// A machine-oriented identifier reference to a unique task.
 	pub task_uuid: UuidDatatype,
-	pub remarks: Option<Remarks>,
 }

@@ -14,13 +14,13 @@ use crate::field::oscal_metadata::Remarks;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct ReferencedControlObjectives {
-	pub links: Option<Vec<Link>>,
-	pub props: Option<Vec<Property>>,
 	pub remarks: Option<Remarks>,
-	pub exclude_objectives: Option<Vec<SelectObjectiveById>>,
 	/// Control Objectives Description
 	/// A human-readable description of this collection of control objectives.
 	pub description: Option<String>,
+	pub exclude_objectives: Option<Vec<SelectObjectiveById>>,
 	pub include_all: Option<IncludeAll>,
 	pub include_objectives: Option<Vec<SelectObjectiveById>>,
+	pub links: Option<Vec<Link>>,
+	pub props: Option<Vec<Property>>,
 }

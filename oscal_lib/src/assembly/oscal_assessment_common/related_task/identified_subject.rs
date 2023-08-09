@@ -11,8 +11,8 @@ use crate::definitions::UuidDatatype;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct IdentifiedSubject {
-	pub subjects: Vec<AssessmentSubject>,
 	/// Assessment Subject Placeholder Universally Unique Identifier Reference
 	/// A machine-oriented identifier reference to a unique assessment subject placeholder defined by this task.
 	pub subject_placeholder_uuid: UuidDatatype,
+	pub subjects: Vec<AssessmentSubject>,
 }

@@ -19,17 +19,17 @@ use crate::field::oscal_metadata::Remarks;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct AssessmentSubject {
-	pub exclude_subjects: Option<Vec<SelectSubjectById>>,
 	pub include_all: Option<IncludeAll>,
 	/// Include Subjects Description
 	/// A human-readable description of the collection of subjects being included in this assessment.
 	pub description: Option<String>,
+	pub include_subjects: Option<Vec<SelectSubjectById>>,
+	pub links: Option<Vec<Link>>,
+	pub remarks: Option<Remarks>,
+	pub exclude_subjects: Option<Vec<SelectSubjectById>>,
+	pub props: Option<Vec<Property>>,
 	/// Subject Type
 	/// Indicates the type of assessment subject, such as a component, inventory, item, location, or party represented by this selection statement.
 	#[serde(rename = "type")]
 	pub _type: SubjectType,
-	pub links: Option<Vec<Link>>,
-	pub props: Option<Vec<Property>>,
-	pub remarks: Option<Remarks>,
-	pub include_subjects: Option<Vec<SelectSubjectById>>,
 }

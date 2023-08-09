@@ -13,6 +13,7 @@ use crate::field::oscal_metadata::Remarks;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct RelevantEvidence {
+	pub remarks: Option<Remarks>,
 	pub props: Option<Vec<Property>>,
 	/// Relevant Evidence Description
 	/// A human-readable description of this evidence.
@@ -21,5 +22,4 @@ pub struct RelevantEvidence {
 	/// A resolvable URL reference to relevant evidence.
 	pub href: Option<UriReferenceDatatype>,
 	pub links: Option<Vec<Link>>,
-	pub remarks: Option<Remarks>,
 }

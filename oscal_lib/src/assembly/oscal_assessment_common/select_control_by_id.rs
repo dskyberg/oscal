@@ -10,8 +10,8 @@ use crate::definitions::TokenDatatype;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct SelectControlById {
-	pub statement_ids: Option<Vec<TokenDatatype>>,
 	/// Control Identifier Reference
 	/// A human-oriented identifier reference to a control with a corresponding id value. When referencing an externally defined control, the Control Identifier Reference must be used in the context of the external / imported OSCAL instance (e.g., uri-reference).
 	pub control_id: TokenDatatype,
+	pub statement_ids: Option<Vec<TokenDatatype>>,
 }

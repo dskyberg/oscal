@@ -7,8 +7,9 @@ use crate::{
     ParserError,
     Property,
     PropertyType,
-    Referencable,
+    SchemaEnum,
     SchemaId,
+    SchemaObject,
     SchemaReference,
 };
 
@@ -71,41 +72,48 @@ impl Parse for SchemaArray {
         }
         let items = obj.get("items").unwrap();
 
-        // If the embedded property is referencable, it will get added to the
-        // NameSpace.  This wil happen for objects and enums.
-        let prop = PropertyType::parse(items, ns, parent_id, name)?;
         // If the property is an object or an enum, it needs to be added to the
         // namespace, and converted into a reference
-        let prop = match prop {
-            PropertyType::Object(obj) => {
-                // Get the id from the object
-                let child_id = obj.id();
-                // Add this object to the namespace
-                // TODO: This results in parsing the object twice, fix it!
-                ns.add_property(items, child_id, None)?;
-                // Create a new Reference property, using the object's id
-                // and return that, now that the object is loaded in the name space
-                let _ref = SchemaReference::try_from(&obj).map_err(|e| {
-                    log::error!("Failed to convert SchemaObject to SchemaReference");
-                    e
-                })?;
-                PropertyType::Reference(_ref)
-            }
-            PropertyType::Enum(e) => {
-                // Get the id from the object
-                let child_id = e.id();
-                // Add this object to the namespace
-                ns.add_property(items, child_id, None)?;
+        if let Some(child_id) = SchemaObject::peek(items, parent_id)? {
+            // Add this object to the namespace
+            let obj = ns.add_property(items, &child_id, None)?;
 
-                // Add this object to the namespace
-                let _enum = SchemaReference::try_from(&e).map_err(|e| {
-                    log::error!("Failed to convert SchemaEnum to SchemaReference");
-                    e
-                })?;
-                PropertyType::Reference(_enum)
-            }
-            _ => prop,
-        };
+            // Create a new Reference property, using the object's id
+            // and return that, now that the object is loaded in the name space
+            let prop_ref = SchemaReference::try_from(&obj).map_err(|e| {
+                log::error!("Failed to convert SchemaObject to SchemaReference");
+                e
+            })?;
+            let prop = PropertyType::Reference(prop_ref);
+            return Ok(Self {
+                title,
+                description,
+                _ref,
+                prop: Box::new(prop),
+            });
+        }
+
+        if let Some(child_id) = SchemaEnum::peek(items, parent_id)? {
+            // Add this object to the namespace
+            let obj = ns.add_property(items, &child_id, None)?;
+
+            // Create a new Reference property, using the object's id
+            // and return that, now that the object is loaded in the name space
+            let prop_ref = SchemaReference::try_from(&obj).map_err(|e| {
+                log::error!("Failed to convert SchemaEnum to SchemaReference");
+                e
+            })?;
+            let prop = PropertyType::Reference(prop_ref);
+            return Ok(Self {
+                title,
+                description,
+                _ref,
+                prop: Box::new(prop),
+            });
+        }
+
+        // Otherwise, use the property directly
+        let prop = PropertyType::parse(items, ns, parent_id, name)?;
 
         Ok(Self {
             title,

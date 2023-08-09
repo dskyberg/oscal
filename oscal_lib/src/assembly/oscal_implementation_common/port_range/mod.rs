@@ -15,13 +15,13 @@ use crate::definitions::NonNegativeIntegerDatatype;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct PortRange {
-	/// Transport
-	/// Indicates the transport type.
-	pub transport: Option<Transport>,
 	/// Start
 	/// Indicates the starting port number in a port range
 	pub start: Option<NonNegativeIntegerDatatype>,
 	/// End
 	/// Indicates the ending port number in a port range
 	pub end: Option<NonNegativeIntegerDatatype>,
+	/// Transport
+	/// Indicates the transport type.
+	pub transport: Option<Transport>,
 }

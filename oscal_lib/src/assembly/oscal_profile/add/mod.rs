@@ -19,17 +19,17 @@ use crate::definitions::TokenDatatype;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct Add {
-	/// Title Change
-	/// A name given to the control, which may be used by a tool for display and navigation.
-	pub title: Option<String>,
-	/// Position
-	/// Where to add the new content with respect to the targeted element (beside it or inside it)
-	pub position: Option<Position>,
-	pub props: Option<Vec<Property>>,
-	pub links: Option<Vec<Link>>,
 	/// Reference by ID
 	/// Target location of the addition.
 	pub by_id: Option<TokenDatatype>,
-	pub params: Option<Vec<Parameter>>,
+	pub props: Option<Vec<Property>>,
+	/// Title Change
+	/// A name given to the control, which may be used by a tool for display and navigation.
+	pub title: Option<String>,
 	pub parts: Option<Vec<Part>>,
+	pub links: Option<Vec<Link>>,
+	/// Position
+	/// Where to add the new content with respect to the targeted element (beside it or inside it)
+	pub position: Option<Position>,
+	pub params: Option<Vec<Parameter>>,
 }

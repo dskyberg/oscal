@@ -49,6 +49,34 @@ impl Property for SchemaEnum {
     }
 }
 
+impl SchemaEnum {
+    pub fn peek(
+        value: &Value,
+        parent_id: Option<&SchemaId>,
+    ) -> crate::error::Result<Option<SchemaId>> {
+        let obj = value.as_object().ok_or(ParserError::ObjectExpected)?;
+        // Enums don't have an object type
+        if obj.contains_key("type") {
+            return Ok(None);
+        }
+
+        // Enums must have an allOf
+        if !obj.contains_key("allOf") {
+            return Ok(None);
+        }
+
+        let title = try_str_from_map("title", obj);
+        if title.is_none() {
+            return Ok(None);
+        }
+        let title = title.unwrap();
+
+        let id_val = try_str_from_map("$id", obj);
+        let id = merge_ids(parent_id, id_val, &title)?;
+        Ok(Some(id))
+    }
+}
+
 impl Parse for SchemaEnum {
     fn parse(
         value: &Value,

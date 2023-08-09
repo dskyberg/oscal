@@ -16,9 +16,9 @@ use crate::field::oscal_metadata::Remarks;
 #[serde(rename_all ="kebab-case")]
 pub struct LocalDefinitions {
 	pub components: Option<Vec<SystemComponent>>,
-	pub inventory_items: Option<Vec<InventoryItem>>,
-	pub objectives_and_methods: Option<Vec<LocalObjective>>,
-	pub users: Option<Vec<SystemUser>>,
 	pub activities: Option<Vec<Activity>>,
+	pub objectives_and_methods: Option<Vec<LocalObjective>>,
 	pub remarks: Option<Remarks>,
+	pub users: Option<Vec<SystemUser>>,
+	pub inventory_items: Option<Vec<InventoryItem>>,
 }

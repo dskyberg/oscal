@@ -16,16 +16,16 @@ use crate::field::oscal_metadata::Remarks;
 #[serde(rename_all ="kebab-case")]
 pub struct Step {
 	pub links: Option<Vec<Link>>,
+	pub responsible_roles: Option<Vec<ResponsibleRole>>,
 	pub remarks: Option<Remarks>,
-	/// Step Description
-	/// A human-readable description of this step.
-	pub description: String,
+	pub reviewed_controls: Option<ReviewedControls>,
 	/// Step Title
 	/// The title for this step.
 	pub title: Option<String>,
+	/// Step Description
+	/// A human-readable description of this step.
+	pub description: String,
 	pub props: Option<Vec<Property>>,
-	pub responsible_roles: Option<Vec<ResponsibleRole>>,
-	pub reviewed_controls: Option<ReviewedControls>,
 	/// Step Universally Unique Identifier
 	/// A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this step elsewhere in this or other OSCAL instances. The locally defined UUID of the step (in a series of steps) can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document.
 	pub uuid: UuidDatatype,

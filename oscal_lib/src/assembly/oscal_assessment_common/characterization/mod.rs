@@ -1,7 +1,7 @@
 pub use facet::*;
 
+
 pub mod facet;
-pub mod naming_system;
 
 /// Characterization
 /// A collection of descriptive data about the containing object from a specific origin.
@@ -15,10 +15,10 @@ use crate::assembly::oscal_metadata::Property;
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, Deserialize, Serialize)]
-#[serde(rename_all = "kebab-case")]
+#[serde(rename_all ="kebab-case")]
 pub struct Characterization {
-    pub facets: Vec<Facet>,
-    pub origin: Origin,
-    pub props: Option<Vec<Property>>,
-    pub links: Option<Vec<Link>>,
+	pub links: Option<Vec<Link>>,
+	pub facets: Vec<Facet>,
+	pub origin: Origin,
+	pub props: Option<Vec<Property>>,
 }

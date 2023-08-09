@@ -22,20 +22,20 @@ use crate::field::oscal_metadata::Version;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct Metadata {
-	pub parties: Option<Vec<Party>>,
-	pub props: Option<Vec<Property>>,
-	pub document_ids: Option<Vec<DocumentId>>,
-	pub last_modified: LastModified,
-	pub links: Option<Vec<Link>>,
-	pub published: Option<Published>,
-	pub responsible_parties: Option<Vec<ResponsibleParty>>,
+	pub roles: Option<Vec<Role>>,
 	pub version: Version,
+	pub props: Option<Vec<Property>>,
 	pub oscal_version: OscalVersion,
+	pub remarks: Option<Remarks>,
+	pub last_modified: LastModified,
+	pub responsible_parties: Option<Vec<ResponsibleParty>>,
+	pub links: Option<Vec<Link>>,
 	pub revisions: Option<Vec<Revision>>,
 	/// Document Title
 	/// A name given to the document, which may be used by a tool for display and navigation.
 	pub title: String,
-	pub remarks: Option<Remarks>,
-	pub roles: Option<Vec<Role>>,
+	pub parties: Option<Vec<Party>>,
 	pub locations: Option<Vec<Location>>,
+	pub document_ids: Option<Vec<DocumentId>>,
+	pub published: Option<Published>,
 }

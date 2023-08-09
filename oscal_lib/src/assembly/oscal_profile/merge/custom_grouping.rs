@@ -11,6 +11,6 @@ use crate::assembly::oscal_profile::InsertControls;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct CustomGrouping {
-	pub groups: Option<Vec<Group>>,
 	pub insert_controls: Option<Vec<InsertControls>>,
+	pub groups: Option<Vec<Group>>,
 }

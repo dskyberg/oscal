@@ -21,26 +21,26 @@ use crate::field::oscal_metadata::Remarks;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct DefinedComponent {
-	pub protocols: Option<Vec<Protocol>>,
-	pub props: Option<Vec<Property>>,
-	pub links: Option<Vec<Link>>,
 	/// Purpose
 	/// A summary of the technological or business purpose of the component.
 	pub purpose: Option<String>,
-	pub remarks: Option<Remarks>,
-	/// Component Identifier
-	/// A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this component elsewhere in this or other OSCAL instances. The locally defined UUID of the component can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document.
-	pub uuid: UuidDatatype,
+	pub control_implementations: Option<Vec<ControlImplementation>>,
+	pub props: Option<Vec<Property>>,
+	pub protocols: Option<Vec<Protocol>>,
 	/// Component Title
 	/// A human readable name for the component.
 	pub title: String,
-	/// Component Description
-	/// A description of the component, including information about its function.
-	pub description: String,
+	pub responsible_roles: Option<Vec<ResponsibleRole>>,
 	/// Component Type
 	/// A category describing the purpose of the component.
 	#[serde(rename = "type")]
 	pub _type: ComponentType,
-	pub control_implementations: Option<Vec<ControlImplementation>>,
-	pub responsible_roles: Option<Vec<ResponsibleRole>>,
+	/// Component Identifier
+	/// A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this component elsewhere in this or other OSCAL instances. The locally defined UUID of the component can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document.
+	pub uuid: UuidDatatype,
+	/// Component Description
+	/// A description of the component, including information about its function.
+	pub description: String,
+	pub links: Option<Vec<Link>>,
+	pub remarks: Option<Remarks>,
 }

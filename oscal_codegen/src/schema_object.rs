@@ -18,6 +18,7 @@ use crate::{
     PropertyType,
     Referencable,
     Result,
+    SchemaEnum,
     SchemaId,
     SchemaReference,
 };
@@ -52,6 +53,29 @@ impl Property for SchemaObject {
 impl Referencable for SchemaObject {
     fn id(&self) -> &SchemaId {
         &self.id
+    }
+}
+
+impl SchemaObject {
+    pub fn peek(value: &Value, parent_id: Option<&SchemaId>) -> Result<Option<SchemaId>> {
+        let obj = value.as_object().ok_or(ParserError::ObjectExpected)?;
+        let obj_type = try_str_from_map("type", obj);
+        if obj_type.is_none() {
+            return Ok(None);
+        }
+        let obj_type = obj_type.unwrap();
+        if obj_type != "object" {
+            return Ok(None);
+        }
+        // This appears to be a typical object def that we can map to a struct.
+        let title = obj
+            .get("title")
+            .ok_or(ParserError::MissingField("title".to_string()))?;
+        let title = title.as_str().ok_or(ParserError::StringExpected)?;
+
+        let id_val = try_str_from_map("$id", obj);
+        let id = merge_ids(parent_id, id_val, title)?;
+        Ok(Some(id))
     }
 }
 
@@ -224,45 +248,41 @@ fn parse_props(
 
     let mut result = HashMap::<String, PropertyType>::new();
     for (prop_name, prop_val) in properties {
-        let prop =
-            PropertyType::parse(prop_val, ns, Some(obj_id), Some(prop_name)).map_err(|e| {
-                log::error!("Failed parsing property: {}", prop_name);
-                e
-            })?;
-
         // If the property is an object or an enum, it needs to be added to the
         // namespace, and converted into a reference
-        let prop = match prop {
-            PropertyType::Object(obj) => {
-                // Get the id from the object
-                let child_id = obj.id();
-                // Add this object to the namespace
-                // TODO: This results in parsing the object twice, fix it!
-                ns.add_property(prop_val, child_id, Some(prop_name))?;
-                // Create a new Reference property, using the object's id
-                // and return that, now that the object is loaded in the name space
-                let _ref = SchemaReference::try_from(&obj).map_err(|e| {
-                    log::error!("Failed to convert SchemaObject to SchemaReference");
-                    e
-                })?;
-                PropertyType::Reference(_ref)
-            }
-            PropertyType::Enum(e) => {
-                // Get the id from the object
-                let child_id = e.id();
-                // Add this object to the namespace
-                ns.add_property(prop_val, child_id, Some(prop_name))?;
+        if let Some(child_id) = SchemaObject::peek(prop_val, Some(obj_id))? {
+            // Add this object to the namespace
+            let obj = ns.add_property(prop_val, &child_id, Some(prop_name))?;
 
-                // Add this object to the namespace
-                let _enum = SchemaReference::try_from(&e).map_err(|e| {
-                    log::error!("Failed to convert SchemaEnum to SchemaReference");
+            // Create a new Reference property, using the object's id
+            // and return that, now that the object is loaded in the name space
+            let prop_ref = SchemaReference::try_from(&obj).map_err(|e| {
+                log::error!("Failed to convert SchemaObject to SchemaReference");
+                e
+            })?;
+            let prop = PropertyType::Reference(prop_ref);
+            result.insert(prop_name.to_owned(), prop);
+        } else if let Some(child_id) = SchemaEnum::peek(prop_val, Some(obj_id))? {
+            // Add this object to the namespace
+            let obj = ns.add_property(prop_val, &child_id, Some(prop_name))?;
+
+            // Create a new Reference property, using the object's id
+            // and return that, now that the object is loaded in the name space
+            let prop_ref = SchemaReference::try_from(&obj).map_err(|e| {
+                log::error!("Failed to convert SchemaEnum to SchemaReference");
+                e
+            })?;
+            let prop = PropertyType::Reference(prop_ref);
+            result.insert(prop_name.to_owned(), prop);
+        } else {
+            let prop =
+                PropertyType::parse(prop_val, ns, Some(obj_id), Some(prop_name)).map_err(|e| {
+                    log::error!("Failed parsing property: {}", prop_name);
                     e
                 })?;
-                PropertyType::Reference(_enum)
-            }
-            _ => prop,
-        };
-        result.insert(prop_name.to_owned(), prop);
+
+            result.insert(prop_name.to_owned(), prop);
+        }
     }
 
     Ok(Some(result))

@@ -14,9 +14,9 @@ use crate::field::oscal_metadata::Remarks;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct ResponsibleRole {
+	pub party_uuids: Option<Vec<PartyUuid>>,
 	pub props: Option<Vec<Property>>,
 	pub remarks: Option<Remarks>,
-	pub party_uuids: Option<Vec<PartyUuid>>,
 	/// Responsible Role ID
 	/// A human-oriented identifier reference to roles responsible for the business function.
 	pub role_id: TokenDatatype,

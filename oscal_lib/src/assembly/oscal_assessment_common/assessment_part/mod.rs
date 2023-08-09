@@ -19,25 +19,25 @@ use crate::definitions::UuidDatatype;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct AssessmentPart {
-	/// Part Name
-	/// A textual label that uniquely identifies the part's semantic type.
-	pub name: PartName,
-	pub links: Option<Vec<Link>>,
-	/// Part Class
-	/// A textual label that provides a sub-type or characterization of the part's name. This can be used to further distinguish or discriminate between the semantics of multiple parts of the same control with the same name and ns.
-	pub class: Option<TokenDatatype>,
-	pub props: Option<Vec<Property>>,
-	/// Part Namespace
-	/// A namespace qualifying the part's name. This allows different organizations to associate distinct semantics with the same name.
-	pub ns: Option<UriDatatype>,
-	/// Part Title
-	/// A name given to the part, which may be used by a tool for display and navigation.
-	pub title: Option<String>,
 	/// Part Identifier
 	/// A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this part elsewhere in this or other OSCAL instances. The locally defined UUID of the part can be used to reference the data item locally or globally (e.g., in an ported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document.
 	pub uuid: Option<UuidDatatype>,
 	/// Part Text
 	/// Permits multiple paragraphs, lists, tables etc.
 	pub prose: Option<String>,
+	/// Part Class
+	/// A textual label that provides a sub-type or characterization of the part's name. This can be used to further distinguish or discriminate between the semantics of multiple parts of the same control with the same name and ns.
+	pub class: Option<TokenDatatype>,
+	/// Part Namespace
+	/// A namespace qualifying the part's name. This allows different organizations to associate distinct semantics with the same name.
+	pub ns: Option<UriDatatype>,
+	pub links: Option<Vec<Link>>,
+	pub props: Option<Vec<Property>>,
+	/// Part Title
+	/// A name given to the part, which may be used by a tool for display and navigation.
+	pub title: Option<String>,
 	pub parts: Option<Vec<AssessmentPart>>,
+	/// Part Name
+	/// A textual label that uniquely identifies the part's semantic type.
+	pub name: PartName,
 }
