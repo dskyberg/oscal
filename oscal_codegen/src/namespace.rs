@@ -312,11 +312,10 @@ impl Generate for NameSpace {
                     mod_file_inner.push_str(r##"#![allow(ambiguous_glob_reexports)]"##);
                     mod_file_inner.push('\n');
                 }
-                mod_file_inner.push_str(&format!("{}\n\n{}\n{}", uses, mods, child_contents));
 
                 // Add the tests to the lib.rs file
                 if file_name == "lib.rs" {
-                    mod_file_inner.push_str(
+                    child_contents.push_str(
                         r##"
 
 #[cfg(test)]
@@ -333,6 +332,8 @@ mod tests {
 }"##,
                     );
                 }
+
+                mod_file_inner.push_str(&format!("{}\n\n{}\n{}", uses, mods, child_contents));
 
                 gen_txt_file(&format!("{}/{}", &path, file_name), &mod_file_inner)?;
                 Ok(name.to_owned())
