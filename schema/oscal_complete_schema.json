@@ -974,16 +974,7 @@
                 "name": {
                     "title": "Property Name",
                     "description": "A textual label that uniquely identifies a specific attribute, characteristic, or quality of the property's containing object.",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/TokenDatatype"
-                        },
-                        {
-                            "enum": [
-                                "marking"
-                            ]
-                        }
-                    ]
+                    "$ref": "#/definitions/TokenDatatype"
                 },
                 "uuid": {
                     "title": "Property Universally Unique Identifier",
@@ -1029,16 +1020,7 @@
                 "rel": {
                     "title": "Relation",
                     "description": "Describes the type of relationship provided by the link. This can be an indicator of the link's purpose.",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/TokenDatatype"
-                        },
-                        {
-                            "enum": [
-                                "reference"
-                            ]
-                        }
-                    ]
+                    "$ref": "#/definitions/TokenDatatype"
                 },
                 "media-type": {
                     "title": "Media Type",
@@ -1315,7 +1297,8 @@
                         },
                         {
                             "enum": [
-                                "http://www.doi.org/"
+                                "http://www.doi.org/",
+                                "https://www.doi.org/"
                             ]
                         }
                     ]

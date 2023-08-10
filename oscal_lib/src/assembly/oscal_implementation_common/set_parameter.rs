@@ -12,8 +12,8 @@ use crate::field::oscal_metadata::Remarks;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct SetParameter {
-	pub values: Vec<StringDatatype>,
 	pub remarks: Option<Remarks>,
+	pub values: Vec<StringDatatype>,
 	/// Parameter ID
 	/// A human-oriented reference to a parameter within a control, who's catalog has been imported into the current implementation context.
 	pub param_id: TokenDatatype,

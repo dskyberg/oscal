@@ -22,19 +22,19 @@ use crate::field::oscal_metadata::Remarks;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct PoamItem {
-	pub links: Option<Vec<Link>>,
-	pub props: Option<Vec<Property>>,
-	pub related_risks: Option<Vec<AssociatedRisk>>,
+	pub origins: Option<Vec<Origin>>,
+	pub related_observations: Option<Vec<RelatedObservation>>,
 	/// POA&M Item Universally Unique Identifier
 	/// A machine-oriented, globally unique identifier with instance scope that can be used to reference this POA&M item entry in this OSCAL instance. This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document.
 	pub uuid: Option<UuidDatatype>,
-	pub remarks: Option<Remarks>,
-	pub origins: Option<Vec<Origin>>,
-	pub related_observations: Option<Vec<RelatedObservation>>,
-	/// POA&M Item Description
-	/// A human-readable description of POA&M item.
-	pub description: String,
+	pub props: Option<Vec<Property>>,
 	/// POA&M Item Title
 	/// The title or name for this POA&M item .
 	pub title: String,
+	pub remarks: Option<Remarks>,
+	pub related_risks: Option<Vec<AssociatedRisk>>,
+	pub links: Option<Vec<Link>>,
+	/// POA&M Item Description
+	/// A human-readable description of POA&M item.
+	pub description: String,
 }

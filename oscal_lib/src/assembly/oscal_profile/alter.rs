@@ -13,8 +13,8 @@ use crate::definitions::TokenDatatype;
 #[serde(rename_all ="kebab-case")]
 pub struct Alter {
 	pub removes: Option<Vec<Remove>>,
-	pub adds: Option<Vec<Add>>,
 	/// Control Identifier Reference
 	/// A human-oriented identifier reference to a control with a corresponding id value. When referencing an externally defined control, the Control Identifier Reference must be used in the context of the external / imported OSCAL instance (e.g., uri-reference).
 	pub control_id: TokenDatatype,
+	pub adds: Option<Vec<Add>>,
 }

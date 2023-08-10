@@ -15,19 +15,19 @@ use crate::definitions::TokenDatatype;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct Group {
-	/// Group Identifier
-	/// A human-oriented, locally unique identifier with cross-instance scope that can be used to reference this defined group elsewhere in this or other OSCAL instances. When referenced from another OSCAL instance, this identifier must be referenced in the context of the containing resource (e.g., import-profile). This id should be assigned per-subject, which means it should be consistently used to identify the same group across revisions of the document.
-	pub id: Option<TokenDatatype>,
+	pub links: Option<Vec<Link>>,
+	pub parts: Option<Vec<Part>>,
+	pub groups: Option<Vec<Group>>,
 	pub props: Option<Vec<Property>>,
 	/// Group Title
 	/// A name given to the group, which may be used by a tool for display and navigation.
 	pub title: String,
-	pub groups: Option<Vec<Group>>,
 	pub insert_controls: Option<Vec<InsertControls>>,
+	pub params: Option<Vec<Parameter>>,
+	/// Group Identifier
+	/// A human-oriented, locally unique identifier with cross-instance scope that can be used to reference this defined group elsewhere in this or other OSCAL instances. When referenced from another OSCAL instance, this identifier must be referenced in the context of the containing resource (e.g., import-profile). This id should be assigned per-subject, which means it should be consistently used to identify the same group across revisions of the document.
+	pub id: Option<TokenDatatype>,
 	/// Group Class
 	/// A textual label that provides a sub-type or characterization of the group.
 	pub class: Option<TokenDatatype>,
-	pub params: Option<Vec<Parameter>>,
-	pub parts: Option<Vec<Part>>,
-	pub links: Option<Vec<Link>>,
 }

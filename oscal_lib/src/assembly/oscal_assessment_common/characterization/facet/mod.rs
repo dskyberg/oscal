@@ -19,7 +19,6 @@ use crate::field::oscal_metadata::Remarks;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct Facet {
-	pub links: Option<Vec<Link>>,
 	/// Facet Name
 	/// The name of the risk metric within the specified system.
 	pub name: TokenDatatype,
@@ -30,5 +29,6 @@ pub struct Facet {
 	/// Facet Value
 	/// Indicates the value of the facet.
 	pub value: StringDatatype,
+	pub links: Option<Vec<Link>>,
 	pub props: Option<Vec<Property>>,
 }

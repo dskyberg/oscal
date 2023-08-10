@@ -18,10 +18,10 @@ pub struct LocalObjective {
 	/// Objective Description
 	/// A human-readable description of this control objective.
 	pub description: Option<String>,
+	pub props: Option<Vec<Property>>,
 	pub links: Option<Vec<Link>>,
+	pub remarks: Option<Remarks>,
 	/// Control Identifier Reference
 	/// A human-oriented identifier reference to a control with a corresponding id value. When referencing an externally defined control, the Control Identifier Reference must be used in the context of the external / imported OSCAL instance (e.g., uri-reference).
 	pub control_id: TokenDatatype,
-	pub props: Option<Vec<Property>>,
-	pub remarks: Option<Remarks>,
 }

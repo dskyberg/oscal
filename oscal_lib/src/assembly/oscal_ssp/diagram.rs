@@ -20,9 +20,9 @@ pub struct Diagram {
 	/// Caption
 	/// A brief caption to annotate the diagram.
 	pub caption: Option<String>,
-	pub props: Option<Vec<Property>>,
 	/// Diagram Description
 	/// A summary of the diagram.
 	pub description: Option<String>,
 	pub links: Option<Vec<Link>>,
+	pub props: Option<Vec<Property>>,
 }

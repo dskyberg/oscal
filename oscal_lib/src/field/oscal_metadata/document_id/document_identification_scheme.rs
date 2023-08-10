@@ -9,4 +9,7 @@ pub enum DocumentIdentificationScheme {
 	// orig: http://www.doi.org/
 #[serde(rename = "http://www.doi.org/")]
 	HttpWwwDoiOrg,
+	// orig: https://www.doi.org/
+#[serde(rename = "https://www.doi.org/")]
+	HttpsWwwDoiOrg,
 }

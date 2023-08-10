@@ -15,17 +15,17 @@ use crate::definitions::UuidDatatype;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct ControlImplementation {
-	pub implemented_requirements: Vec<ImplementedRequirement>,
-	/// Control Implementation Set Identifier
-	/// A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference a set of implemented controls elsewhere in this or other OSCAL instances. The locally defined UUID of the control implementation set can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document.
-	pub uuid: UuidDatatype,
 	pub links: Option<Vec<Link>>,
-	/// Control Implementation Description
-	/// A description of how the specified set of controls are implemented for the containing component or capability.
-	pub description: String,
 	/// Source Resource Reference
 	/// A reference to an OSCAL catalog or profile providing the referenced control or subcontrol definition.
 	pub source: UriReferenceDatatype,
-	pub props: Option<Vec<Property>>,
+	pub implemented_requirements: Vec<ImplementedRequirement>,
 	pub set_parameters: Option<Vec<SetParameter>>,
+	/// Control Implementation Description
+	/// A description of how the specified set of controls are implemented for the containing component or capability.
+	pub description: String,
+	/// Control Implementation Set Identifier
+	/// A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference a set of implemented controls elsewhere in this or other OSCAL instances. The locally defined UUID of the control implementation set can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document.
+	pub uuid: UuidDatatype,
+	pub props: Option<Vec<Property>>,
 }

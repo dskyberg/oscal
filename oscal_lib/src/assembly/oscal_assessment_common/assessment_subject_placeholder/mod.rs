@@ -23,9 +23,9 @@ pub struct AssessmentSubjectPlaceholder {
 	/// Assessment Subject Placeholder Description
 	/// A human-readable description of intent of this assessment subject placeholder.
 	pub description: Option<String>,
+	pub links: Option<Vec<Link>>,
 	/// Assessment Subject Placeholder Universally Unique Identifier
 	/// A machine-oriented, globally unique identifier for a set of assessment subjects that will be identified by a task or an activity that is part of a task. The locally defined UUID of the assessment subject placeholder can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document.
 	pub uuid: UuidDatatype,
 	pub remarks: Option<Remarks>,
-	pub links: Option<Vec<Link>>,
 }

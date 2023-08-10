@@ -292,6 +292,8 @@ impl Generate for NameSpace {
                     }
                 }
 
+                // If there's a leaf with the same name as this, then generate it
+                // right here in the mod file.
                 let file_name = match name.as_ref() {
                     "src" => {
                         // Stuff that only pertains to the top level lib
@@ -302,6 +304,8 @@ impl Generate for NameSpace {
                 };
 
                 let mut mod_file_inner = String::new();
+
+                // Add the top matter to the lib.rs file
                 if file_name == "lib.rs" {
                     mod_file_inner.push_str(r##"#![doc = include_str!("../README.md")]"##);
                     mod_file_inner.push('\n');
@@ -310,8 +314,25 @@ impl Generate for NameSpace {
                 }
                 mod_file_inner.push_str(&format!("{}\n\n{}\n{}", uses, mods, child_contents));
 
-                // If there's a leaf with the same name as this, then generate it
-                // right here in the mod file.
+                // Add the tests to the lib.rs file
+                if file_name == "lib.rs" {
+                    mod_file_inner.push_str(
+                        r##"
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_catalog() {
+        let json =
+            include_str!("../../tests/fedramp-automation-rev4-baseines/FedRAMP_rev4_HIGH-baseline-resolved-profile_catalog.json");
+        let oscal = serde_json::from_str::<Oscal>(json);
+        assert!(oscal.is_ok());
+    }
+}"##,
+                    );
+                }
 
                 gen_txt_file(&format!("{}/{}", &path, file_name), &mod_file_inner)?;
                 Ok(name.to_owned())

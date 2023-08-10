@@ -14,11 +14,11 @@ use crate::field::oscal_metadata::Remarks;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct ResponsibleParty {
-	pub props: Option<Vec<Property>>,
-	pub party_uuids: Vec<PartyUuid>,
-	pub links: Option<Vec<Link>>,
-	pub remarks: Option<Remarks>,
 	/// Responsible Role
 	/// A human-oriented identifier reference to roles served by the user.
 	pub role_id: TokenDatatype,
+	pub props: Option<Vec<Property>>,
+	pub links: Option<Vec<Link>>,
+	pub remarks: Option<Remarks>,
+	pub party_uuids: Vec<PartyUuid>,
 }

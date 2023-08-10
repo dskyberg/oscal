@@ -12,11 +12,11 @@ use crate::field::oscal_metadata::Hash;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct ResourceLink {
-	/// Hypertext Reference
-	/// A resolvable URI reference to a resource.
-	pub href: UriReferenceDatatype,
 	pub hashes: Option<Vec<Hash>>,
 	/// Media Type
 	/// Specifies a media type as defined by the Internet Assigned Numbers Authority (IANA) Media Types Registry.
 	pub media_type: Option<StringDatatype>,
+	/// Hypertext Reference
+	/// A resolvable URI reference to a resource.
+	pub href: UriReferenceDatatype,
 }

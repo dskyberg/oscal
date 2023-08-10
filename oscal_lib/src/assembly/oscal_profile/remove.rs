@@ -13,16 +13,16 @@ pub struct Remove {
 	/// Reference by class
 	/// Identify items to remove by matching their class.
 	pub by_class: Option<TokenDatatype>,
-	/// Item Namespace Reference
-	/// Identify items to remove by the item's ns, which is the namespace associated with a part, or prop.
-	pub by_ns: Option<TokenDatatype>,
-	/// Item Name Reference
-	/// Identify items to remove by the name of the item's information element name, e.g. title or prop
-	pub by_item_name: Option<TokenDatatype>,
 	/// Reference by ID
 	/// Identify items to remove indicated by their id.
 	pub by_id: Option<TokenDatatype>,
+	/// Item Name Reference
+	/// Identify items to remove by the name of the item's information element name, e.g. title or prop
+	pub by_item_name: Option<TokenDatatype>,
 	/// Reference by (assigned) name
 	/// Identify items to remove by matching their assigned name
 	pub by_name: Option<TokenDatatype>,
+	/// Item Namespace Reference
+	/// Identify items to remove by the item's ns, which is the namespace associated with a part, or prop.
+	pub by_ns: Option<TokenDatatype>,
 }

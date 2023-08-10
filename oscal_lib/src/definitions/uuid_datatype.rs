@@ -40,11 +40,11 @@ fn deserialize<'de, D>(deserializer: D) -> Result<String, D::Error>
 where
     D: de::Deserializer<'de>,
 {
-    let s: &str = de::Deserialize::deserialize(deserializer)?;
+    let s: String = de::Deserialize::deserialize(deserializer)?;
 
-    match UuidDatatype::validate(s) {
-        Ok(()) => Ok(s.to_string()),
-        _ => Err(de::Error::unknown_variant(s, &["UuidDatatype"])),
+    match UuidDatatype::validate(&s) {
+        Ok(()) => Ok(s),
+        _ => Err(de::Error::custom("invalid UuidDatatype")),
     }
 }
 

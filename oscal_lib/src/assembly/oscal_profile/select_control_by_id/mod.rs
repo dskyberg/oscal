@@ -17,9 +17,9 @@ use crate::definitions::TokenDatatype;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct SelectControlById {
-	pub matching: Option<Vec<MatchControlsByPattern>>,
 	/// Include contained controls with control
 	/// When a control is included, whether its child (dependent) controls are also included.
 	pub with_child_controls: Option<IncludeContainedControlsWithControl>,
 	pub with_ids: Option<Vec<TokenDatatype>>,
+	pub matching: Option<Vec<MatchControlsByPattern>>,
 }

@@ -14,12 +14,12 @@ use crate::field::oscal_metadata::Remarks;
 #[serde(rename_all ="kebab-case")]
 pub struct RelevantEvidence {
 	pub remarks: Option<Remarks>,
-	pub props: Option<Vec<Property>>,
 	/// Relevant Evidence Description
 	/// A human-readable description of this evidence.
 	pub description: String,
+	pub links: Option<Vec<Link>>,
+	pub props: Option<Vec<Property>>,
 	/// Relevant Evidence Reference
 	/// A resolvable URL reference to relevant evidence.
 	pub href: Option<UriReferenceDatatype>,
-	pub links: Option<Vec<Link>>,
 }

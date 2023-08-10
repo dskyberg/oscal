@@ -14,11 +14,11 @@ use crate::field::oscal_metadata::Remarks;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct ImplementedComponent {
-	pub links: Option<Vec<Link>>,
-	pub remarks: Option<Remarks>,
-	pub props: Option<Vec<Property>>,
 	pub responsible_parties: Option<Vec<ResponsibleParty>>,
+	pub links: Option<Vec<Link>>,
 	/// Component Universally Unique Identifier Reference
 	/// A machine-oriented identifier reference to a component that is implemented as part of an inventory item.
 	pub component_uuid: UuidDatatype,
+	pub remarks: Option<Remarks>,
+	pub props: Option<Vec<Property>>,
 }

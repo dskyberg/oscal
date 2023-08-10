@@ -19,16 +19,16 @@ use crate::definitions::BooleanDatatype;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct Merge {
-	/// Custom grouping
-	/// A Custom element frames a structure for embedding represented controls in resolution.
-	pub custom: Option<CustomGrouping>,
-	/// Combination rule
-	/// A Combine element defines how to combine multiple (competing) versions of the same control.
-	pub combine: Option<CombinationRule>,
-	/// Flat
-	/// Use the flat structuring method.
-	pub flat: Option<Flat>,
 	/// As-Is Structuring Directive
 	/// An As-is element indicates that the controls should be structured in resolution as they are structured in their source catalogs. It does not contain any elements or attributes.
 	pub as_is: Option<BooleanDatatype>,
+	/// Combination rule
+	/// A Combine element defines how to combine multiple (competing) versions of the same control.
+	pub combine: Option<CombinationRule>,
+	/// Custom grouping
+	/// A Custom element frames a structure for embedding represented controls in resolution.
+	pub custom: Option<CustomGrouping>,
+	/// Flat
+	/// Use the flat structuring method.
+	pub flat: Option<Flat>,
 }

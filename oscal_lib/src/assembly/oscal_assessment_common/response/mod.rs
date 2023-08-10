@@ -22,22 +22,22 @@ use crate::field::oscal_metadata::Remarks;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct Response {
+	pub props: Option<Vec<Property>>,
 	/// Response Title
 	/// The title for this response activity.
 	pub title: String,
-	/// Remediation Universally Unique Identifier
-	/// A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this remediation elsewhere in this or other OSCAL instances. The locally defined UUID of the risk response can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document.
-	pub uuid: UuidDatatype,
-	pub origins: Option<Vec<Origin>>,
-	/// Response Description
-	/// A human-readable description of this response plan.
-	pub description: String,
-	pub props: Option<Vec<Property>>,
-	pub remarks: Option<Remarks>,
 	/// Remediation Intent
 	/// Identifies whether this is a recommendation, such as from an assessor or tool, or an actual plan accepted by the system owner.
 	pub lifecycle: RemediationIntent,
-	pub links: Option<Vec<Link>>,
+	pub origins: Option<Vec<Origin>>,
 	pub required_assets: Option<Vec<RequiredAsset>>,
+	pub remarks: Option<Remarks>,
 	pub tasks: Option<Vec<Task>>,
+	/// Remediation Universally Unique Identifier
+	/// A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this remediation elsewhere in this or other OSCAL instances. The locally defined UUID of the risk response can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document.
+	pub uuid: UuidDatatype,
+	pub links: Option<Vec<Link>>,
+	/// Response Description
+	/// A human-readable description of this response plan.
+	pub description: String,
 }

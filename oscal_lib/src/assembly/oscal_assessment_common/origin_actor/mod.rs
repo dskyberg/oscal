@@ -18,11 +18,6 @@ use crate::definitions::UuidDatatype;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct OriginActor {
-	/// Actor Universally Unique Identifier Reference
-	/// A machine-oriented identifier reference to the tool or person based on the associated type.
-	pub actor_uuid: UuidDatatype,
-	pub props: Option<Vec<Property>>,
-	pub links: Option<Vec<Link>>,
 	/// Actor Role
 	/// For a party, this can optionally be used to specify the role the actor was performing.
 	pub role_id: Option<TokenDatatype>,
@@ -30,4 +25,9 @@ pub struct OriginActor {
 	/// The kind of actor.
 	#[serde(rename = "type")]
 	pub _type: ActorType,
+	pub links: Option<Vec<Link>>,
+	pub props: Option<Vec<Property>>,
+	/// Actor Universally Unique Identifier Reference
+	/// A machine-oriented identifier reference to the tool or person based on the associated type.
+	pub actor_uuid: UuidDatatype,
 }
