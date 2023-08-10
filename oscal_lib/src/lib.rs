@@ -35,7 +35,7 @@ mod tests {
     #[test]
     fn test_catalog() {
         let json =
-            include_str!("../../tests/fedramp-automation-rev4-baseines/FedRAMP_rev4_HIGH-baseline-resolved-profile_catalog.json");
+            include_str!("../../tests/fedramp-automation-rev5-baselines/FedRAMP_rev5_HIGH-baseline-resolved-profile_catalog.json");
         let oscal = serde_json::from_str::<Oscal>(json);
         assert!(oscal.is_ok());
     }
