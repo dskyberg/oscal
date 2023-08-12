@@ -15,10 +15,10 @@ use crate::field::oscal_metadata::Remarks;
 #[serde(rename_all ="kebab-case")]
 pub struct ImplementedComponent {
 	pub responsible_parties: Option<Vec<ResponsibleParty>>,
-	pub links: Option<Vec<Link>>,
+	pub props: Option<Vec<Property>>,
 	/// Component Universally Unique Identifier Reference
 	/// A machine-oriented identifier reference to a component that is implemented as part of an inventory item.
 	pub component_uuid: UuidDatatype,
+	pub links: Option<Vec<Link>>,
 	pub remarks: Option<Remarks>,
-	pub props: Option<Vec<Property>>,
 }

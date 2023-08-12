@@ -19,6 +19,6 @@ pub struct ResponsibleParty {
 	pub role_id: TokenDatatype,
 	pub props: Option<Vec<Property>>,
 	pub links: Option<Vec<Link>>,
-	pub remarks: Option<Remarks>,
 	pub party_uuids: Vec<PartyUuid>,
+	pub remarks: Option<Remarks>,
 }

@@ -15,8 +15,8 @@ use crate::definitions::StringDatatype;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct DocumentId {
+	pub identifier: StringDatatype,
 	/// Document Identification Scheme
 	/// Qualifies the kind of document identifier using a URI. If the scheme is not provided the value of the element will be interpreted as a string of characters.
 	pub scheme: Option<DocumentIdentificationScheme>,
-	pub identifier: StringDatatype,
 }

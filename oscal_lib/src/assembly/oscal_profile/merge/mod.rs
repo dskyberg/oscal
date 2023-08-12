@@ -19,9 +19,6 @@ use crate::definitions::BooleanDatatype;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct Merge {
-	/// As-Is Structuring Directive
-	/// An As-is element indicates that the controls should be structured in resolution as they are structured in their source catalogs. It does not contain any elements or attributes.
-	pub as_is: Option<BooleanDatatype>,
 	/// Combination rule
 	/// A Combine element defines how to combine multiple (competing) versions of the same control.
 	pub combine: Option<CombinationRule>,
@@ -31,4 +28,7 @@ pub struct Merge {
 	/// Flat
 	/// Use the flat structuring method.
 	pub flat: Option<Flat>,
+	/// As-Is Structuring Directive
+	/// An As-is element indicates that the controls should be structured in resolution as they are structured in their source catalogs. It does not contain any elements or attributes.
+	pub as_is: Option<BooleanDatatype>,
 }

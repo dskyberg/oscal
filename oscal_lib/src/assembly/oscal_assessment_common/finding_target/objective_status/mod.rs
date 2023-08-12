@@ -17,11 +17,11 @@ use crate::field::oscal_metadata::Remarks;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct ObjectiveStatus {
-	/// Objective Status Reason
-	/// The reason the objective was given it's status.
-	pub reason: Option<ObjectiveStatusReason>,
 	pub remarks: Option<Remarks>,
 	/// Objective Status State
 	/// An indication as to whether the objective is satisfied or not.
 	pub state: ObjectiveStatusState,
+	/// Objective Status Reason
+	/// The reason the objective was given it's status.
+	pub reason: Option<ObjectiveStatusReason>,
 }

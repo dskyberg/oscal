@@ -15,9 +15,9 @@ use crate::definitions::StringDatatype;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct TelephoneNumber {
-	pub number: StringDatatype,
 	/// type flag
 	/// Indicates the type of phone number.
 	#[serde(rename = "type")]
 	pub _type: Option<TypeFlag>,
+	pub number: StringDatatype,
 }

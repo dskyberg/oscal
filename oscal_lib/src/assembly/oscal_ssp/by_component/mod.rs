@@ -25,24 +25,24 @@ use crate::field::oscal_metadata::Remarks;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct ByComponent {
-	/// By-Component Universally Unique Identifier
-	/// A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this by-component entry elsewhere in this or other OSCAL instances. The locally defined UUID of the by-component entry can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document.
-	pub uuid: UuidDatatype,
-	/// Export
-	/// Identifies content intended for external consumption, such as with leveraged organizations.
-	pub export: Option<Export>,
-	/// Component Universally Unique Identifier Reference
-	/// A machine-oriented identifier reference to the component that is implemeting a given control.
-	pub component_uuid: UuidDatatype,
 	pub inherited: Option<Vec<InheritedControlImplementation>>,
+	pub links: Option<Vec<Link>>,
+	pub set_parameters: Option<Vec<SetParameter>>,
 	/// Control Implementation Description
 	/// An implementation statement that describes how a control or a control statement is implemented within the referenced system component.
 	pub description: String,
+	pub implementation_status: Option<ImplementationStatus>,
 	pub remarks: Option<Remarks>,
 	pub responsible_roles: Option<Vec<ResponsibleRole>>,
 	pub props: Option<Vec<Property>>,
+	/// Component Universally Unique Identifier Reference
+	/// A machine-oriented identifier reference to the component that is implemeting a given control.
+	pub component_uuid: UuidDatatype,
+	/// By-Component Universally Unique Identifier
+	/// A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this by-component entry elsewhere in this or other OSCAL instances. The locally defined UUID of the by-component entry can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document.
+	pub uuid: UuidDatatype,
 	pub satisfied: Option<Vec<SatisfiedControlImplementationResponsibility>>,
-	pub set_parameters: Option<Vec<SetParameter>>,
-	pub implementation_status: Option<ImplementationStatus>,
-	pub links: Option<Vec<Link>>,
+	/// Export
+	/// Identifies content intended for external consumption, such as with leveraged organizations.
+	pub export: Option<Export>,
 }

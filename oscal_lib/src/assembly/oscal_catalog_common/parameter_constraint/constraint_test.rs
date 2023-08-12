@@ -11,8 +11,8 @@ use crate::field::oscal_metadata::Remarks;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct ConstraintTest {
+	pub remarks: Option<Remarks>,
 	/// Constraint test
 	/// A formal (executable) expression of a constraint
 	pub expression: StringDatatype,
-	pub remarks: Option<Remarks>,
 }

@@ -13,11 +13,11 @@ use crate::field::oscal_metadata::Remarks;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct AuthorizationBoundary {
+	pub diagrams: Option<Vec<Diagram>>,
+	pub props: Option<Vec<Property>>,
+	pub links: Option<Vec<Link>>,
 	/// Authorization Boundary Description
 	/// A summary of the system's authorization boundary.
 	pub description: String,
-	pub diagrams: Option<Vec<Diagram>>,
-	pub props: Option<Vec<Property>>,
 	pub remarks: Option<Remarks>,
-	pub links: Option<Vec<Link>>,
 }

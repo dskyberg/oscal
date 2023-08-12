@@ -19,9 +19,6 @@ use crate::field::oscal_metadata::Remarks;
 #[serde(rename_all ="kebab-case")]
 pub struct SubjectReference {
 	pub links: Option<Vec<Link>>,
-	/// Subject Universally Unique Identifier Reference
-	/// A machine-oriented identifier reference to a component, inventory-item, location, party, user, or resource using it's UUID.
-	pub subject_uuid: UuidDatatype,
 	/// Subject Reference Title
 	/// The title or name for the referenced subject.
 	pub title: Option<String>,
@@ -30,5 +27,8 @@ pub struct SubjectReference {
 	/// Used to indicate the type of object pointed to by the uuid-ref within a subject.
 	#[serde(rename = "type")]
 	pub _type: SubjectUniversallyUniqueIdentifierReferenceType,
+	/// Subject Universally Unique Identifier Reference
+	/// A machine-oriented identifier reference to a component, inventory-item, location, party, user, or resource using it's UUID.
+	pub subject_uuid: UuidDatatype,
 	pub remarks: Option<Remarks>,
 }

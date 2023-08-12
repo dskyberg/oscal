@@ -19,16 +19,16 @@ use crate::field::oscal_metadata::Remarks;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct Facet {
+	pub remarks: Option<Remarks>,
+	pub props: Option<Vec<Property>>,
 	/// Facet Name
 	/// The name of the risk metric within the specified system.
 	pub name: TokenDatatype,
-	pub remarks: Option<Remarks>,
+	pub links: Option<Vec<Link>>,
 	/// Naming System
 	/// Specifies the naming system under which this risk metric is organized, which allows for the same names to be used in different systems controlled by different parties. This avoids the potential of a name clash.
 	pub system: NamingSystem,
 	/// Facet Value
 	/// Indicates the value of the facet.
 	pub value: StringDatatype,
-	pub links: Option<Vec<Link>>,
-	pub props: Option<Vec<Property>>,
 }

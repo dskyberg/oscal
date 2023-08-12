@@ -11,9 +11,9 @@ use crate::assembly::oscal_ssp::ImplementedRequirement;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct ControlImplementation {
-	pub implemented_requirements: Vec<ImplementedRequirement>,
 	/// Control Implementation Description
 	/// A statement describing important things to know about how this set of control satisfaction documentation is approached.
 	pub description: String,
 	pub set_parameters: Option<Vec<SetParameter>>,
+	pub implemented_requirements: Vec<ImplementedRequirement>,
 }

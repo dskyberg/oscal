@@ -21,17 +21,19 @@ use crate::field::oscal_metadata::Remarks;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct FindingTarget {
+	/// Objective Status Description
+	/// A human-readable description of the assessor's conclusions regarding the degree to which an objective is satisfied.
+	pub description: Option<String>,
+	pub implementation_status: Option<ImplementationStatus>,
 	pub links: Option<Vec<Link>>,
+	pub props: Option<Vec<Property>>,
 	/// Finding Target Identifier Reference
 	/// A machine-oriented identifier reference for a specific target qualified by the type.
 	pub target_id: TokenDatatype,
 	/// Objective Status
 	/// A determination of if the objective is satisfied or not within a given system.
 	pub status: ObjectiveStatus,
-	/// Objective Status Description
-	/// A human-readable description of the assessor's conclusions regarding the degree to which an objective is satisfied.
-	pub description: Option<String>,
-	pub implementation_status: Option<ImplementationStatus>,
+	pub remarks: Option<Remarks>,
 	/// Objective Status Title
 	/// The title for this objective status.
 	pub title: Option<String>,
@@ -39,6 +41,4 @@ pub struct FindingTarget {
 	/// Identifies the type of the target.
 	#[serde(rename = "type")]
 	pub _type: FindingTargetType,
-	pub remarks: Option<Remarks>,
-	pub props: Option<Vec<Property>>,
 }

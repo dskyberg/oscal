@@ -13,8 +13,6 @@ use crate::definitions::UuidDatatype;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct InheritedControlImplementation {
-	pub links: Option<Vec<Link>>,
-	pub props: Option<Vec<Property>>,
 	/// Provided UUID
 	/// A machine-oriented identifier reference to an inherited control implementation that a leveraging system is inheriting from a leveraged system.
 	pub provided_uuid: Option<UuidDatatype>,
@@ -25,4 +23,6 @@ pub struct InheritedControlImplementation {
 	/// Inherited Control Implementation Description
 	/// An implementation statement that describes the aspects of a control or control statement implementation that a leveraging system is inheriting from a leveraged system.
 	pub description: String,
+	pub props: Option<Vec<Property>>,
+	pub links: Option<Vec<Link>>,
 }

@@ -25,15 +25,10 @@ use crate::field::oscal_metadata::TelephoneNumber;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct Party {
-	/// Party Short Name
-	/// A short common name, abbreviation, or acronym for the party.
-	pub short_name: Option<StringDatatype>,
-	pub props: Option<Vec<Property>>,
-	pub telephone_numbers: Option<Vec<TelephoneNumber>>,
-	pub remarks: Option<Remarks>,
-	pub member_of_organizations: Option<Vec<UuidDatatype>>,
 	pub email_addresses: Option<Vec<EmailAddress>>,
-	pub addresses: Option<Vec<Address>>,
+	pub remarks: Option<Remarks>,
+	pub links: Option<Vec<Link>>,
+	pub telephone_numbers: Option<Vec<TelephoneNumber>>,
 	/// Party Type
 	/// A category describing the kind of party the object describes.
 	#[serde(rename = "type")]
@@ -42,9 +37,14 @@ pub struct Party {
 	/// A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this defined party elsewhere in this or other OSCAL instances. The locally defined UUID of the party can be used to reference the data item locally or globally (e.g., from an importing OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document.
 	pub uuid: UuidDatatype,
 	pub external_ids: Option<Vec<PartyExternalIdentifier>>,
+	pub addresses: Option<Vec<Address>>,
 	pub location_uuids: Option<Vec<LocationUuid>>,
 	/// Party Name
 	/// The full name of the party. This is typically the legal name associated with the party.
 	pub name: Option<StringDatatype>,
-	pub links: Option<Vec<Link>>,
+	pub member_of_organizations: Option<Vec<UuidDatatype>>,
+	pub props: Option<Vec<Property>>,
+	/// Party Short Name
+	/// A short common name, abbreviation, or acronym for the party.
+	pub short_name: Option<StringDatatype>,
 }

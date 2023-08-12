@@ -17,12 +17,12 @@ use crate::definitions::UuidDatatype;
 #[serde(rename_all ="kebab-case")]
 pub struct SystemSecurityPlan {
 	pub metadata: Metadata,
-	pub system_characteristics: SystemCharacteristics,
 	/// System Security Plan Universally Unique Identifier
 	/// A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this system security plan (SSP) elsewhere in this or other OSCAL instances. The locally defined UUID of the SSP can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance).This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document.
 	pub uuid: UuidDatatype,
+	pub system_characteristics: SystemCharacteristics,
 	pub system_implementation: SystemImplementation,
-	pub control_implementation: ControlImplementation,
 	pub back_matter: Option<BackMatter>,
+	pub control_implementation: ControlImplementation,
 	pub import_profile: ImportProfile,
 }

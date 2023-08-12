@@ -22,23 +22,23 @@ use crate::field::oscal_metadata::Remarks;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct Finding {
-	pub remarks: Option<Remarks>,
-	pub related_risks: Option<Vec<AssociatedRisk>>,
-	pub links: Option<Vec<Link>>,
-	pub target: FindingTarget,
-	/// Finding Description
-	/// A human-readable description of this finding.
-	pub description: String,
+	pub related_observations: Option<Vec<RelatedObservation>>,
 	/// Implementation Statement UUID
 	/// A machine-oriented identifier reference to the implementation statement in the SSP to which this finding is related.
 	pub implementation_statement_uuid: Option<UuidDatatype>,
+	pub remarks: Option<Remarks>,
+	pub related_risks: Option<Vec<AssociatedRisk>>,
 	pub origins: Option<Vec<Origin>>,
-	pub related_observations: Option<Vec<RelatedObservation>>,
+	pub props: Option<Vec<Property>>,
+	/// Finding Description
+	/// A human-readable description of this finding.
+	pub description: String,
+	pub target: FindingTarget,
+	pub links: Option<Vec<Link>>,
 	/// Finding Title
 	/// The title for this finding.
 	pub title: String,
 	/// Finding Universally Unique Identifier
 	/// A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this finding in this or other OSCAL instances. The locally defined UUID of the finding can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document.
 	pub uuid: UuidDatatype,
-	pub props: Option<Vec<Property>>,
 }

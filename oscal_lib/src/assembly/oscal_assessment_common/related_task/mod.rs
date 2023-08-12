@@ -20,14 +20,14 @@ use crate::field::oscal_metadata::Remarks;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct RelatedTask {
-	pub subjects: Option<Vec<AssessmentSubject>>,
+	pub links: Option<Vec<Link>>,
+	pub remarks: Option<Remarks>,
+	pub responsible_parties: Option<Vec<ResponsibleParty>>,
 	/// Identified Subject
 	/// Used to detail assessment subjects that were identfied by this task.
 	pub identified_subject: Option<IdentifiedSubject>,
-	pub links: Option<Vec<Link>>,
 	pub props: Option<Vec<Property>>,
-	pub remarks: Option<Remarks>,
-	pub responsible_parties: Option<Vec<ResponsibleParty>>,
+	pub subjects: Option<Vec<AssessmentSubject>>,
 	/// Task Universally Unique Identifier Reference
 	/// A machine-oriented identifier reference to a unique task.
 	pub task_uuid: UuidDatatype,

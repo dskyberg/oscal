@@ -16,11 +16,11 @@ use crate::definitions::UriReferenceDatatype;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct ThreatId {
-	pub id: UriDatatype,
 	/// Threat Type Identification System
 	/// Specifies the source of the threat information.
 	pub system: ThreatTypeIdentificationSystem,
 	/// Threat Information Resource Reference
 	/// An optional location for the threat data, from which this ID originates.
 	pub href: Option<UriReferenceDatatype>,
+	pub id: UriDatatype,
 }

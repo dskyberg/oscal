@@ -14,13 +14,13 @@ use crate::field::oscal_metadata::Remarks;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct AssessedControls {
-	pub exclude_controls: Option<Vec<SelectControlById>>,
-	pub links: Option<Vec<Link>>,
-	pub remarks: Option<Remarks>,
-	pub include_controls: Option<Vec<SelectControlById>>,
 	/// Assessed Controls Description
 	/// A human-readable description of in-scope controls specified for assessment.
 	pub description: Option<String>,
 	pub include_all: Option<IncludeAll>,
+	pub links: Option<Vec<Link>>,
 	pub props: Option<Vec<Property>>,
+	pub exclude_controls: Option<Vec<SelectControlById>>,
+	pub remarks: Option<Remarks>,
+	pub include_controls: Option<Vec<SelectControlById>>,
 }

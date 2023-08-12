@@ -17,7 +17,7 @@ pub struct DataFlow {
 	/// A summary of the system's data flow.
 	pub description: String,
 	pub links: Option<Vec<Link>>,
-	pub diagrams: Option<Vec<Diagram>>,
-	pub props: Option<Vec<Property>>,
 	pub remarks: Option<Remarks>,
+	pub props: Option<Vec<Property>>,
+	pub diagrams: Option<Vec<Diagram>>,
 }

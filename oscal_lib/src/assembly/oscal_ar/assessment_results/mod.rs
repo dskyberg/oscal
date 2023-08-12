@@ -21,12 +21,12 @@ use crate::definitions::UuidDatatype;
 pub struct AssessmentResults {
 	pub back_matter: Option<BackMatter>,
 	pub results: Vec<Result>,
+	pub import_ap: ImportAp,
+	/// Assessment Results Universally Unique Identifier
+	/// A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this assessment results instance in this or other OSCAL instances. The locally defined UUID of the assessment result can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document.
+	pub uuid: UuidDatatype,
 	/// Local Definitions
 	/// Used to define data objects that are used in the assessment plan, that do not appear in the referenced SSP.
 	pub local_definitions: Option<LocalDefinitions>,
 	pub metadata: Metadata,
-	/// Assessment Results Universally Unique Identifier
-	/// A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this assessment results instance in this or other OSCAL instances. The locally defined UUID of the assessment result can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document.
-	pub uuid: UuidDatatype,
-	pub import_ap: ImportAp,
 }

@@ -17,6 +17,6 @@ pub struct ConfidentialityImpactLevel {
 	pub props: Option<Vec<Property>>,
 	pub adjustment_justification: Option<AdjustmentJustification>,
 	pub links: Option<Vec<Link>>,
-	pub base: Base,
 	pub selected: Option<Selected>,
+	pub base: Base,
 }

@@ -18,14 +18,14 @@ use crate::field::oscal_metadata::Remarks;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct SelectSubjectById {
-	pub remarks: Option<Remarks>,
-	pub props: Option<Vec<Property>>,
-	/// Subject Universally Unique Identifier Reference
-	/// A machine-oriented identifier reference to a component, inventory-item, location, party, user, or resource using it's UUID.
-	pub subject_uuid: UuidDatatype,
 	pub links: Option<Vec<Link>>,
 	/// Subject Universally Unique Identifier Reference Type
 	/// Used to indicate the type of object pointed to by the uuid-ref within a subject.
 	#[serde(rename = "type")]
 	pub _type: SubjectUniversallyUniqueIdentifierReferenceType,
+	pub props: Option<Vec<Property>>,
+	/// Subject Universally Unique Identifier Reference
+	/// A machine-oriented identifier reference to a component, inventory-item, location, party, user, or resource using it's UUID.
+	pub subject_uuid: UuidDatatype,
+	pub remarks: Option<Remarks>,
 }

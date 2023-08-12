@@ -15,6 +15,6 @@ use crate::assembly::oscal_profile::Alter;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct Modify {
-	pub set_parameters: Option<Vec<ParameterSetting>>,
 	pub alters: Option<Vec<Alter>>,
+	pub set_parameters: Option<Vec<ParameterSetting>>,
 }

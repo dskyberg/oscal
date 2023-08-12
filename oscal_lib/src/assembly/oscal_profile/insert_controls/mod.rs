@@ -16,10 +16,10 @@ use crate::assembly::oscal_profile::SelectControlById;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct InsertControls {
-	pub include_all: Option<IncludeAll>,
-	pub exclude_controls: Option<Vec<SelectControlById>>,
 	pub include_controls: Option<Vec<SelectControlById>>,
 	/// Order
 	/// A designation of how a selection of controls in a profile is to be ordered.
 	pub order: Option<Order>,
+	pub exclude_controls: Option<Vec<SelectControlById>>,
+	pub include_all: Option<IncludeAll>,
 }

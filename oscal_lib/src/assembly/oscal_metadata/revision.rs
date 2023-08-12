@@ -16,14 +16,14 @@ use crate::field::oscal_metadata::Version;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct Revision {
+	pub links: Option<Vec<Link>>,
+	pub version: Version,
+	pub props: Option<Vec<Property>>,
+	pub last_modified: Option<LastModified>,
 	pub remarks: Option<Remarks>,
 	pub published: Option<Published>,
-	pub props: Option<Vec<Property>>,
 	/// Document Title
 	/// A name given to the document revision, which may be used by a tool for display and navigation.
 	pub title: Option<String>,
-	pub version: Version,
-	pub links: Option<Vec<Link>>,
 	pub oscal_version: Option<OscalVersion>,
-	pub last_modified: Option<LastModified>,
 }

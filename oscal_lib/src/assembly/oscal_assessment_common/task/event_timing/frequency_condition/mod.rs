@@ -15,10 +15,10 @@ use crate::definitions::PositiveIntegerDatatype;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct FrequencyCondition {
-	/// Period
-	/// The task must occur after the specified period has elapsed.
-	pub period: PositiveIntegerDatatype,
 	/// Time Unit
 	/// The unit of time for the period.
 	pub unit: TimeUnit,
+	/// Period
+	/// The task must occur after the specified period has elapsed.
+	pub period: PositiveIntegerDatatype,
 }

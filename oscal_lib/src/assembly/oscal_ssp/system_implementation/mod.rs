@@ -20,11 +20,11 @@ use crate::field::oscal_metadata::Remarks;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct SystemImplementation {
-	pub props: Option<Vec<Property>>,
+	pub components: Vec<SystemComponent>,
+	pub remarks: Option<Remarks>,
+	pub leveraged_authorizations: Option<Vec<LeveragedAuthorization>>,
 	pub users: Vec<SystemUser>,
 	pub links: Option<Vec<Link>>,
-	pub remarks: Option<Remarks>,
+	pub props: Option<Vec<Property>>,
 	pub inventory_items: Option<Vec<InventoryItem>>,
-	pub components: Vec<SystemComponent>,
-	pub leveraged_authorizations: Option<Vec<LeveragedAuthorization>>,
 }

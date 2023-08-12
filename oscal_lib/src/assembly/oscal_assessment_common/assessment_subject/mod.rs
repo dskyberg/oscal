@@ -22,14 +22,14 @@ pub struct AssessmentSubject {
 	/// Include Subjects Description
 	/// A human-readable description of the collection of subjects being included in this assessment.
 	pub description: Option<String>,
+	pub include_all: Option<IncludeAll>,
 	/// Subject Type
 	/// Indicates the type of assessment subject, such as a component, inventory, item, location, or party represented by this selection statement.
 	#[serde(rename = "type")]
 	pub _type: SubjectType,
-	pub include_subjects: Option<Vec<SelectSubjectById>>,
-	pub remarks: Option<Remarks>,
-	pub exclude_subjects: Option<Vec<SelectSubjectById>>,
-	pub links: Option<Vec<Link>>,
-	pub include_all: Option<IncludeAll>,
 	pub props: Option<Vec<Property>>,
+	pub remarks: Option<Remarks>,
+	pub links: Option<Vec<Link>>,
+	pub exclude_subjects: Option<Vec<SelectSubjectById>>,
+	pub include_subjects: Option<Vec<SelectSubjectById>>,
 }

@@ -19,12 +19,12 @@ use crate::field::oscal_metadata::Remarks;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct Export {
+	pub remarks: Option<Remarks>,
+	pub links: Option<Vec<Link>>,
+	pub provided: Option<Vec<ProvidedControlImplementation>>,
+	pub props: Option<Vec<Property>>,
+	pub responsibilities: Option<Vec<ControlImplementationResponsibility>>,
 	/// Control Implementation Export Description
 	/// An implementation statement that describes the aspects of the control or control statement implementation that can be available to another system leveraging this system.
 	pub description: Option<String>,
-	pub props: Option<Vec<Property>>,
-	pub provided: Option<Vec<ProvidedControlImplementation>>,
-	pub remarks: Option<Remarks>,
-	pub links: Option<Vec<Link>>,
-	pub responsibilities: Option<Vec<ControlImplementationResponsibility>>,
 }

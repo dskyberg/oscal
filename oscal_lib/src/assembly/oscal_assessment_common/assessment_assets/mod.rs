@@ -15,6 +15,6 @@ use crate::assembly::oscal_implementation_common::SystemComponent;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct AssessmentAssets {
-	pub assessment_platforms: Vec<AssessmentPlatform>,
 	pub components: Option<Vec<SystemComponent>>,
+	pub assessment_platforms: Vec<AssessmentPlatform>,
 }

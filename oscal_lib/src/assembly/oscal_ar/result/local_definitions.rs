@@ -15,8 +15,8 @@ use crate::assembly::oscal_implementation_common::SystemUser;
 #[serde(rename_all ="kebab-case")]
 pub struct LocalDefinitions {
 	pub tasks: Option<Vec<Task>>,
-	pub components: Option<Vec<SystemComponent>>,
 	pub users: Option<Vec<SystemUser>>,
 	pub inventory_items: Option<Vec<InventoryItem>>,
 	pub assessment_assets: Option<AssessmentAssets>,
+	pub components: Option<Vec<SystemComponent>>,
 }

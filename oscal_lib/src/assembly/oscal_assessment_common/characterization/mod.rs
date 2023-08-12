@@ -17,8 +17,8 @@ use crate::assembly::oscal_metadata::Property;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct Characterization {
+	pub links: Option<Vec<Link>>,
+	pub props: Option<Vec<Property>>,
 	pub origin: Origin,
 	pub facets: Vec<Facet>,
-	pub props: Option<Vec<Property>>,
-	pub links: Option<Vec<Link>>,
 }
