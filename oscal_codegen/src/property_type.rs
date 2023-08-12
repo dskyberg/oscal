@@ -3,6 +3,7 @@ use serde_json::Value;
 use crate::{
     //
     try_str_from_map,
+    Extensible,
     Generate,
     NameSpace,
     Parse,
@@ -121,6 +122,15 @@ impl Property for PropertyType {
     }
 }
 
+impl Extensible for PropertyType {
+    fn extend_schema(&mut self, value: &Value) -> Result<()> {
+        match self {
+            PropertyType::Enum(val) => val.extend_schema(value),
+            _ => Err(ParserError::NotExstensible.into()),
+        }
+    }
+}
+
 impl Parse for PropertyType {
     fn parse(
         value: &Value,
@@ -148,7 +158,7 @@ impl Parse for PropertyType {
             return Ok(PropertyType::Reference(_ref));
         }
 
-        let _type = try_str_from_map("type", obj);
+        let _type = try_str_from_map("type", obj)?;
         if _type.is_none() {
             // This can happen for enum types.
             if let Ok(enum_type) = SchemaEnum::parse(value, ns, parent_id, name) {
@@ -160,7 +170,7 @@ impl Parse for PropertyType {
         let _type = _type.unwrap();
 
         // If it's not a $ref or a string, then it's a type with items
-        match _type.as_str() {
+        match _type {
             "integer" | "number" => {
                 if obj.contains_key("$id") {
                     // This is a referencable string
@@ -220,7 +230,7 @@ impl Parse for PropertyType {
             _ => {
                 // Oops!  Unrecognized type
                 log::error!("Unrecognize type: {}", _type);
-                Err(ParserError::UnrecognizedType(_type).into())
+                Err(ParserError::UnrecognizedType(_type.to_string()).into())
             }
         }
     }

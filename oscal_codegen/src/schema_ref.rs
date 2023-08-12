@@ -56,13 +56,13 @@ impl Parse for SchemaReference {
     ) -> Result<SchemaReference> {
         let obj = value.as_object().ok_or(ParserError::ObjectExpected)?;
 
-        let title = try_str_from_map("title", obj);
-        let description = try_str_from_map("description", obj);
+        let title = try_str_from_map("title", obj)?.map(|s| s.to_string());
+        let description = try_str_from_map("description", obj)?.map(|s| s.to_string());
         let id_val = str_from_map("$ref", obj).map_err(|e| {
             log::error!("Reference has no $ref");
             e
         })?;
-        let id = SchemaId::try_from(id_val.as_str())?;
+        let id = SchemaId::try_from(id_val)?;
 
         Ok(SchemaReference {
             id,

@@ -58,11 +58,11 @@ impl Parse for SchemaArray {
     ) -> crate::error::Result<Self> {
         let obj = value.as_object().ok_or(ParserError::ObjectExpected)?;
 
-        let title = try_str_from_map("title", obj);
-        let description = try_str_from_map("description", obj);
-        let ref_str = try_str_from_map("$ref", obj);
+        let title = try_str_from_map("title", obj)?.map(|s| s.to_string());
+        let description = try_str_from_map("description", obj)?.map(|s| s.to_string());
+        let ref_str = try_str_from_map("$ref", obj)?;
         let _ref = match ref_str {
-            Some(s) => SchemaId::try_from(s.as_str()).ok(),
+            Some(s) => SchemaId::try_from(s).ok(),
             None => None,
         };
 

@@ -1,6 +1,8 @@
+use clap::{Parser, Subcommand};
 use serde_json::Value;
 
 use error::{ParserError, Result};
+use extensible::Extensible;
 use file::*;
 use generate::*;
 use namespace::NameSpace;
@@ -22,6 +24,7 @@ use schema_type_ref::SchemaTypeRef;
 use utils::*;
 
 mod error;
+mod extensible;
 mod file;
 mod generate;
 mod namespace;
@@ -42,6 +45,85 @@ mod schema_string_ref;
 mod schema_type_ref;
 mod utils;
 
+#[derive(Parser, Debug)]
+#[command(author, version, about, long_about = None)]
+#[command(propagate_version = true)]
+struct Cli {
+    #[command(subcommand)]
+    command: Commands,
+}
+
+#[derive(Debug, Subcommand)]
+enum Commands {
+    /// Check for errors in the schema and extensions.
+    Check {
+        /// Source schema file to generate from
+        #[arg(short, long, value_name = "FILE")]
+        file: String,
+        /// Extension file to extend the schema
+        #[arg(short, long, value_name = "FILE")]
+        extension: Vec<String>,
+    },
+    /// Shows the resulting schema and extensions, without generating code
+    Show {
+        /// Source schema file to generate from
+        #[arg(short, long, value_name = "FILE")]
+        file: String,
+        /// Extension file to extend the schema
+        #[arg(short, long, value_name = "FILE")]
+        extension: Vec<String>,
+    },
+    /// Generates Rust code from the schema and extensions
+    Generate {
+        /// Source schema file to generate from
+        #[arg(short, long, value_name = "FILE")]
+        file: String,
+        /// Extension file to extend the schema
+        #[arg(short, long, value_name = "FILE")]
+        extension: Vec<String>,
+        /// Where to generate the src tree
+        #[arg(short, long, value_name = "Directory", default_value = "../oscal_lib")]
+        path: String,
+    },
+}
+
+fn main() -> Result<()> {
+    // If no env var is set, default to "info"
+    // This is a convenience step for testing.  Just flip this to
+    // "trace", so yu don't have to set the RUST_LOG env.
+    if std::env::var("RUST_LOG").is_err() {
+        std::env::set_var("RUST_LOG", "info");
+    }
+    env_logger::init();
+
+    let args = Cli::parse();
+
+    match args.command {
+        Commands::Check { file, extension } => {
+            let mut schema = read_schema(&file)?;
+            println!("Schema validates");
+            extend_schema(&mut schema, &extension)?;
+        }
+        Commands::Show { file, extension } => {
+            let mut schema = read_schema(&file)?;
+            extend_schema(&mut schema, &extension)?;
+            schema.show();
+        }
+        Commands::Generate {
+            file,
+            extension,
+            path,
+        } => {
+            let mut schema = read_schema(&file)?;
+            extend_schema(&mut schema, &extension)?;
+            schema.generate(&path)?;
+        }
+    }
+
+    Ok(())
+}
+
+/// Read the schema file and parse it
 fn read_schema(file: &str) -> Result<Schema> {
     let json = read_file_to_string(file)?;
     let schema_val = serde_json::from_str::<Value>(&json)?;
@@ -49,30 +131,12 @@ fn read_schema(file: &str) -> Result<Schema> {
     Ok(schema)
 }
 
-fn help() {
-    log::info!("id_parser <show | generate> <file name>");
-}
-fn main() -> Result<()> {
-    std::env::set_var("RUST_LOG", "trace");
-    env_logger::init();
-    let args: Vec<String> = std::env::args().collect();
-    if args.len() < 3 {
-        help();
-        return Ok(());
+// If schema extensions have been provided, process them.
+fn extend_schema(schema: &mut Schema, extensions: &[String]) -> Result<()> {
+    for file in extensions {
+        let json = read_file_to_string(file)?;
+        let schema_val = serde_json::from_str::<Value>(&json)?;
+        schema.extend(&schema_val)?;
     }
-    let command = args.get(1).unwrap();
-    let file_name = args.get(2).unwrap();
-    let schema = read_schema(file_name)?;
-
-    match command.as_str() {
-        "show" => schema.show(),
-        "generate" => {
-            let _ = schema.generate("../oscal_lib")?;
-        }
-        _ => {
-            help();
-        }
-    };
-
     Ok(())
 }

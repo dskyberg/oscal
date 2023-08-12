@@ -1,7 +1,9 @@
 use convert_case::{Case, Casing};
 use serde_json::{Map, Value};
 
+use crate::extensible::Extensible;
 use crate::file::{append_txt_file, gen_txt_file, read_file_to_string, remove_file};
+use crate::property_type::PropertyType;
 use crate::utils::{str_from_map, try_str_from_map};
 use crate::{Generate, NameSpace, ParserError, Result, SchemaId};
 
@@ -29,7 +31,7 @@ fn parse_definitions(namespaces: &mut NameSpace, schema: &Map<String, Value>) ->
             flatten_all_of(val_as_map)
         };
 
-        let mut raw_id = try_str_from_map("$id", val_as_map);
+        let mut raw_id = try_str_from_map("$id", val_as_map)?.map(|s| s.to_string());
 
         if raw_id.is_none() {
             // No id.  Let's try to spoof it
@@ -100,6 +102,50 @@ fn parse_schema_to_object(namespaces: &mut NameSpace, schema: &Map<String, Value
 }
 
 impl Schema {
+    pub fn extend(&mut self, value: &Value) -> Result<()> {
+        let obj = value.as_object().ok_or(ParserError::ObjectExpected)?;
+        // Look for the "extensions" key
+        let extensions_val = obj
+            .get("extensions")
+            .ok_or(ParserError::MissingField("extensions".to_string()))?;
+        let extensions = extensions_val
+            .as_array()
+            .ok_or(ParserError::ArrayExpected)?;
+
+        for extension in extensions {
+            let obj = extension.as_object().ok_or(ParserError::ObjectExpected)?;
+
+            let id_val = str_from_map("$id", obj).map_err(|e| {
+                log::error!("Schema extensions must contain an $id");
+                e
+            })?;
+            let id = SchemaId::try_from(id_val).map_err(|e| {
+                log::error!("Failed to parse $id for schema extension");
+                e
+            })?;
+
+            // Find the id in the namespace
+            if let Some(prop) = self.find_mut(&id) {
+                prop.extend_schema(extension)?;
+            }
+        }
+        Ok(())
+    }
+
+    fn find_mut(&mut self, id: &SchemaId) -> Option<&mut PropertyType> {
+        match &mut self.namespaces {
+            NameSpace::Node { name: _, children } => {
+                for child in children {
+                    if let Some(id) = child.find_mut(id) {
+                        return Some(id);
+                    }
+                }
+                None
+            }
+            NameSpace::Leaf { name: _, child: _ } => None,
+        }
+    }
+
     pub fn parse(schema: &Value) -> Result<Self> {
         let mut namespaces = NameSpace::new("src");
         let schema = schema.as_object().ok_or(ParserError::BadSchema)?;
@@ -125,7 +171,27 @@ impl Schema {
 
     fn fixup_lib(&self, path: &str) -> Result<()> {
         // Read the contents of "oscal.rs"
-        let contents = read_file_to_string(&format!("{}/src/oscal.rs", path))?;
+        let mut contents = read_file_to_string(&format!("{}/src/oscal.rs", path))?;
+
+        contents.push_str(r##"
+
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_catalog() {
+        let json =
+            include_str!("../../tests/fedramp-automation-rev4-baselines/FedRAMP_rev4_HIGH-baseline-resolved-profile_catalog.json");
+        let _oscal = serde_json::from_str::<Oscal>(json).expect("failed");
+        //assert!(oscal.is_ok());
+    }
+}
+
+"##,
+         );
+
         append_txt_file(&format!("{}/src/lib.rs", path), &contents)?;
         remove_file(&format!("{}/src/oscal.rs", path))?;
         Ok(())

@@ -14,6 +14,8 @@ pub enum ParserError {
     ObjectExpected,
     #[error("Array type expected")]
     ArrayExpected,
+    #[error("Number type expected")]
+    NumberExpected,
     #[error("Missing field: {0}")]
     MissingField(String),
     #[error("Stacked error: {0}")]
@@ -36,4 +38,8 @@ pub enum ParserError {
     CannotGenerate,
     #[error("Wrong property type for NameSpace")]
     WrongType,
+    #[error("Property type is not extensible")]
+    NotExstensible,
+    #[error("Bad extension object: {0}")]
+    BadExtension(String),
 }

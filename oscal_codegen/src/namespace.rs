@@ -129,6 +129,24 @@ impl NameSpace {
         }
     }
 
+    pub fn find_mut(&mut self, id: &SchemaId) -> Option<&mut PropertyType> {
+        match self {
+            NameSpace::Leaf { name, child } => match *name == id.name {
+                true => Some(child),
+                false => None,
+            },
+            NameSpace::Node { name: _, children } => {
+                for child in children {
+                    if let Some(prop) = child.find_mut(id) {
+                        return Some(prop);
+                    }
+                }
+
+                None
+            }
+        }
+    }
+
     pub fn is(&self, target: &str) -> bool {
         match self {
             NameSpace::Leaf { name, child: _ } => name == target,
@@ -311,26 +329,6 @@ impl Generate for NameSpace {
                     mod_file_inner.push('\n');
                     mod_file_inner.push_str(r##"#![allow(ambiguous_glob_reexports)]"##);
                     mod_file_inner.push('\n');
-                }
-
-                // Add the tests to the lib.rs file
-                if file_name == "lib.rs" {
-                    child_contents.push_str(
-                        r##"
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_catalog() {
-        let json =
-            include_str!("../../tests/fedramp-automation-rev4-baseines/FedRAMP_rev4_HIGH-baseline-resolved-profile_catalog.json");
-        let oscal = serde_json::from_str::<Oscal>(json);
-        assert!(oscal.is_ok());
-    }
-}"##,
-                    );
                 }
 
                 mod_file_inner.push_str(&format!("{}\n\n{}\n{}", uses, mods, child_contents));

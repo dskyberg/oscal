@@ -60,19 +60,19 @@ impl Parse for SchemaTypeRef {
             e
         })?;
 
-        let description = try_str_from_map("description", obj);
+        let description = try_str_from_map("description", obj)?.map(|s| s.to_string());
 
         let local_id = str_from_map("$id", obj).map_err(|e| {
             log::error!("A TypeRef must have an $id: {:#?}", name);
             e
         })?;
-        let id = merge_ids(parent_id, Some(local_id), &title)?;
+        let id = merge_ids(parent_id, Some(local_id), title)?;
 
         let ref_val = str_from_map("$ref", obj).map_err(|e| {
             log::error!("A TypeRef must have a $ref: {:#?}", name);
             e
         })?;
-        let _ref = SchemaId::try_from(ref_val.as_str()).map_err(|e| {
+        let _ref = SchemaId::try_from(ref_val).map_err(|e| {
             log::error!("TypeRef $ref failed to parse");
             e
         })?;
@@ -80,7 +80,7 @@ impl Parse for SchemaTypeRef {
         Ok(SchemaTypeRef {
             id,
             _ref,
-            title,
+            title: title.to_string(),
             description,
         })
     }

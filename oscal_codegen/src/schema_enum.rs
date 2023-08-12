@@ -3,10 +3,13 @@ use serde_json::Value;
 
 use crate::{
     //
+    array_from_map,
     gen_txt_file,
     merge_ids,
     str_from_map,
     try_str_from_map,
+    utils::{str_from_value, try_array_from_map},
+    Extensible,
     Generate,
     Parse,
     ParserError,
@@ -65,15 +68,41 @@ impl SchemaEnum {
             return Ok(None);
         }
 
-        let title = try_str_from_map("title", obj);
+        let title = try_str_from_map("title", obj)?;
         if title.is_none() {
             return Ok(None);
         }
         let title = title.unwrap();
 
-        let id_val = try_str_from_map("$id", obj);
-        let id = merge_ids(parent_id, id_val, &title)?;
+        let id_val = try_str_from_map("$id", obj)?;
+        let id = merge_ids(parent_id, id_val, title)?;
         Ok(Some(id))
+    }
+}
+
+impl Extensible for SchemaEnum {
+    fn extend_schema(&mut self, value: &Value) -> crate::error::Result<()> {
+        let obj = value.as_object().ok_or(ParserError::ObjectExpected)?;
+
+        let allof = array_from_map("allOf", obj)?;
+
+        for entry in allof {
+            let obj = entry.as_object().ok_or(ParserError::ObjectExpected)?;
+
+            if !obj.contains_key("enum") {
+                continue;
+            }
+            let enum_array = array_from_map("enum", obj)?;
+
+            for value in enum_array {
+                let e = value.as_str().ok_or(ParserError::BadEnumeratedType)?;
+                log::trace!("Adding {} to {}", e, self.name());
+                self.enums.push(e.to_string());
+            }
+            return Ok(());
+        }
+        log::error!("Enum extension with no 'enum' element");
+        Err(ParserError::BadExtension("Enum extension with no 'enum' element".to_string()).into())
     }
 }
 
@@ -86,25 +115,22 @@ impl Parse for SchemaEnum {
     ) -> crate::error::Result<Self> {
         let obj = value.as_object().ok_or(ParserError::ObjectExpected)?;
 
-        let title = str_from_map("title", obj).map_err(|e| {
-            log::error!("Enum must have a title: {:#?}", name);
-            e
-        })?;
+        let title = str_from_map("title", obj)
+            .map_err(|e| {
+                log::error!("Enum must have a title: {:#?}", name);
+                e
+            })?
+            .to_string();
 
-        let description = try_str_from_map("description", obj);
-        let ref_str = try_str_from_map("$ref", obj);
+        let description = try_str_from_map("description", obj)?.map(|s| s.to_string());
+        let ref_str = try_str_from_map("$ref", obj)?;
         let _ref = match ref_str {
-            Some(s) => SchemaId::try_from(s.as_str()).ok(),
+            Some(s) => SchemaId::try_from(s).ok(),
             None => None,
         };
         let id = merge_ids(parent_id, None, &title)?;
 
-        let allof = obj
-            .get("allOf")
-            .ok_or(ParserError::BadEnumeratedType)?
-            .as_array()
-            .ok_or(ParserError::BadEnumeratedType)?;
-
+        let allof = array_from_map("allOf", obj)?;
         if allof.len() < 2 {
             // Not sure what to do with this
             return Err(ParserError::BadEnumeratedType.into());
@@ -115,24 +141,13 @@ impl Parse for SchemaEnum {
 
         for entry in allof {
             let entry = entry.as_object().ok_or(ParserError::BadEnumeratedType)?;
-            if entry.contains_key("$ref") {
+            if let Some(enum_ref_val) = try_str_from_map("$ref", obj)? {
                 // This is the enum ref
-                let enum_ref_val = entry
-                    .get("$ref")
-                    .ok_or(ParserError::BadEnumeratedType)?
-                    .as_str()
-                    .ok_or(ParserError::BadEnumeratedType)?;
                 let id = SchemaId::try_from(enum_ref_val)?;
                 enum_ref = Some(id);
-            } else if entry.contains_key("enum") {
-                let enum_array = entry
-                    .get("enum")
-                    .ok_or(ParserError::BadEnumeratedType)?
-                    .as_array()
-                    .ok_or(ParserError::BadEnumeratedType)?;
-
+            } else if let Some(enum_array) = try_array_from_map("enum", entry)? {
                 for value in enum_array {
-                    let e = value.as_str().ok_or(ParserError::BadEnumeratedType)?;
+                    let e = str_from_value(value)?;
                     enums.push(e.to_string());
                 }
             }
@@ -170,10 +185,16 @@ impl Generate for SchemaEnum {
 
         for val in &self.enums {
             contents.push_str(&format!("\t// orig: {}\n", &val));
+            // If the value is a url, , remove the ugly parts
             if val.starts_with("http://") || val.starts_with("https://") {
                 let v = un_uri(val);
                 contents.push_str(&format!(r##"#[serde(rename = "{}")]{}"##, val, "\n"));
                 contents.push_str(&format!("\t{},\n", v.to_case(Case::Pascal)));
+            } else if val == &val.to_case(Case::Upper) {
+                // If this is one of those weird all upper case words...
+                contents.push('\t');
+                contents.push_str(&format!(r##"#[serde(rename = "{}")]{}"##, val, "\n"));
+                contents.push_str(&format!("\t{},\n", val.to_case(Case::Pascal)));
             } else {
                 contents.push_str(&format!("\t{},\n", val.to_case(Case::Pascal)));
             }

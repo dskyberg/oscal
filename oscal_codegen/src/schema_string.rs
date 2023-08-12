@@ -47,11 +47,11 @@ impl Parse for SchemaString {
     ) -> Result<SchemaString> {
         let obj = value.as_object().ok_or(ParserError::ObjectExpected)?;
 
-        let title = try_str_from_map("title", obj);
-        let description = try_str_from_map("description", obj);
-        let format = try_str_from_map("format", obj);
-        let pattern = try_str_from_map("pattern", obj);
-        let _ref = try_str_from_map("$ref", obj);
+        let title = try_str_from_map("title", obj)?.map(|s| s.to_string());
+        let description = try_str_from_map("description", obj)?.map(|s| s.to_string());
+        let format = try_str_from_map("format", obj)?.map(|s| s.to_string());
+        let pattern = try_str_from_map("pattern", obj)?.map(|s| s.to_string());
+        let _ref = try_str_from_map("$ref", obj)?.map(|s| s.to_string());
 
         Ok(SchemaString {
             title,

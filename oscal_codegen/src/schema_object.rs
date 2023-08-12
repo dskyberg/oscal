@@ -59,7 +59,7 @@ impl Referencable for SchemaObject {
 impl SchemaObject {
     pub fn peek(value: &Value, parent_id: Option<&SchemaId>) -> Result<Option<SchemaId>> {
         let obj = value.as_object().ok_or(ParserError::ObjectExpected)?;
-        let obj_type = try_str_from_map("type", obj);
+        let obj_type = try_str_from_map("type", obj)?;
         if obj_type.is_none() {
             return Ok(None);
         }
@@ -68,12 +68,8 @@ impl SchemaObject {
             return Ok(None);
         }
         // This appears to be a typical object def that we can map to a struct.
-        let title = obj
-            .get("title")
-            .ok_or(ParserError::MissingField("title".to_string()))?;
-        let title = title.as_str().ok_or(ParserError::StringExpected)?;
-
-        let id_val = try_str_from_map("$id", obj);
+        let title = str_from_map("title", obj)?;
+        let id_val = try_str_from_map("$id", obj)?;
         let id = merge_ids(parent_id, id_val, title)?;
         Ok(Some(id))
     }
@@ -98,13 +94,10 @@ impl Parse for SchemaObject {
             return Err(ParserError::WrongObjectType(obj_type.to_string()).into());
         }
 
-        // This appears to be a typical object def that we can map to a struct.
-        let title = obj
-            .get("title")
-            .ok_or(ParserError::MissingField("title".to_string()))?;
-        let title = title.as_str().ok_or(ParserError::StringExpected)?;
+        let title = str_from_map("title", obj)?;
 
-        let id_val = try_str_from_map("$id", obj);
+        // This appears to be a typical object def that we can map to a struct.
+        let id_val = try_str_from_map("$id", obj)?;
         let id = merge_ids(parent_id, id_val, title)?;
 
         let description = obj

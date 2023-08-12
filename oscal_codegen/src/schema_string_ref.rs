@@ -62,19 +62,21 @@ impl Parse for SchemaStringRef {
             log::error!("Referenceable String  must have an $id: {:#?}", name);
             e
         })?;
-        let _id = SchemaId::try_from(local_id.as_str()).map_err(|e| {
+        let _id = SchemaId::try_from(local_id).map_err(|e| {
             log::error!("The $id is not valid: {}", &local_id);
             e
         })?;
 
-        let title = try_str_from_map("title", obj).unwrap_or(_id.to_pascal_case());
+        let title = try_str_from_map("title", obj)?
+            .map(|s| s.to_string())
+            .unwrap_or(_id.to_pascal_case());
 
         let id = merge_ids(parent_id, Some(local_id), &title)?;
 
-        let description = try_str_from_map("description", obj);
-        let _ref = try_str_from_map("$ref", obj);
-        let format = try_str_from_map("format", obj);
-        let pattern = try_str_from_map("pattern", obj);
+        let description = try_str_from_map("description", obj)?.map(|s| s.to_string());
+        let _ref = try_str_from_map("$ref", obj)?.map(|s| s.to_string());
+        let format = try_str_from_map("format", obj)?.map(|s| s.to_string());
+        let pattern = try_str_from_map("pattern", obj)?.map(|s| s.to_string());
 
         Ok(SchemaStringRef {
             id,

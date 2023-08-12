@@ -8,12 +8,12 @@ use crate::{ParserError, Result, SchemaId};
 /// - If not, and there is a title, convert it to an id, and add to the parent
 pub fn merge_ids(
     parent_id: Option<&SchemaId>,
-    id_val: Option<String>,
+    id_val: Option<&str>,
     title: &str,
 ) -> Result<SchemaId> {
     let id = match (id_val, parent_id) {
         // Use the local $id value
-        (Some(local), None) => SchemaId::try_from(local.as_str()).map_err(|e| {
+        (Some(local), None) => SchemaId::try_from(local).map_err(|e| {
             log::error!("Object $id failed to parse");
             e
         })?,
