@@ -1,0 +1,51 @@
+{
+    "title": "Okta schema extensions",
+    "description": "Collection of extensions for the Okta OSCAL framework",
+    "version": "1.0.0",
+    "extensions": [
+        {
+            "$id": "#assembly_oscal-metadata_link_relation_relation",
+            "allOf": [
+                {
+                    "enum": [
+                        "resolution-source",
+                        "homepage",
+                        "logo",
+                        "related",
+                        "corresp"
+                    ]
+                }
+            ]
+        },
+        {
+            "$id": "#assembly_oscal-metadata_property_property-name_property-name",
+            "allOf": [
+                {
+                    "enum": [
+                        "CORE",
+                        "label",
+                        "sort-id",
+                        "response-point",
+                        "method",
+                        "type"
+                    ]
+                }
+            ]
+        },
+        {
+            "$id": "#field_oscal-metadata_document-id_document-identification-scheme_document-identification-scheme",
+            "title": "Document Identification Scheme",
+            "description": "Qualifies the kind of document identifier using a URI. If the scheme is not provided the value of the element will be interpreted as a string of characters.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/URIDatatype"
+                },
+                {
+                    "enum": [
+                        "https://www.doi.org/"
+                    ]
+                }
+            ]
+        }
+    ]
+}
