@@ -4,7 +4,7 @@
     "version": "1.0.0",
     "extensions": [
         {
-            "$id": "#assembly_oscal-metadata_link_relation_relation",
+            "$id": "#assembly_oscal-metadata_link_relation",
             "allOf": [
                 {
                     "enum": [
@@ -12,13 +12,14 @@
                         "homepage",
                         "logo",
                         "related",
-                        "corresp"
+                        "corresp",
+                        "required"
                     ]
                 }
             ]
         },
         {
-            "$id": "#assembly_oscal-metadata_property_property-name_property-name",
+            "$id": "#assembly_oscal-metadata_property_property-name",
             "allOf": [
                 {
                     "enum": [
@@ -27,13 +28,22 @@
                         "sort-id",
                         "response-point",
                         "method",
-                        "type"
+                        "type",
+                        "resolution-resource",
+                        "job-title",
+                        "vendor-name",
+                        "name",
+                        "version",
+                        "allows-authenticated-scan",
+                        "asset-id",
+                        "ipv4-address",
+                        "fqdn"
                     ]
                 }
             ]
         },
         {
-            "$id": "#field_oscal-metadata_document-id_document-identification-scheme_document-identification-scheme",
+            "$id": "#field_oscal-metadata_document-id_document-identification-scheme",
             "title": "Document Identification Scheme",
             "description": "Qualifies the kind of document identifier using a URI. If the scheme is not provided the value of the element will be interpreted as a string of characters.",
             "allOf": [
@@ -43,6 +53,36 @@
                 {
                     "enum": [
                         "https://www.doi.org/"
+                    ]
+                }
+            ]
+        },
+        {
+            "$id": "#assembly_oscal-implementation-common_system-component_component-type",
+            "title": "Component Type",
+            "description": "A category describing the purpose of the component.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/StringDatatype"
+                },
+                {
+                    "enum": [
+                        "virtual"
+                    ]
+                }
+            ]
+        },
+        {
+            "$id": "#assembly_oscal-assessment-common_observation_observation-type",
+            "title": "Observation Type",
+            "description": "Identifies the nature of the observation. More than one may be used to further qualify and enable filtering.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/TokenDatatype"
+                },
+                {
+                    "enum": [
+                        "vendor-dependency"
                     ]
                 }
             ]
