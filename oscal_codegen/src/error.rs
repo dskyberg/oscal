@@ -32,6 +32,8 @@ pub enum ParserError {
     NotUriId(String),
     #[error("Don't know how to merge the ID")]
     MergeFailed,
+    #[error("NameSpace Leaf expected")]
+    ExpectedLeaf,
     #[error("Expected this node to be terminal")]
     ExpectedTerminalNode,
     #[error("Cannot be generated")]

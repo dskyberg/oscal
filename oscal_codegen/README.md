@@ -11,5 +11,18 @@ For help with the cli, run
 To generate code from schema, and extend, use:
 
 ```bash, ignore
-> codegen generate -f  -f ../schema/oscal_complete_schema.json -e ../schema/okta_extensions.json
+> codegen generate -f ../schema/oscal_complete_schema.json -e ../schema/okta_extensions.json
+```
+
+## Handling Enums
+
+The OSCAL schema defines extensible enums, that are defined with a base type (as a `$ref`) and 1 or more default variants.
+The FedRAMP extensions define context specific variants for these enums.  This is just too brittle to manage as Rust enums.
+So, you have the option to abandon enums, and treat them as the the base `$ref`.  Or you can continually update the code
+to include additional variants, as they arise.
+
+The default is to use refs.  To use enums,  turn off default features, and use the `enums_as_enums` feature.
+
+```bash
+cargo build --no-default-features --features "enums_as_enums"
 ```

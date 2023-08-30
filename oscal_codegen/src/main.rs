@@ -92,9 +92,9 @@ fn main() -> Result<()> {
     // This is a convenience step for testing.  Just flip this to
     // "trace", so yu don't have to set the RUST_LOG env.
     if std::env::var("RUST_LOG").is_err() {
-        std::env::set_var("RUST_LOG", "info");
+        std::env::set_var("RUST_LOG", "trace");
     }
-    env_logger::init();
+    pretty_env_logger::init();
 
     let args = Cli::parse();
 

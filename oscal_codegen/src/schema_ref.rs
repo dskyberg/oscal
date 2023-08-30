@@ -22,6 +22,18 @@ pub struct SchemaReference {
     pub title: Option<String>,
     pub description: Option<String>,
 }
+
+impl SchemaReference {
+    pub fn minify_id(&mut self) {
+        let last = self.id.path.last();
+        if let Some(last_name) = last {
+            if last_name.as_str() == self.id.name {
+                log::info!("Need to trim name: {}", &self.id.raw)
+            }
+        }
+    }
+}
+
 impl Referencable for SchemaReference {
     fn id(&self) -> &SchemaId {
         &self.id

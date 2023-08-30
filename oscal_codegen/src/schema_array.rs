@@ -1,3 +1,6 @@
+/// Wraps a reference into a Vec.
+/// If the schema defines a local object or enum, that
+/// enum is added to the namespace and a reference is created for it.
 use serde_json::Value;
 
 use crate::{
@@ -28,6 +31,54 @@ impl SchemaArray {
     }
     pub fn id(&self) -> Option<&SchemaId> {
         self.prop.id()
+    }
+
+    pub fn minify_id(&mut self) {
+        log::info!("Minifying array");
+    }
+
+    #[cfg(feature = "enums_as_enums")]
+    fn handle_enum(
+        value: &Value,
+        ns: &mut crate::namespace::NameSpace,
+        _parent_id: Option<&SchemaId>,
+        _name: Option<&str>,
+        child_id: &SchemaId,
+    ) -> crate::error::Result<PropertyType> {
+        // Add this object to the namespace
+        let obj = ns.add_property(value, child_id, None).map_err(|e| {
+            log::error!("Failed to add enum as a property");
+            e
+        })?;
+
+        // Create a new Reference property, using the object's id
+        // and return that, now that the object is loaded in the name space
+        let prop_ref = SchemaReference::try_from(&obj).map_err(|e| {
+            log::error!("Failed to convert SchemaEnum to SchemaReference");
+            e
+        })?;
+        Ok(PropertyType::Reference(prop_ref))
+    }
+
+    #[cfg(feature = "enums_as_refs")]
+    fn handle_enum(
+        value: &Value,
+        ns: &mut crate::namespace::NameSpace,
+        parent_id: Option<&SchemaId>,
+        name: Option<&str>,
+        _child_id: &SchemaId,
+    ) -> crate::error::Result<PropertyType> {
+        // Parse the Value as a SchhemaEnum, and then convert it to a SchemaReference
+        let _enum = SchemaEnum::parse(value, ns, parent_id, name).map_err(|e| {
+            log::error!("Failed to pase enum");
+            e
+        })?;
+        let prop_ref = SchemaReference {
+            title: Some(_enum.title),
+            description: _enum.description,
+            id: _enum.enum_ref,
+        };
+        Ok(PropertyType::Reference(prop_ref))
     }
 }
 
@@ -66,6 +117,11 @@ impl Parse for SchemaArray {
             None => None,
         };
 
+        if parent_id.is_none() {
+            log::error!("Parent ID is required");
+            return Err(ParserError::BadPropertyType.into());
+        }
+
         if !obj.contains_key("items") {
             log::error!("Array does not contain 'items':{:?}", name);
             return Err(ParserError::BadPropertyType.into());
@@ -93,17 +149,11 @@ impl Parse for SchemaArray {
             });
         }
 
+        // For Enums' we can either treat it as a real enum, and generate a SchemaEnum,
+        // or we can treat it as a reference - using SchemaEnum::enum_ref.  Let's add a
+        // feature flag to toggle this.
         if let Some(child_id) = SchemaEnum::peek(items, parent_id)? {
-            // Add this object to the namespace
-            let obj = ns.add_property(items, &child_id, None)?;
-
-            // Create a new Reference property, using the object's id
-            // and return that, now that the object is loaded in the name space
-            let prop_ref = SchemaReference::try_from(&obj).map_err(|e| {
-                log::error!("Failed to convert SchemaEnum to SchemaReference");
-                e
-            })?;
-            let prop = PropertyType::Reference(prop_ref);
+            let prop = SchemaArray::handle_enum(items, ns, parent_id, name, &child_id)?;
             return Ok(Self {
                 title,
                 description,

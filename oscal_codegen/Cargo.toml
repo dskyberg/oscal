@@ -9,9 +9,14 @@ description = "Parse OSCAL json schema into Rust"
 [dependencies]
 clap = { version = "4.3", features = ["derive"] }
 convert_case = "0.6.0"
-env_logger = "0.10.0"
 log = "0.4.19"
+pretty_env_logger = "0.5.0"
 regex = "1.9.1"
 serde = { version = "1.0.174", features = ["derive"] }
 serde_json = "1.0.103"
 thiserror = "1.0.44"
+
+[features]
+default = ["enums_as_refs"]
+enums_as_refs = []
+enums_as_enums = []

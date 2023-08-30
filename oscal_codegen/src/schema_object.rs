@@ -73,6 +73,16 @@ impl SchemaObject {
         let id = merge_ids(parent_id, id_val, title)?;
         Ok(Some(id))
     }
+
+    pub fn minify_id(&mut self) {
+        let last = self.id.path.last();
+        if let Some(last_name) = last {
+            if last_name.as_str() == self.id.name {
+                // Pop the last.
+                self.id.path.pop();
+            }
+        }
+    }
 }
 
 impl Parse for SchemaObject {
@@ -256,16 +266,7 @@ fn parse_props(
             let prop = PropertyType::Reference(prop_ref);
             result.insert(prop_name.to_owned(), prop);
         } else if let Some(child_id) = SchemaEnum::peek(prop_val, Some(obj_id))? {
-            // Add this object to the namespace
-            let obj = ns.add_property(prop_val, &child_id, Some(prop_name))?;
-
-            // Create a new Reference property, using the object's id
-            // and return that, now that the object is loaded in the name space
-            let prop_ref = SchemaReference::try_from(&obj).map_err(|e| {
-                log::error!("Failed to convert SchemaEnum to SchemaReference");
-                e
-            })?;
-            let prop = PropertyType::Reference(prop_ref);
+            let prop = SchemaObject::handle_enum(prop_val, ns, Some(obj_id), prop_name, child_id)?;
             result.insert(prop_name.to_owned(), prop);
         } else {
             let prop =
@@ -279,4 +280,48 @@ fn parse_props(
     }
 
     Ok(Some(result))
+}
+
+impl SchemaObject {
+    #[cfg(feature = "enums_as_enums")]
+    fn handle_enum(
+        value: &Value,
+        ns: &mut crate::namespace::NameSpace,
+        _parent_id: Option<&SchemaId>,
+        name: &str,
+        id: SchemaId,
+    ) -> crate::error::Result<PropertyType> {
+        // Add this object to the namespace
+        let obj = ns.add_property(value, &id, Some(name))?;
+
+        // Create a new Reference property, using the object's id
+        // and return that, now that the object is loaded in the name space
+        let prop_ref = SchemaReference::try_from(&obj).map_err(|e| {
+            log::error!("Failed to convert SchemaEnum to SchemaReference");
+            e
+        })?;
+
+        Ok(PropertyType::Reference(prop_ref))
+    }
+
+    #[cfg(feature = "enums_as_refs")]
+    fn handle_enum(
+        value: &Value,
+        ns: &mut crate::namespace::NameSpace,
+        parent_id: Option<&SchemaId>,
+        name: &str,
+        _id: SchemaId,
+    ) -> crate::error::Result<PropertyType> {
+        // Parse the Value as a SchhemaEnum, and then convert it to a SchemaReference
+        let _enum = SchemaEnum::parse(value, ns, parent_id, Some(name)).map_err(|e| {
+            log::error!("Attempt to parse enum failed");
+            e
+        })?;
+        let prop_ref = SchemaReference {
+            title: Some(_enum.title),
+            description: _enum.description,
+            id: _enum.enum_ref,
+        };
+        Ok(PropertyType::Reference(prop_ref))
+    }
 }

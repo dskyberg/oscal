@@ -1,3 +1,15 @@
+/// SchemaEnum creates verifiable data
+/// There are two parts to a SchemaEnum
+///
+/// - A reference to an OSCAL data type, such as `TokenDatatype`
+/// - An enum with a core set of valid values
+///
+/// Objects that include the enum, should allow any value of the referenced data type.
+///
+/// A separate extensible collection will be created that can be used to validate the data
+/// programmatically.  This can't be done via the serde crate because there is no way to provide a serialize/deserialize
+/// context to Serde.
+///
 use convert_case::{Case, Casing};
 use serde_json::Value;
 
@@ -7,8 +19,8 @@ use crate::{
     gen_txt_file,
     merge_ids,
     str_from_map,
+    str_from_value,
     try_str_from_map,
-    utils::{str_from_value, try_array_from_map},
     Extensible,
     Generate,
     Parse,
@@ -25,7 +37,7 @@ pub struct SchemaEnum {
     pub description: Option<String>,
     pub _ref: Option<SchemaId>,
     pub enums: Vec<String>,
-    pub enum_ref: Option<SchemaId>,
+    pub enum_ref: SchemaId,
 }
 
 impl Referencable for SchemaEnum {
@@ -77,6 +89,16 @@ impl SchemaEnum {
         let id_val = try_str_from_map("$id", obj)?;
         let id = merge_ids(parent_id, id_val, title)?;
         Ok(Some(id))
+    }
+
+    pub fn minify_id(&mut self) {
+        let last = self.id.path.last();
+        if let Some(last_name) = last {
+            if last_name.as_str() == self.id.name {
+                // Pop the last.
+                self.id.path.pop();
+            }
+        }
     }
 }
 
@@ -131,28 +153,59 @@ impl Parse for SchemaEnum {
         let id = merge_ids(parent_id, None, &title)?;
 
         let allof = array_from_map("allOf", obj)?;
-        if allof.len() < 2 {
+        if allof.len() != 2 {
             // Not sure what to do with this
             return Err(ParserError::BadEnumeratedType.into());
         }
 
-        let mut enum_ref: Option<SchemaId> = None;
-        let mut enums: Vec<String> = Vec::new();
+        // Safe unwrap, since we know the len is 2
+        let entry = allof
+            .get(0)
+            .unwrap()
+            .as_object()
+            .ok_or(ParserError::BadEnumeratedType)?;
+        let enum_ref_val = str_from_map("$ref", entry).map_err(|_| {
+            log::error!("Enum does not contain a $ref");
+            ParserError::BadEnumeratedType
+        })?;
+        // This is the enum ref
+        let enum_ref = SchemaId::try_from(enum_ref_val).map_err(|e| {
+            log::error!("$ref is not a valid id: {}", enum_ref_val);
+            e
+        })?;
 
-        for entry in allof {
-            let entry = entry.as_object().ok_or(ParserError::BadEnumeratedType)?;
-            if let Some(enum_ref_val) = try_str_from_map("$ref", obj)? {
-                // This is the enum ref
-                let id = SchemaId::try_from(enum_ref_val)?;
-                enum_ref = Some(id);
-            } else if let Some(enum_array) = try_array_from_map("enum", entry)? {
-                for value in enum_array {
-                    let e = str_from_value(value)?;
-                    enums.push(e.to_string());
-                }
-            }
+        let mut enums: Vec<String> = Vec::new();
+        let entry = allof
+            .get(1)
+            .unwrap()
+            .as_object()
+            .ok_or(ParserError::BadEnumeratedType)?;
+
+        let enum_array = array_from_map("enum", entry).map_err(|_| {
+            log::error!("Enum does not contain enum");
+            ParserError::BadEnumeratedType
+        })?;
+        for value in enum_array {
+            let e = str_from_value(value)?;
+            enums.push(e.to_string());
         }
 
+        /*
+               for entry in allof {
+                   let entry = entry.as_object().ok_or(ParserError::BadEnumeratedType)?;
+                   if let Some(enum_ref_val) = try_str_from_map("$ref", obj)? {
+                       // This is the enum ref
+                       let id = SchemaId::try_from(enum_ref_val)?;
+                       enum_ref = Some(id);
+                   } else if let Some(enum_array) = try_array_from_map("enum", entry)? {
+                       for value in enum_array {
+                           let e = str_from_value(value)?;
+                           enums.push(e.to_string());
+                       }
+                   }
+               }
+
+        */
         Ok(Self {
             id,
             title,

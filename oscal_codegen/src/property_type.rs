@@ -50,6 +50,23 @@ impl PropertyType {
             PropertyType::String(_) => None,
         }
     }
+
+    /// At some point, we want to trim the redundant portion of ids in minified terminal nodes.
+    /// The problem is that this is happening after references to these nodes have been created.
+    /// So we can't trim them without also trimming all references.
+    pub fn minify_id(&mut self) {
+        match self {
+            PropertyType::ReferencableInteger(_) => {}
+            PropertyType::ReferencableBoolean(_) => {}
+            PropertyType::ReferencableString(_) => {}
+            PropertyType::TypeRef(_) => {}
+            PropertyType::Reference(val) => val.minify_id(),
+            PropertyType::Object(val) => val.minify_id(),
+            PropertyType::Enum(val) => val.minify_id(),
+            PropertyType::Array(val) => val.minify_id(),
+            PropertyType::String(_) => {}
+        };
+    }
 }
 
 impl Property for PropertyType {

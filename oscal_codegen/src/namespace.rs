@@ -44,6 +44,16 @@ impl NameSpace {
         }
     }
 
+    pub fn get_prop_mut(&mut self) -> Result<&mut PropertyType> {
+        match self {
+            NameSpace::Node {
+                name: _,
+                children: _,
+            } => Err(ParserError::ExpectedLeaf.into()),
+            NameSpace::Leaf { name: _, child } => Ok(child),
+        }
+    }
+
     pub fn new_leaf(name: &str, child: PropertyType) -> Result<NameSpace> {
         match child {
             PropertyType::Object(_)
@@ -86,10 +96,9 @@ impl NameSpace {
         }
     }
 
+    /// Returns the child of a terminal node
+    /// WARNING!! MAKE SURE YOU CALL `is_terminal_node` FIRST!!
     pub fn get_terminal_child(&self) -> Result<&NameSpace> {
-        if !self.is_terminal_node() {
-            return Err(ParserError::ExpectedTerminalNode.into());
-        }
         // Since this is a terminal node, we know it has only 1 child, and the
         // child is a leaf.
         match self {
@@ -98,6 +107,32 @@ impl NameSpace {
                 Ok(child)
             }
             _ => Err(ParserError::ExpectedTerminalNode.into()),
+        }
+    }
+
+    /// Look for terminal nodes, and swap the node for the child leaf
+    pub fn minify(&self) -> Result<NameSpace> {
+        match self {
+            Self::Node { name, children } => {
+                let mut new_children: Vec<NameSpace> = Vec::new();
+                for child in children {
+                    if child.is_terminal_node() {
+                        let mut new_child = child.get_terminal_child()?.clone();
+                        // The new child's name needs to be fixed up
+                        let prop = new_child.get_prop_mut()?;
+                        prop.minify_id();
+                        new_children.push(new_child);
+                    } else {
+                        new_children.push(child.minify()?)
+                    }
+                }
+                let ns = NameSpace::Node {
+                    name: name.to_string(),
+                    children: new_children,
+                };
+                Ok(ns)
+            }
+            _ => Ok(self.clone()),
         }
     }
 
@@ -302,7 +337,10 @@ impl Generate for NameSpace {
 
                     if child.name() == name {
                         let path = format!("{}/{}.rs", path, name);
-                        child_contents = read_file_to_string(&path)?;
+                        child_contents = read_file_to_string(&path).map_err(|e| {
+                            log::error!("Failed to read child: {}", &path);
+                            e
+                        })?;
                         remove_file(&path)?;
                     } else {
                         uses.push_str(&format!("pub use {}::*;\n", &cname));
