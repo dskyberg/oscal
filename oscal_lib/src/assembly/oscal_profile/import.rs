@@ -12,10 +12,10 @@ use crate::definitions::UriReferenceDatatype;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct Import {
+	pub exclude_controls: Option<Vec<SelectControlById>>,
+	pub include_all: Option<IncludeAll>,
 	pub include_controls: Option<Vec<SelectControlById>>,
 	/// Catalog or Profile Reference
 	/// A resolvable URL reference to the base catalog or profile that this profile is tailoring.
 	pub href: UriReferenceDatatype,
-	pub include_all: Option<IncludeAll>,
-	pub exclude_controls: Option<Vec<SelectControlById>>,
 }

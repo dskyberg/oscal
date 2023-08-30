@@ -17,8 +17,8 @@ use crate::field::oscal_metadata::Remarks;
 pub struct LocalDefinitions {
 	pub activities: Option<Vec<Activity>>,
 	pub components: Option<Vec<SystemComponent>>,
-	pub inventory_items: Option<Vec<InventoryItem>>,
 	pub objectives_and_methods: Option<Vec<LocalObjective>>,
+	pub inventory_items: Option<Vec<InventoryItem>>,
 	pub remarks: Option<Remarks>,
 	pub users: Option<Vec<SystemUser>>,
 }

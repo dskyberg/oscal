@@ -27,31 +27,31 @@ use crate::field::oscal_assessment_common::ThreatId;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct Risk {
-	pub related_observations: Option<Vec<RelatedObservation>>,
-	/// Risk Universally Unique Identifier
-	/// A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this risk elsewhere in this or other OSCAL instances. The locally defined UUID of the risk can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document.
-	pub uuid: UuidDatatype,
-	pub origins: Option<Vec<Origin>>,
-	pub props: Option<Vec<Property>>,
-	pub links: Option<Vec<Link>>,
 	/// Risk Statement
 	/// An summary of impact for how the risk affects the system.
 	pub statement: String,
+	pub props: Option<Vec<Property>>,
 	pub characterizations: Option<Vec<Characterization>>,
 	/// Risk Description
 	/// A human-readable summary of the identified risk, to include a statement of how the risk impacts the system.
 	pub description: String,
+	pub mitigating_factors: Option<Vec<MitigatingFactor>>,
 	pub remediations: Option<Vec<Response>>,
+	pub related_observations: Option<Vec<RelatedObservation>>,
+	/// Risk Universally Unique Identifier
+	/// A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this risk elsewhere in this or other OSCAL instances. The locally defined UUID of the risk can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document.
+	pub uuid: UuidDatatype,
+	pub links: Option<Vec<Link>>,
+	/// Risk Resolution Deadline
+	/// The date/time by which the risk must be resolved.
+	pub deadline: Option<DateTimeWithTimezoneDatatype>,
+	pub status: RiskStatus,
+	pub origins: Option<Vec<Origin>>,
 	/// Risk Log
 	/// A log of all risk-related tasks taken.
 	pub risk_log: Option<RiskLog>,
-	pub mitigating_factors: Option<Vec<MitigatingFactor>>,
-	pub status: RiskStatus,
 	pub threat_ids: Option<Vec<ThreatId>>,
 	/// Risk Title
 	/// The title for this risk.
 	pub title: String,
-	/// Risk Resolution Deadline
-	/// The date/time by which the risk must be resolved.
-	pub deadline: Option<DateTimeWithTimezoneDatatype>,
 }

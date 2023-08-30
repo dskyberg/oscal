@@ -22,28 +22,28 @@ use crate::field::oscal_ssp::DateAuthorized;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct SystemCharacteristics {
-	pub system_ids: Vec<SystemId>,
-	pub remarks: Option<Remarks>,
-	pub status: Status,
-	/// System Name - Short
-	/// A short name for the system, such as an acronym, that is suitable for display in a data table or summary list.
-	pub system_name_short: Option<StringDatatype>,
 	pub data_flow: Option<DataFlow>,
-	pub date_authorized: Option<DateAuthorized>,
 	/// Security Sensitivity Level
 	/// The overall information system sensitivity categorization, such as defined by FIPS-199.
 	pub security_sensitivity_level: StringDatatype,
-	pub network_architecture: Option<NetworkArchitecture>,
-	pub links: Option<Vec<Link>>,
-	pub responsible_parties: Option<Vec<ResponsibleParty>>,
-	pub authorization_boundary: AuthorizationBoundary,
+	pub date_authorized: Option<DateAuthorized>,
 	pub system_information: SystemInformation,
-	/// System Description
-	/// A summary of the system.
-	pub description: String,
-	pub props: Option<Vec<Property>>,
-	pub security_impact_level: SecurityImpactLevel,
+	pub network_architecture: Option<NetworkArchitecture>,
+	pub responsible_parties: Option<Vec<ResponsibleParty>>,
 	/// System Name - Full
 	/// The full name of the system.
 	pub system_name: StringDatatype,
+	pub props: Option<Vec<Property>>,
+	pub system_ids: Vec<SystemId>,
+	pub security_impact_level: SecurityImpactLevel,
+	pub links: Option<Vec<Link>>,
+	pub status: Status,
+	pub authorization_boundary: AuthorizationBoundary,
+	/// System Description
+	/// A summary of the system.
+	pub description: String,
+	pub remarks: Option<Remarks>,
+	/// System Name - Short
+	/// A short name for the system, such as an acronym, that is suitable for display in a data table or summary list.
+	pub system_name_short: Option<StringDatatype>,
 }

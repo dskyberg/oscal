@@ -24,20 +24,20 @@ use crate::definitions::UuidDatatype;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct AssessmentPlan {
-	pub import_ssp: ImportSsp,
-	pub back_matter: Option<BackMatter>,
-	/// Assessment Plan Terms and Conditions
-	/// Used to define various terms and conditions under which an assessment, described by the plan, can be performed. Each child part defines a different type of term or condition.
-	pub terms_and_conditions: Option<AssessmentPlanTermsAndConditions>,
-	/// Local Definitions
-	/// Used to define data objects that are used in the assessment plan, that do not appear in the referenced SSP.
-	pub local_definitions: Option<LocalDefinitions>,
 	pub tasks: Option<Vec<Task>>,
-	pub assessment_assets: Option<AssessmentAssets>,
-	pub assessment_subjects: Option<Vec<AssessmentSubject>>,
-	pub metadata: Metadata,
 	/// Assessment Plan Universally Unique Identifier
 	/// A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this assessment plan in this or other OSCAL instances. The locally defined UUID of the assessment plan can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document.
 	pub uuid: UuidDatatype,
+	pub metadata: Metadata,
+	pub assessment_subjects: Option<Vec<AssessmentSubject>>,
+	/// Local Definitions
+	/// Used to define data objects that are used in the assessment plan, that do not appear in the referenced SSP.
+	pub local_definitions: Option<LocalDefinitions>,
+	pub assessment_assets: Option<AssessmentAssets>,
+	/// Assessment Plan Terms and Conditions
+	/// Used to define various terms and conditions under which an assessment, described by the plan, can be performed. Each child part defines a different type of term or condition.
+	pub terms_and_conditions: Option<AssessmentPlanTermsAndConditions>,
 	pub reviewed_controls: ReviewedControls,
+	pub import_ssp: ImportSsp,
+	pub back_matter: Option<BackMatter>,
 }

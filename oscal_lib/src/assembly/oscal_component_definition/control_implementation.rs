@@ -16,16 +16,16 @@ use crate::definitions::UuidDatatype;
 #[serde(rename_all ="kebab-case")]
 pub struct ControlImplementation {
 	pub links: Option<Vec<Link>>,
-	pub implemented_requirements: Vec<ImplementedRequirement>,
-	pub props: Option<Vec<Property>>,
 	/// Control Implementation Description
 	/// A description of how the specified set of controls are implemented for the containing component or capability.
 	pub description: String,
 	pub set_parameters: Option<Vec<SetParameter>>,
-	/// Control Implementation Set Identifier
-	/// A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference a set of implemented controls elsewhere in this or other OSCAL instances. The locally defined UUID of the control implementation set can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document.
-	pub uuid: UuidDatatype,
+	pub implemented_requirements: Vec<ImplementedRequirement>,
+	pub props: Option<Vec<Property>>,
 	/// Source Resource Reference
 	/// A reference to an OSCAL catalog or profile providing the referenced control or subcontrol definition.
 	pub source: UriReferenceDatatype,
+	/// Control Implementation Set Identifier
+	/// A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference a set of implemented controls elsewhere in this or other OSCAL instances. The locally defined UUID of the control implementation set can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document.
+	pub uuid: UuidDatatype,
 }

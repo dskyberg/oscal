@@ -17,26 +17,26 @@ use crate::field::oscal_metadata::Remarks;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct Parameter {
-	/// Parameter Label
-	/// A short, placeholder name for the parameter, which can be used as a substitute for a value if no value is assigned.
-	pub label: Option<String>,
-	pub guidelines: Option<Vec<ParameterGuideline>>,
-	pub select: Option<ParameterSelection>,
-	/// Depends on
-	/// **(deprecated)** Another parameter invoking this one. This construct has been deprecated and should not be used.
-	pub depends_on: Option<TokenDatatype>,
-	/// Parameter Usage Description
-	/// Describes the purpose and use of a parameter
-	pub usage: Option<String>,
-	pub constraints: Option<Vec<ParameterConstraint>>,
 	/// Parameter Identifier
 	/// A human-oriented, locally unique identifier with cross-instance scope that can be used to reference this defined parameter elsewhere in this or other OSCAL instances. When referenced from another OSCAL instance, this identifier must be referenced in the context of the containing resource (e.g., import-profile). This id should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document.
 	pub id: TokenDatatype,
+	/// Depends on
+	/// **(deprecated)** Another parameter invoking this one. This construct has been deprecated and should not be used.
+	pub depends_on: Option<TokenDatatype>,
+	pub links: Option<Vec<Link>>,
+	pub remarks: Option<Remarks>,
+	pub select: Option<ParameterSelection>,
+	pub props: Option<Vec<Property>>,
+	pub values: Option<Vec<ParameterValue>>,
 	/// Parameter Class
 	/// A textual label that provides a characterization of the parameter.
 	pub class: Option<TokenDatatype>,
-	pub props: Option<Vec<Property>>,
-	pub values: Option<Vec<ParameterValue>>,
-	pub remarks: Option<Remarks>,
-	pub links: Option<Vec<Link>>,
+	/// Parameter Usage Description
+	/// Describes the purpose and use of a parameter
+	pub usage: Option<String>,
+	pub guidelines: Option<Vec<ParameterGuideline>>,
+	/// Parameter Label
+	/// A short, placeholder name for the parameter, which can be used as a substitute for a value if no value is assigned.
+	pub label: Option<String>,
+	pub constraints: Option<Vec<ParameterConstraint>>,
 }

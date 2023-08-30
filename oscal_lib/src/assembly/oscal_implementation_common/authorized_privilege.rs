@@ -10,10 +10,10 @@ use crate::field::oscal_implementation_common::FunctionPerformed;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct AuthorizedPrivilege {
-	pub functions_performed: Vec<FunctionPerformed>,
 	/// Privilege Title
 	/// A human readable name for the privilege.
 	pub title: String,
+	pub functions_performed: Vec<FunctionPerformed>,
 	/// Privilege Description
 	/// A summary of the privilege's purpose within the system.
 	pub description: Option<String>,

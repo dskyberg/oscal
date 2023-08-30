@@ -14,11 +14,6 @@ use crate::field::oscal_ssp::DateAuthorized;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct LeveragedAuthorization {
-	pub date_authorized: DateAuthorized,
-	/// Leveraged Authorization Universally Unique Identifier
-	/// A machine-oriented, globally unique identifier with cross-instance scope and can be used to reference this leveraged authorization elsewhere in this or other OSCAL instances. The locally defined UUID of the leveraged authorization can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document.
-	pub uuid: UuidDatatype,
-	pub remarks: Option<Remarks>,
 	/// title field
 	/// A human readable name for the leveraged authorization in the context of the system.
 	pub title: String,
@@ -26,5 +21,10 @@ pub struct LeveragedAuthorization {
 	/// A machine-oriented identifier reference to the party that manages the leveraged system.
 	pub party_uuid: UuidDatatype,
 	pub props: Option<Vec<Property>>,
+	/// Leveraged Authorization Universally Unique Identifier
+	/// A machine-oriented, globally unique identifier with cross-instance scope and can be used to reference this leveraged authorization elsewhere in this or other OSCAL instances. The locally defined UUID of the leveraged authorization can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document.
+	pub uuid: UuidDatatype,
+	pub date_authorized: DateAuthorized,
+	pub remarks: Option<Remarks>,
 	pub links: Option<Vec<Link>>,
 }

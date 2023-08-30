@@ -11,6 +11,6 @@ use crate::assembly::oscal_assessment_common::RelatedTask;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct Origin {
-	pub actors: Vec<OriginActor>,
 	pub related_tasks: Option<Vec<RelatedTask>>,
+	pub actors: Vec<OriginActor>,
 }

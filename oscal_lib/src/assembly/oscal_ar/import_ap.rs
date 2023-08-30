@@ -11,8 +11,8 @@ use crate::field::oscal_metadata::Remarks;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct ImportAp {
-	pub remarks: Option<Remarks>,
 	/// Assessment Plan Reference
 	/// A resolvable URL reference to the assessment plan governing the assessment activities.
 	pub href: UriReferenceDatatype,
+	pub remarks: Option<Remarks>,
 }

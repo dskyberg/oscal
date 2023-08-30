@@ -13,16 +13,16 @@ use crate::definitions::UuidDatatype;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct MitigatingFactor {
+	pub links: Option<Vec<Link>>,
+	pub props: Option<Vec<Property>>,
 	/// Implementation UUID
 	/// A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this implementation statement elsewhere in this or other OSCAL instancess. The locally defined UUID of the implementation statement can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document.
 	pub implementation_uuid: Option<UuidDatatype>,
-	pub props: Option<Vec<Property>>,
-	/// Mitigating Factor Description
-	/// A human-readable description of this mitigating factor.
-	pub description: String,
-	pub links: Option<Vec<Link>>,
 	pub subjects: Option<Vec<SubjectReference>>,
 	/// Mitigating Factor Universally Unique Identifier
 	/// A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this mitigating factor elsewhere in this or other OSCAL instances. The locally defined UUID of the mitigating factor can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document.
 	pub uuid: UuidDatatype,
+	/// Mitigating Factor Description
+	/// A human-readable description of this mitigating factor.
+	pub description: String,
 }

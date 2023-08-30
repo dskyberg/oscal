@@ -21,27 +21,84 @@ use serde_with::skip_serializing_none;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct Oscal {
-	pub profile: Option<Profile>,
-	pub system_security_plan: Option<SystemSecurityPlan>,
-	pub catalog: Option<Catalog>,
-	pub assessment_results: Option<AssessmentResults>,
-	pub assessment_plan: Option<AssessmentPlan>,
-	pub component_definition: Option<ComponentDefinition>,
 	pub plan_of_action_and_milestones: Option<PlanOfActionAndMilestones>,
+	pub assessment_results: Option<AssessmentResults>,
+	pub system_security_plan: Option<SystemSecurityPlan>,
+	pub component_definition: Option<ComponentDefinition>,
+	pub assessment_plan: Option<AssessmentPlan>,
+	pub profile: Option<Profile>,
+	pub catalog: Option<Catalog>,
 }
 
 
 
 #[cfg(test)]
 mod tests {
-    use super::*;
+use super::*;
 
-    #[test]
-    fn test_catalog() {
-        let json =
-            include_str!("../../tests/fedramp-automation-rev4-baselines/FedRAMP_rev4_HIGH-baseline-resolved-profile_catalog.json");
-        let _oscal = serde_json::from_str::<Oscal>(json).expect("failed");
-        //assert!(oscal.is_ok());
-    }
+#[test]
+fn test_rev4_moderate() {
+    let json =
+        include_str!("../../tests/fedramp-automation/dist/content/rev4/baselines/json/FedRAMP_rev4_MODERATE-baseline-resolved-profile_catalog.json");
+    let oscal = serde_json::from_str::<Oscal>(json);
+    assert!(oscal.is_ok());
+}
+
+#[test]
+fn test_rev4_high() {
+    let json =
+        include_str!("../../tests/fedramp-automation/dist/content/rev4/baselines/json/FedRAMP_rev4_HIGH-baseline-resolved-profile_catalog.json");
+    let oscal = serde_json::from_str::<Oscal>(json);
+    assert!(oscal.is_ok());
+}
+
+
+#[test]
+fn test_rev5_moderate() {
+    let json =
+        include_str!("../../tests/fedramp-automation/dist/content/rev5/baselines/json/FedRAMP_rev5_MODERATE-baseline-resolved-profile_catalog.json");
+    let oscal = serde_json::from_str::<Oscal>(json);
+    assert!(oscal.is_ok());
+}
+
+#[test]
+fn test_rev5_high() {
+    let json =
+        include_str!("../../tests/fedramp-automation/dist/content/rev5/baselines/json/FedRAMP_rev5_HIGH-baseline-resolved-profile_catalog.json");
+    let oscal = serde_json::from_str::<Oscal>(json);
+    assert!(oscal.is_ok());
+}
+
+#[test]
+fn test_rev5_poam() {
+    let json =
+        include_str!("../../tests/fedramp-automation/dist/content/rev5/templates/poam/json/FedRAMP-POAM-OSCAL-Template.json");
+    let oscal = serde_json::from_str::<Oscal>(json);
+    assert!(oscal.is_ok());
+}
+
+#[test]
+fn test_rev5_sap() {
+    let json =
+        include_str!("../../tests/fedramp-automation/dist/content/rev5/templates/sap/json/FedRAMP-SAP-OSCAL-Template.json");
+    let oscal = serde_json::from_str::<Oscal>(json);
+    assert!(oscal.is_ok());
+}
+
+#[test]
+fn test_rev5_sar() {
+    let json =
+        include_str!("../../tests/fedramp-automation/dist/content/rev5/templates/sar/FedRAMP-SAR-OSCAL-Template.json");
+    let oscal = serde_json::from_str::<Oscal>(json);
+    assert!(oscal.is_ok());
+}
+
+#[test]
+fn test_rev5_ssp() {
+    let json =
+        include_str!("../../tests/fedramp-automation/dist/content/rev5/templates/ssp/json/FedRAMP-SSP-OSCAL-Template.json");
+    let oscal = serde_json::from_str::<Oscal>(json);
+    assert!(oscal.is_ok());
+}
 }
 

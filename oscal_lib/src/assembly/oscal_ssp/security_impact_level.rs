@@ -10,12 +10,12 @@ use crate::definitions::StringDatatype;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct SecurityImpactLevel {
-	/// Security Objective: Integrity
-	/// A target-level of integrity for the system, based on the sensitivity of information within the system.
-	pub security_objective_integrity: StringDatatype,
 	/// Security Objective: Confidentiality
 	/// A target-level of confidentiality for the system, based on the sensitivity of information within the system.
 	pub security_objective_confidentiality: StringDatatype,
+	/// Security Objective: Integrity
+	/// A target-level of integrity for the system, based on the sensitivity of information within the system.
+	pub security_objective_integrity: StringDatatype,
 	/// Security Objective: Availability
 	/// A target-level of availability for the system, based on the sensitivity of information within the system.
 	pub security_objective_availability: StringDatatype,

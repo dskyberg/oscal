@@ -15,12 +15,12 @@ use crate::field::oscal_metadata::Remarks;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct AssociatedActivity {
+	pub links: Option<Vec<Link>>,
+	pub remarks: Option<Remarks>,
+	pub subjects: Vec<AssessmentSubject>,
+	pub props: Option<Vec<Property>>,
 	/// Activity Universally Unique Identifier Reference
 	/// A machine-oriented identifier reference to an activity defined in the list of activities.
 	pub activity_uuid: UuidDatatype,
 	pub responsible_roles: Option<Vec<ResponsibleRole>>,
-	pub links: Option<Vec<Link>>,
-	pub subjects: Vec<AssessmentSubject>,
-	pub props: Option<Vec<Property>>,
-	pub remarks: Option<Remarks>,
 }

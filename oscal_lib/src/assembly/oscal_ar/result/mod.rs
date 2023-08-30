@@ -27,33 +27,33 @@ use crate::field::oscal_metadata::Remarks;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct Result {
+	/// end field
+	/// Date/time stamp identifying the end of the evidence collection reflected in these results. In a continuous motoring scenario, this may contain the same value as start if appropriate.
+	pub end: Option<DateTimeWithTimezoneDatatype>,
+	pub reviewed_controls: ReviewedControls,
+	pub risks: Option<Vec<Risk>>,
 	pub attestations: Option<Vec<AttestationStatements>>,
-	/// start field
-	/// Date/time stamp identifying the start of the evidence collection reflected in these results.
-	pub start: DateTimeWithTimezoneDatatype,
+	pub remarks: Option<Remarks>,
 	/// Results Description
 	/// A human-readable description of this set of test results.
 	pub description: String,
+	/// Assessment Log
+	/// A log of all assessment-related actions taken.
+	pub assessment_log: Option<AssessmentLog>,
+	/// Local Definitions
+	/// Used to define data objects that are used in the assessment plan, that do not appear in the referenced SSP.
+	pub local_definitions: Option<LocalDefinitions>,
+	pub links: Option<Vec<Link>>,
+	/// start field
+	/// Date/time stamp identifying the start of the evidence collection reflected in these results.
+	pub start: DateTimeWithTimezoneDatatype,
 	/// Results Title
 	/// The title for this set of results.
 	pub title: String,
 	pub observations: Option<Vec<Observation>>,
+	pub props: Option<Vec<Property>>,
 	pub findings: Option<Vec<Finding>>,
-	pub risks: Option<Vec<Risk>>,
-	/// Assessment Log
-	/// A log of all assessment-related actions taken.
-	pub assessment_log: Option<AssessmentLog>,
 	/// Results Universally Unique Identifier
 	/// A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this set of results in this or other OSCAL instances. The locally defined UUID of the assessment result can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document.
 	pub uuid: UuidDatatype,
-	pub links: Option<Vec<Link>>,
-	pub props: Option<Vec<Property>>,
-	/// Local Definitions
-	/// Used to define data objects that are used in the assessment plan, that do not appear in the referenced SSP.
-	pub local_definitions: Option<LocalDefinitions>,
-	/// end field
-	/// Date/time stamp identifying the end of the evidence collection reflected in these results. In a continuous motoring scenario, this may contain the same value as start if appropriate.
-	pub end: Option<DateTimeWithTimezoneDatatype>,
-	pub remarks: Option<Remarks>,
-	pub reviewed_controls: ReviewedControls,
 }

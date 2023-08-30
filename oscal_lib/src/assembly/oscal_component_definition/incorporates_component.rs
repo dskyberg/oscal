@@ -10,10 +10,10 @@ use crate::definitions::UuidDatatype;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct IncorporatesComponent {
-	/// Component Description
-	/// A description of the component, including information about its function.
-	pub description: String,
 	/// Component Reference
 	/// A machine-oriented identifier reference to a component.
 	pub component_uuid: UuidDatatype,
+	/// Component Description
+	/// A description of the component, including information about its function.
+	pub description: String,
 }

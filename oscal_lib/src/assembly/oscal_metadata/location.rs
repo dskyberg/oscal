@@ -17,17 +17,17 @@ use crate::field::oscal_metadata::TelephoneNumber;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct Location {
-	pub telephone_numbers: Option<Vec<TelephoneNumber>>,
+	pub links: Option<Vec<Link>>,
 	pub props: Option<Vec<Property>>,
+	pub remarks: Option<Remarks>,
 	/// Location Title
 	/// A name given to the location, which may be used by a tool for display and navigation.
 	pub title: Option<String>,
-	pub address: Address,
-	pub remarks: Option<Remarks>,
-	pub links: Option<Vec<Link>>,
 	pub urls: Option<Vec<UriDatatype>>,
-	pub email_addresses: Option<Vec<EmailAddress>>,
 	/// Location Universally Unique Identifier
 	/// A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this defined location elsewhere in this or other OSCAL instances. The locally defined UUID of the location can be used to reference the data item locally or globally (e.g., from an importing OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document.
 	pub uuid: UuidDatatype,
+	pub email_addresses: Option<Vec<EmailAddress>>,
+	pub address: Address,
+	pub telephone_numbers: Option<Vec<TelephoneNumber>>,
 }

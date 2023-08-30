@@ -16,21 +16,21 @@ use crate::field::oscal_metadata::RoleId;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct SystemUser {
-	pub props: Option<Vec<Property>>,
+	pub remarks: Option<Remarks>,
 	pub role_ids: Option<Vec<RoleId>>,
-	/// User Universally Unique Identifier
-	/// A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this user class elsewhere in this or other OSCAL instances. The locally defined UUID of the system user can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document.
-	pub uuid: UuidDatatype,
-	pub authorized_privileges: Option<Vec<AuthorizedPrivilege>>,
+	pub props: Option<Vec<Property>>,
 	/// User Description
 	/// A summary of the user's purpose within the system.
 	pub description: Option<String>,
-	/// User Title
-	/// A name given to the user, which may be used by a tool for display and navigation.
-	pub title: Option<String>,
 	pub links: Option<Vec<Link>>,
-	pub remarks: Option<Remarks>,
+	pub authorized_privileges: Option<Vec<AuthorizedPrivilege>>,
 	/// User Short Name
 	/// A short common name, abbreviation, or acronym for the user.
 	pub short_name: Option<StringDatatype>,
+	/// User Title
+	/// A name given to the user, which may be used by a tool for display and navigation.
+	pub title: Option<String>,
+	/// User Universally Unique Identifier
+	/// A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this user class elsewhere in this or other OSCAL instances. The locally defined UUID of the system user can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document.
+	pub uuid: UuidDatatype,
 }

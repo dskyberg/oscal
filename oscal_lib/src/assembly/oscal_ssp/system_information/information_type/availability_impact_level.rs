@@ -14,9 +14,9 @@ use crate::field::oscal_ssp::Selected;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct AvailabilityImpactLevel {
-	pub props: Option<Vec<Property>>,
-	pub adjustment_justification: Option<AdjustmentJustification>,
-	pub base: Base,
 	pub links: Option<Vec<Link>>,
 	pub selected: Option<Selected>,
+	pub base: Base,
+	pub adjustment_justification: Option<AdjustmentJustification>,
+	pub props: Option<Vec<Property>>,
 }

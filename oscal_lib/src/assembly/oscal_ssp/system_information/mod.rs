@@ -16,7 +16,7 @@ use crate::assembly::oscal_metadata::Property;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct SystemInformation {
+	pub links: Option<Vec<Link>>,
 	pub props: Option<Vec<Property>>,
 	pub information_types: Vec<InformationType>,
-	pub links: Option<Vec<Link>>,
 }

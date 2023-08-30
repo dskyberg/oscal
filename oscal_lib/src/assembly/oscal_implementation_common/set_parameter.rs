@@ -15,6 +15,6 @@ pub struct SetParameter {
 	/// Parameter ID
 	/// A human-oriented reference to a parameter within a control, who's catalog has been imported into the current implementation context.
 	pub param_id: TokenDatatype,
-	pub remarks: Option<Remarks>,
 	pub values: Vec<StringDatatype>,
+	pub remarks: Option<Remarks>,
 }

@@ -15,12 +15,12 @@ use crate::definitions::UuidDatatype;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct Catalog {
-	pub controls: Option<Vec<Control>>,
 	pub metadata: Metadata,
-	pub groups: Option<Vec<Group>>,
-	pub params: Option<Vec<Parameter>>,
+	pub controls: Option<Vec<Control>>,
 	/// Catalog Universally Unique Identifier
 	/// A globally unique identifier with cross-instance scope for this catalog instance. This UUID should be changed when this document is revised.
 	pub uuid: UuidDatatype,
+	pub params: Option<Vec<Parameter>>,
 	pub back_matter: Option<BackMatter>,
+	pub groups: Option<Vec<Group>>,
 }

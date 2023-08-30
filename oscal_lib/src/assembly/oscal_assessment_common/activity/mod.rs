@@ -20,19 +20,19 @@ use crate::field::oscal_metadata::Remarks;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct Activity {
-	/// Included Activity Title
-	/// The title for this included activity.
-	pub title: Option<String>,
 	pub remarks: Option<Remarks>,
-	pub steps: Option<Vec<Step>>,
 	pub responsible_roles: Option<Vec<ResponsibleRole>>,
-	pub props: Option<Vec<Property>>,
-	pub related_controls: Option<ReviewedControls>,
-	pub links: Option<Vec<Link>>,
 	/// Assessment Activity Universally Unique Identifier
 	/// A machine-oriented, globally unique identifier with cross-instance scope that can be used to reference this assessment activity elsewhere in this or other OSCAL instances. The locally defined UUID of the activity can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned per-subject, which means it should be consistently used to identify the same subject across revisions of the document.
 	pub uuid: UuidDatatype,
+	pub props: Option<Vec<Property>>,
 	/// Included Activity Description
 	/// A human-readable description of this included activity.
 	pub description: String,
+	pub steps: Option<Vec<Step>>,
+	pub links: Option<Vec<Link>>,
+	/// Included Activity Title
+	/// The title for this included activity.
+	pub title: Option<String>,
+	pub related_controls: Option<ReviewedControls>,
 }

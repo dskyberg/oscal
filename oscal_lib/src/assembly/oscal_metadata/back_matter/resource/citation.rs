@@ -11,9 +11,9 @@ use crate::assembly::oscal_metadata::Property;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct Citation {
+	pub props: Option<Vec<Property>>,
 	/// Citation Text
 	/// A line of citation text.
 	pub text: String,
 	pub links: Option<Vec<Link>>,
-	pub props: Option<Vec<Property>>,
 }

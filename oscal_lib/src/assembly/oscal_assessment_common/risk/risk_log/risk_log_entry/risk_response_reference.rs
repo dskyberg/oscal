@@ -14,11 +14,11 @@ use crate::field::oscal_metadata::Remarks;
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all ="kebab-case")]
 pub struct RiskResponseReference {
+	pub related_tasks: Option<Vec<RelatedTask>>,
+	pub props: Option<Vec<Property>>,
 	/// Response Universally Unique Identifier Reference
 	/// A machine-oriented identifier reference to a unique risk response.
 	pub response_uuid: UuidDatatype,
 	pub remarks: Option<Remarks>,
-	pub related_tasks: Option<Vec<RelatedTask>>,
 	pub links: Option<Vec<Link>>,
-	pub props: Option<Vec<Property>>,
 }
