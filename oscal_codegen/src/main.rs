@@ -10,7 +10,8 @@ use parse::*;
 use property::Property;
 use property_type::*;
 use referencable::Referencable;
-use schema::Schema;
+//use schema::Schema;
+use schema2::Schema;
 use schema_array::SchemaArray;
 use schema_boolean_ref::SchemaBooleanRef;
 use schema_enum::SchemaEnum;
@@ -33,6 +34,7 @@ mod property;
 mod property_type;
 mod referencable;
 mod schema;
+mod schema2;
 mod schema_array;
 mod schema_boolean_ref;
 mod schema_enum;
@@ -60,27 +62,18 @@ enum Commands {
         /// Source schema file to generate from
         #[arg(short, long, value_name = "FILE")]
         file: String,
-        /// Extension file to extend the schema
-        #[arg(short, long, value_name = "FILE")]
-        extension: Vec<String>,
     },
     /// Shows the resulting schema and extensions, without generating code
     Show {
         /// Source schema file to generate from
         #[arg(short, long, value_name = "FILE")]
         file: String,
-        /// Extension file to extend the schema
-        #[arg(short, long, value_name = "FILE")]
-        extension: Vec<String>,
     },
     /// Generates Rust code from the schema and extensions
     Generate {
         /// Source schema file to generate from
         #[arg(short, long, value_name = "FILE")]
         file: String,
-        /// Extension file to extend the schema
-        #[arg(short, long, value_name = "FILE")]
-        extension: Vec<String>,
         /// Where to generate the src tree
         #[arg(short, long, value_name = "Directory", default_value = "../oscal_lib")]
         path: String,
@@ -99,23 +92,16 @@ fn main() -> Result<()> {
     let args = Cli::parse();
 
     match args.command {
-        Commands::Check { file, extension } => {
-            let mut schema = read_schema(&file)?;
+        Commands::Check { file } => {
+            let _schema = read_schema(&file)?;
             println!("Schema validates");
-            extend_schema(&mut schema, &extension)?;
         }
-        Commands::Show { file, extension } => {
-            let mut schema = read_schema(&file)?;
-            extend_schema(&mut schema, &extension)?;
+        Commands::Show { file } => {
+            let schema = read_schema(&file)?;
             schema.show();
         }
-        Commands::Generate {
-            file,
-            extension,
-            path,
-        } => {
-            let mut schema = read_schema(&file)?;
-            extend_schema(&mut schema, &extension)?;
+        Commands::Generate { file, path } => {
+            let schema = read_schema(&file)?;
             schema.generate(&path)?;
         }
     }
@@ -129,14 +115,4 @@ fn read_schema(file: &str) -> Result<Schema> {
     let schema_val = serde_json::from_str::<Value>(&json)?;
     let schema = Schema::parse(&schema_val)?;
     Ok(schema)
-}
-
-// If schema extensions have been provided, process them.
-fn extend_schema(schema: &mut Schema, extensions: &[String]) -> Result<()> {
-    for file in extensions {
-        let json = read_file_to_string(file)?;
-        let schema_val = serde_json::from_str::<Value>(&json)?;
-        schema.extend(&schema_val)?;
-    }
-    Ok(())
 }

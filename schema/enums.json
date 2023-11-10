@@ -1,0 +1,1025 @@
+[
+  {
+    "id": {
+      "uri_id": false,
+      "raw": "#assembly_oscal-assessment-common_assessment-part_part-name",
+      "path": [
+        "assembly",
+        "oscal_assessment_common",
+        "assessment_part"
+      ],
+      "name": "part_name"
+    },
+    "title": "Part Name",
+    "description": "A textual label that uniquely identifies the part's semantic type.",
+    "enums": [
+      "asset",
+      "method",
+      "objective"
+    ],
+    "enum_ref": {
+      "uri_id": true,
+      "raw": "#/definitions/TokenDatatype",
+      "path": [
+        "definitions"
+      ],
+      "name": "TokenDatatype"
+    }
+  },
+  {
+    "id": {
+      "uri_id": false,
+      "raw": "#assembly_oscal-assessment-common_assessment-subject_subject-type",
+      "path": [
+        "assembly",
+        "oscal_assessment_common",
+        "assessment_subject"
+      ],
+      "name": "subject_type"
+    },
+    "title": "Subject Type",
+    "description": "Indicates the type of assessment subject, such as a component, inventory, item, location, or party represented by this selection statement.",
+    "enums": [
+      "component",
+      "inventory-item",
+      "location",
+      "party",
+      "user"
+    ],
+    "enum_ref": {
+      "uri_id": true,
+      "raw": "#/definitions/TokenDatatype",
+      "path": [
+        "definitions"
+      ],
+      "name": "TokenDatatype"
+    }
+  },
+  {
+    "id": {
+      "uri_id": false,
+      "raw": "#assembly_oscal-assessment-common_characterization_facet_facet_naming-system",
+      "path": [
+        "assembly",
+        "oscal_assessment_common",
+        "characterization",
+        "facet",
+        "facet"
+      ],
+      "name": "naming_system"
+    },
+    "title": "Naming System",
+    "description": "Specifies the naming system under which this risk metric is organized, which allows for the same names to be used in different systems controlled by different parties. This avoids the potential of a name clash.",
+    "enums": [
+      "http://fedramp.gov",
+      "http://fedramp.gov/ns/oscal",
+      "http://csrc.nist.gov/ns/oscal",
+      "http://csrc.nist.gov/ns/oscal/unknown",
+      "http://cve.mitre.org",
+      "http://www.first.org/cvss/v2.0",
+      "http://www.first.org/cvss/v3.0",
+      "http://www.first.org/cvss/v3.1"
+    ],
+    "enum_ref": {
+      "uri_id": true,
+      "raw": "#/definitions/URIDatatype",
+      "path": [
+        "definitions"
+      ],
+      "name": "URIDatatype"
+    }
+  },
+  {
+    "id": {
+      "uri_id": false,
+      "raw": "#assembly_oscal-assessment-common_finding-target_objective-status_objective-status_objective-status-reason",
+      "path": [
+        "assembly",
+        "oscal_assessment_common",
+        "finding_target",
+        "objective_status",
+        "objective_status"
+      ],
+      "name": "objective_status_reason"
+    },
+    "title": "Objective Status Reason",
+    "description": "The reason the objective was given it's status.",
+    "enums": [
+      "pass",
+      "fail",
+      "other"
+    ],
+    "enum_ref": {
+      "uri_id": true,
+      "raw": "#/definitions/TokenDatatype",
+      "path": [
+        "definitions"
+      ],
+      "name": "TokenDatatype"
+    }
+  },
+  {
+    "id": {
+      "uri_id": false,
+      "raw": "#assembly_oscal-assessment-common_finding-target_objective-status_objective-status_objective-status-state",
+      "path": [
+        "assembly",
+        "oscal_assessment_common",
+        "finding_target",
+        "objective_status",
+        "objective_status"
+      ],
+      "name": "objective_status_state"
+    },
+    "title": "Objective Status State",
+    "description": "An indication as to whether the objective is satisfied or not.",
+    "enums": [
+      "satisfied",
+      "not-satisfied"
+    ],
+    "enum_ref": {
+      "uri_id": true,
+      "raw": "#/definitions/TokenDatatype",
+      "path": [
+        "definitions"
+      ],
+      "name": "TokenDatatype"
+    }
+  },
+  {
+    "id": {
+      "uri_id": false,
+      "raw": "#assembly_oscal-assessment-common_finding-target_finding-target-type",
+      "path": [
+        "assembly",
+        "oscal_assessment_common",
+        "finding_target"
+      ],
+      "name": "finding_target_type"
+    },
+    "title": "Finding Target Type",
+    "description": "Identifies the type of the target.",
+    "enums": [
+      "statement-id",
+      "objective-id"
+    ],
+    "enum_ref": {
+      "uri_id": true,
+      "raw": "#/definitions/StringDatatype",
+      "path": [
+        "definitions"
+      ],
+      "name": "StringDatatype"
+    }
+  },
+  {
+    "id": {
+      "uri_id": false,
+      "raw": "#assembly_oscal-assessment-common_observation_observation-method",
+      "path": [
+        "assembly",
+        "oscal_assessment_common",
+        "observation"
+      ],
+      "name": "observation_method"
+    },
+    "title": "Observation Method",
+    "description": "Identifies how the observation was made.",
+    "enums": [
+      "EXAMINE",
+      "INTERVIEW",
+      "TEST",
+      "UNKNOWN"
+    ],
+    "enum_ref": {
+      "uri_id": true,
+      "raw": "#/definitions/StringDatatype",
+      "path": [
+        "definitions"
+      ],
+      "name": "StringDatatype"
+    }
+  },
+  {
+    "id": {
+      "uri_id": false,
+      "raw": "#assembly_oscal-assessment-common_observation_observation-type",
+      "path": [
+        "assembly",
+        "oscal_assessment_common",
+        "observation"
+      ],
+      "name": "observation_type"
+    },
+    "title": "Observation Type",
+    "description": "Identifies the nature of the observation. More than one may be used to further qualify and enable filtering.",
+    "enums": [
+      "ssp-statement-issue",
+      "control-objective",
+      "mitigation",
+      "finding",
+      "historic"
+    ],
+    "enum_ref": {
+      "uri_id": true,
+      "raw": "#/definitions/TokenDatatype",
+      "path": [
+        "definitions"
+      ],
+      "name": "TokenDatatype"
+    }
+  },
+  {
+    "id": {
+      "uri_id": false,
+      "raw": "#assembly_oscal-assessment-common_origin-actor_actor-type",
+      "path": [
+        "assembly",
+        "oscal_assessment_common",
+        "origin_actor"
+      ],
+      "name": "actor_type"
+    },
+    "title": "Actor Type",
+    "description": "The kind of actor.",
+    "enums": [
+      "tool",
+      "assessment-platform",
+      "party"
+    ],
+    "enum_ref": {
+      "uri_id": true,
+      "raw": "#/definitions/TokenDatatype",
+      "path": [
+        "definitions"
+      ],
+      "name": "TokenDatatype"
+    }
+  },
+  {
+    "id": {
+      "uri_id": false,
+      "raw": "#assembly_oscal-assessment-common_response_remediation-intent",
+      "path": [
+        "assembly",
+        "oscal_assessment_common",
+        "response"
+      ],
+      "name": "remediation_intent"
+    },
+    "title": "Remediation Intent",
+    "description": "Identifies whether this is a recommendation, such as from an assessor or tool, or an actual plan accepted by the system owner.",
+    "enums": [
+      "recommendation",
+      "planned",
+      "completed"
+    ],
+    "enum_ref": {
+      "uri_id": true,
+      "raw": "#/definitions/TokenDatatype",
+      "path": [
+        "definitions"
+      ],
+      "name": "TokenDatatype"
+    }
+  },
+  {
+    "id": {
+      "uri_id": false,
+      "raw": "#assembly_oscal-assessment-common_select-subject-by-id_subject-universally-unique-identifier-reference-type",
+      "path": [
+        "assembly",
+        "oscal_assessment_common",
+        "select_subject_by_id"
+      ],
+      "name": "subject_universally_unique_identifier_reference_type"
+    },
+    "title": "Subject Universally Unique Identifier Reference Type",
+    "description": "Used to indicate the type of object pointed to by the uuid-ref within a subject.",
+    "enums": [
+      "component",
+      "inventory-item",
+      "location",
+      "party",
+      "user",
+      "resource"
+    ],
+    "enum_ref": {
+      "uri_id": true,
+      "raw": "#/definitions/TokenDatatype",
+      "path": [
+        "definitions"
+      ],
+      "name": "TokenDatatype"
+    }
+  },
+  {
+    "id": {
+      "uri_id": false,
+      "raw": "#assembly_oscal-assessment-common_subject-reference_subject-universally-unique-identifier-reference-type",
+      "path": [
+        "assembly",
+        "oscal_assessment_common",
+        "subject_reference"
+      ],
+      "name": "subject_universally_unique_identifier_reference_type"
+    },
+    "title": "Subject Universally Unique Identifier Reference Type",
+    "description": "Used to indicate the type of object pointed to by the uuid-ref within a subject.",
+    "enums": [
+      "component",
+      "inventory-item",
+      "location",
+      "party",
+      "user",
+      "resource"
+    ],
+    "enum_ref": {
+      "uri_id": true,
+      "raw": "#/definitions/TokenDatatype",
+      "path": [
+        "definitions"
+      ],
+      "name": "TokenDatatype"
+    }
+  },
+  {
+    "id": {
+      "uri_id": false,
+      "raw": "#assembly_oscal-assessment-common_task_event-timing_event-timing_frequency-condition_frequency-condition_time-unit",
+      "path": [
+        "assembly",
+        "oscal_assessment_common",
+        "task",
+        "event_timing",
+        "event_timing",
+        "frequency_condition",
+        "frequency_condition"
+      ],
+      "name": "time_unit"
+    },
+    "title": "Time Unit",
+    "description": "The unit of time for the period.",
+    "enums": [
+      "seconds",
+      "minutes",
+      "hours",
+      "days",
+      "months",
+      "years"
+    ],
+    "enum_ref": {
+      "uri_id": true,
+      "raw": "#/definitions/StringDatatype",
+      "path": [
+        "definitions"
+      ],
+      "name": "StringDatatype"
+    }
+  },
+  {
+    "id": {
+      "uri_id": false,
+      "raw": "#assembly_oscal-assessment-common_task_task-type",
+      "path": [
+        "assembly",
+        "oscal_assessment_common",
+        "task"
+      ],
+      "name": "task_type"
+    },
+    "title": "Task Type",
+    "description": "The type of task.",
+    "enums": [
+      "milestone",
+      "action"
+    ],
+    "enum_ref": {
+      "uri_id": true,
+      "raw": "#/definitions/TokenDatatype",
+      "path": [
+        "definitions"
+      ],
+      "name": "TokenDatatype"
+    }
+  },
+  {
+    "id": {
+      "uri_id": false,
+      "raw": "#field_oscal-assessment-common_threat-id_threat-type-identification-system",
+      "path": [
+        "field",
+        "oscal_assessment_common",
+        "threat_id"
+      ],
+      "name": "threat_type_identification_system"
+    },
+    "title": "Threat Type Identification System",
+    "description": "Specifies the source of the threat information.",
+    "enums": [
+      "http://fedramp.gov",
+      "http://fedramp.gov/ns/oscal"
+    ],
+    "enum_ref": {
+      "uri_id": true,
+      "raw": "#/definitions/URIDatatype",
+      "path": [
+        "definitions"
+      ],
+      "name": "URIDatatype"
+    }
+  },
+  {
+    "id": {
+      "uri_id": false,
+      "raw": "#assembly_oscal-catalog-common_parameter-selection_parameter-cardinality",
+      "path": [
+        "assembly",
+        "oscal_catalog_common",
+        "parameter_selection"
+      ],
+      "name": "parameter_cardinality"
+    },
+    "title": "Parameter Cardinality",
+    "description": "Describes the number of selections that must occur. Without this setting, only one value should be assumed to be permitted.",
+    "enums": [
+      "one",
+      "one-or-more"
+    ],
+    "enum_ref": {
+      "uri_id": true,
+      "raw": "#/definitions/TokenDatatype",
+      "path": [
+        "definitions"
+      ],
+      "name": "TokenDatatype"
+    }
+  },
+  {
+    "id": {
+      "uri_id": false,
+      "raw": "#assembly_oscal-component-definition_defined-component_component-type",
+      "path": [
+        "assembly",
+        "oscal_component_definition",
+        "defined_component"
+      ],
+      "name": "component_type"
+    },
+    "title": "Component Type",
+    "description": "A category describing the purpose of the component.",
+    "enums": [
+      "interconnection",
+      "software",
+      "hardware",
+      "service",
+      "policy",
+      "physical",
+      "process-procedure",
+      "plan",
+      "guidance",
+      "standard",
+      "validation"
+    ],
+    "enum_ref": {
+      "uri_id": true,
+      "raw": "#/definitions/StringDatatype",
+      "path": [
+        "definitions"
+      ],
+      "name": "StringDatatype"
+    }
+  },
+  {
+    "id": {
+      "uri_id": false,
+      "raw": "#assembly_oscal-implementation-common_implementation-status_implementation-state",
+      "path": [
+        "assembly",
+        "oscal_implementation_common",
+        "implementation_status"
+      ],
+      "name": "implementation_state"
+    },
+    "title": "Implementation State",
+    "description": "Identifies the implementation status of the control or control objective.",
+    "enums": [
+      "implemented",
+      "partial",
+      "planned",
+      "alternative",
+      "not-applicable"
+    ],
+    "enum_ref": {
+      "uri_id": true,
+      "raw": "#/definitions/TokenDatatype",
+      "path": [
+        "definitions"
+      ],
+      "name": "TokenDatatype"
+    }
+  },
+  {
+    "id": {
+      "uri_id": false,
+      "raw": "#assembly_oscal-implementation-common_port-range_transport",
+      "path": [
+        "assembly",
+        "oscal_implementation_common",
+        "port_range"
+      ],
+      "name": "transport"
+    },
+    "title": "Transport",
+    "description": "Indicates the transport type.",
+    "enums": [
+      "TCP",
+      "UDP"
+    ],
+    "enum_ref": {
+      "uri_id": true,
+      "raw": "#/definitions/TokenDatatype",
+      "path": [
+        "definitions"
+      ],
+      "name": "TokenDatatype"
+    }
+  },
+  {
+    "id": {
+      "uri_id": false,
+      "raw": "#assembly_oscal-implementation-common_system-component_status_status_state",
+      "path": [
+        "assembly",
+        "oscal_implementation_common",
+        "system_component",
+        "status",
+        "status"
+      ],
+      "name": "state"
+    },
+    "title": "State",
+    "description": "The operational status.",
+    "enums": [
+      "under-development",
+      "operational",
+      "disposition",
+      "other"
+    ],
+    "enum_ref": {
+      "uri_id": true,
+      "raw": "#/definitions/TokenDatatype",
+      "path": [
+        "definitions"
+      ],
+      "name": "TokenDatatype"
+    }
+  },
+  {
+    "id": {
+      "uri_id": false,
+      "raw": "#assembly_oscal-implementation-common_system-component_component-type",
+      "path": [
+        "assembly",
+        "oscal_implementation_common",
+        "system_component"
+      ],
+      "name": "component_type"
+    },
+    "title": "Component Type",
+    "description": "A category describing the purpose of the component.",
+    "enums": [
+      "this-system",
+      "system",
+      "interconnection",
+      "software",
+      "hardware",
+      "service",
+      "policy",
+      "physical",
+      "process-procedure",
+      "plan",
+      "guidance",
+      "standard",
+      "validation",
+      "network"
+    ],
+    "enum_ref": {
+      "uri_id": true,
+      "raw": "#/definitions/StringDatatype",
+      "path": [
+        "definitions"
+      ],
+      "name": "StringDatatype"
+    }
+  },
+  {
+    "id": {
+      "uri_id": false,
+      "raw": "#field_oscal-implementation-common_system-id_identification-system-type",
+      "path": [
+        "field",
+        "oscal_implementation_common",
+        "system_id"
+      ],
+      "name": "identification_system_type"
+    },
+    "title": "Identification System Type",
+    "description": "Identifies the identification system from which the provided identifier was assigned.",
+    "enums": [
+      "https://fedramp.gov",
+      "http://fedramp.gov/ns/oscal",
+      "https://ietf.org/rfc/rfc4122",
+      "http://ietf.org/rfc/rfc4122"
+    ],
+    "enum_ref": {
+      "uri_id": true,
+      "raw": "#/definitions/URIDatatype",
+      "path": [
+        "definitions"
+      ],
+      "name": "URIDatatype"
+    }
+  },
+  {
+    "id": {
+      "uri_id": false,
+      "raw": "#assembly_oscal-metadata_address_address-type",
+      "path": [
+        "assembly",
+        "oscal_metadata",
+        "address"
+      ],
+      "name": "address_type"
+    },
+    "title": "Address Type",
+    "description": "Indicates the type of address.",
+    "enums": [
+      "home",
+      "work"
+    ],
+    "enum_ref": {
+      "uri_id": true,
+      "raw": "#/definitions/TokenDatatype",
+      "path": [
+        "definitions"
+      ],
+      "name": "TokenDatatype"
+    }
+  },
+  {
+    "id": {
+      "uri_id": false,
+      "raw": "#field_oscal-metadata_document-id_document-identification-scheme",
+      "path": [
+        "field",
+        "oscal_metadata",
+        "document_id"
+      ],
+      "name": "document_identification_scheme"
+    },
+    "title": "Document Identification Scheme",
+    "description": "Qualifies the kind of document identifier using a URI. If the scheme is not provided the value of the element will be interpreted as a string of characters.",
+    "enums": [
+      "http://www.doi.org/"
+    ],
+    "enum_ref": {
+      "uri_id": true,
+      "raw": "#/definitions/URIDatatype",
+      "path": [
+        "definitions"
+      ],
+      "name": "URIDatatype"
+    }
+  },
+  {
+    "id": {
+      "uri_id": false,
+      "raw": "#field_oscal-metadata_hash_hash-algorithm",
+      "path": [
+        "field",
+        "oscal_metadata",
+        "hash"
+      ],
+      "name": "hash_algorithm"
+    },
+    "title": "Hash algorithm",
+    "description": "Method by which a hash is derived",
+    "enums": [
+      "SHA-224",
+      "SHA-256",
+      "SHA-384",
+      "SHA-512",
+      "SHA3-224",
+      "SHA3-256",
+      "SHA3-384",
+      "SHA3-512"
+    ],
+    "enum_ref": {
+      "uri_id": true,
+      "raw": "#/definitions/StringDatatype",
+      "path": [
+        "definitions"
+      ],
+      "name": "StringDatatype"
+    }
+  },
+  {
+    "id": {
+      "uri_id": false,
+      "raw": "#assembly_oscal-metadata_link_relation",
+      "path": [
+        "assembly",
+        "oscal_metadata",
+        "link"
+      ],
+      "name": "relation"
+    },
+    "title": "Relation",
+    "description": "Describes the type of relationship provided by the link. This can be an indicator of the link's purpose.",
+    "enums": [
+      "reference"
+    ],
+    "enum_ref": {
+      "uri_id": true,
+      "raw": "#/definitions/TokenDatatype",
+      "path": [
+        "definitions"
+      ],
+      "name": "TokenDatatype"
+    }
+  },
+  {
+    "id": {
+      "uri_id": false,
+      "raw": "#assembly_oscal-metadata_party_party-external-identifier_party-external-identifier_external-identifier-schema",
+      "path": [
+        "assembly",
+        "oscal_metadata",
+        "party",
+        "party_external_identifier",
+        "party_external_identifier"
+      ],
+      "name": "external_identifier_schema"
+    },
+    "title": "External Identifier Schema",
+    "description": "Indicates the type of external identifier.",
+    "enums": [
+      "http://orcid.org/"
+    ],
+    "enum_ref": {
+      "uri_id": true,
+      "raw": "#/definitions/URIDatatype",
+      "path": [
+        "definitions"
+      ],
+      "name": "URIDatatype"
+    }
+  },
+  {
+    "id": {
+      "uri_id": false,
+      "raw": "#assembly_oscal-metadata_party_party-type",
+      "path": [
+        "assembly",
+        "oscal_metadata",
+        "party"
+      ],
+      "name": "party_type"
+    },
+    "title": "Party Type",
+    "description": "A category describing the kind of party the object describes.",
+    "enums": [
+      "person",
+      "organization"
+    ],
+    "enum_ref": {
+      "uri_id": true,
+      "raw": "#/definitions/StringDatatype",
+      "path": [
+        "definitions"
+      ],
+      "name": "StringDatatype"
+    }
+  },
+  {
+    "id": {
+      "uri_id": false,
+      "raw": "#assembly_oscal-metadata_property_property-name",
+      "path": [
+        "assembly",
+        "oscal_metadata",
+        "property"
+      ],
+      "name": "property_name"
+    },
+    "title": "Property Name",
+    "description": "A textual label that uniquely identifies a specific attribute, characteristic, or quality of the property's containing object.",
+    "enums": [
+      "marking"
+    ],
+    "enum_ref": {
+      "uri_id": true,
+      "raw": "#/definitions/TokenDatatype",
+      "path": [
+        "definitions"
+      ],
+      "name": "TokenDatatype"
+    }
+  },
+  {
+    "id": {
+      "uri_id": false,
+      "raw": "#field_oscal-metadata_telephone-number_type-flag",
+      "path": [
+        "field",
+        "oscal_metadata",
+        "telephone_number"
+      ],
+      "name": "type_flag"
+    },
+    "title": "type flag",
+    "description": "Indicates the type of phone number.",
+    "enums": [
+      "home",
+      "office",
+      "mobile"
+    ],
+    "enum_ref": {
+      "uri_id": true,
+      "raw": "#/definitions/StringDatatype",
+      "path": [
+        "definitions"
+      ],
+      "name": "StringDatatype"
+    }
+  },
+  {
+    "id": {
+      "uri_id": false,
+      "raw": "#assembly_oscal-profile_add_position",
+      "path": [
+        "assembly",
+        "oscal_profile",
+        "add"
+      ],
+      "name": "position"
+    },
+    "title": "Position",
+    "description": "Where to add the new content with respect to the targeted element (beside it or inside it)",
+    "enums": [
+      "before",
+      "after",
+      "starting",
+      "ending"
+    ],
+    "enum_ref": {
+      "uri_id": true,
+      "raw": "#/definitions/TokenDatatype",
+      "path": [
+        "definitions"
+      ],
+      "name": "TokenDatatype"
+    }
+  },
+  {
+    "id": {
+      "uri_id": false,
+      "raw": "#assembly_oscal-profile_insert-controls_order",
+      "path": [
+        "assembly",
+        "oscal_profile",
+        "insert_controls"
+      ],
+      "name": "order"
+    },
+    "title": "Order",
+    "description": "A designation of how a selection of controls in a profile is to be ordered.",
+    "enums": [
+      "keep",
+      "ascending",
+      "descending"
+    ],
+    "enum_ref": {
+      "uri_id": true,
+      "raw": "#/definitions/TokenDatatype",
+      "path": [
+        "definitions"
+      ],
+      "name": "TokenDatatype"
+    }
+  },
+  {
+    "id": {
+      "uri_id": false,
+      "raw": "#assembly_oscal-profile_merge_combination-rule_combination-rule_combination-method",
+      "path": [
+        "assembly",
+        "oscal_profile",
+        "merge",
+        "combination_rule",
+        "combination_rule"
+      ],
+      "name": "combination_method"
+    },
+    "title": "Combination method",
+    "description": "How clashing controls should be handled",
+    "enums": [
+      "use-first",
+      "merge",
+      "keep"
+    ],
+    "enum_ref": {
+      "uri_id": true,
+      "raw": "#/definitions/StringDatatype",
+      "path": [
+        "definitions"
+      ],
+      "name": "StringDatatype"
+    }
+  },
+  {
+    "id": {
+      "uri_id": false,
+      "raw": "#assembly_oscal-profile_select-control-by-id_include-contained-controls-with-control",
+      "path": [
+        "assembly",
+        "oscal_profile",
+        "select_control_by_id"
+      ],
+      "name": "include_contained_controls_with_control"
+    },
+    "title": "Include contained controls with control",
+    "description": "When a control is included, whether its child (dependent) controls are also included.",
+    "enums": [
+      "yes",
+      "no"
+    ],
+    "enum_ref": {
+      "uri_id": true,
+      "raw": "#/definitions/TokenDatatype",
+      "path": [
+        "definitions"
+      ],
+      "name": "TokenDatatype"
+    }
+  },
+  {
+    "id": {
+      "uri_id": false,
+      "raw": "#assembly_oscal-ssp_status_state",
+      "path": [
+        "assembly",
+        "oscal_ssp",
+        "status"
+      ],
+      "name": "state"
+    },
+    "title": "State",
+    "description": "The current operating status.",
+    "enums": [
+      "operational",
+      "under-development",
+      "under-major-modification",
+      "disposition",
+      "other"
+    ],
+    "enum_ref": {
+      "uri_id": true,
+      "raw": "#/definitions/StringDatatype",
+      "path": [
+        "definitions"
+      ],
+      "name": "StringDatatype"
+    }
+  },
+  {
+    "id": {
+      "uri_id": false,
+      "raw": "#assembly_oscal-ssp_system-information_information-type_information-type_information-type-categorization_information-type-categorization_information-type-identification-system",
+      "path": [
+        "assembly",
+        "oscal_ssp",
+        "system_information",
+        "information_type",
+        "information_type",
+        "information_type_categorization",
+        "information_type_categorization"
+      ],
+      "name": "information_type_identification_system"
+    },
+    "title": "Information Type Identification System",
+    "description": "Specifies the information type identification system used.",
+    "enums": [
+      "http://doi.org/10.6028/NIST.SP.800-60v2r1"
+    ],
+    "enum_ref": {
+      "uri_id": true,
+      "raw": "#/definitions/URIDatatype",
+      "path": [
+        "definitions"
+      ],
+      "name": "URIDatatype"
+    }
+  },
+]

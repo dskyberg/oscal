@@ -1,104 +1,100 @@
 #![doc = include_str!("../README.md")]
-#![allow(ambiguous_glob_reexports)]
-pub use definitions::*;
-pub use assembly::*;
-pub use field::*;
 
+pub use back_matter::*;
+pub use capability::*;
+pub use catalog::*;
+pub use catalog_control::*;
+pub use catalog_group::*;
+pub use catalog_group::*;
+pub use common_parameter::*;
+pub use common_part::*;
+pub use common_protocol::*;
+pub use component_definition::*;
+pub use control_implementation::*;
+pub use control_implementation::*;
+pub use data_types::*;
+pub use defined_component::*;
+pub use implemented_requirement::*;
+pub use import_component_definition::*;
+pub use include_all::*;
+pub use incorporates_component::*;
+pub use metadata::*;
+pub use metadata_address::*;
+pub use metadata_document_id::*;
+pub use metadata_hash::*;
+pub use metadata_link::*;
+pub use metadata_location::*;
+pub use metadata_party::*;
+pub use metadata_property::*;
+pub use metadata_remarks::*;
+pub use metadata_responsible_party::*;
+pub use metadata_revision::*;
+pub use metadata_role::*;
+pub use parameter_constraint::*;
+pub use parameter_guideline::*;
+pub use parameter_selection::*;
+pub use parameter_value::*;
+pub use plan_of_action::*;
+pub use profile::*;
+pub use profile_add::*;
+pub use profile_alter::*;
+pub use profile_group::*;
+pub use profile_import::*;
+pub use profile_insert_control::*;
+pub use profile_merge::*;
+pub use profile_modify::*;
+pub use profile_remove::*;
+pub use responsible_role::*;
+pub use schema_constraint::*;
+pub use select_control_by_id::*;
+pub use set_parameter::*;
+pub use telephone_number::*;
 
-pub mod definitions;
-pub mod assembly;
-pub mod field;
-pub mod error;
-
-/// http://json-schema.org/draft-07/schema#
-/// OSCAL Unified Model of Models: JSON Schema
-/// $id: #/oscal
-use serde::{Deserialize, Serialize};
-use serde_with::skip_serializing_none;
-
-
-#[skip_serializing_none]
-#[derive(Debug, Clone, Deserialize, Serialize)]
-#[serde(rename_all ="kebab-case")]
-pub struct Oscal {
-	pub plan_of_action_and_milestones: Option<PlanOfActionAndMilestones>,
-	pub assessment_results: Option<AssessmentResults>,
-	pub system_security_plan: Option<SystemSecurityPlan>,
-	pub component_definition: Option<ComponentDefinition>,
-	pub assessment_plan: Option<AssessmentPlan>,
-	pub profile: Option<Profile>,
-	pub catalog: Option<Catalog>,
-}
-
-
-
-#[cfg(test)]
-mod tests {
-use super::*;
-
-#[test]
-fn test_rev4_moderate() {
-    let json =
-        include_str!("../../tests/fedramp-automation/dist/content/rev4/baselines/json/FedRAMP_rev4_MODERATE-baseline-resolved-profile_catalog.json");
-    let oscal = serde_json::from_str::<Oscal>(json);
-    assert!(oscal.is_ok());
-}
-
-#[test]
-fn test_rev4_high() {
-    let json =
-        include_str!("../../tests/fedramp-automation/dist/content/rev4/baselines/json/FedRAMP_rev4_HIGH-baseline-resolved-profile_catalog.json");
-    let oscal = serde_json::from_str::<Oscal>(json);
-    assert!(oscal.is_ok());
-}
-
-
-#[test]
-fn test_rev5_moderate() {
-    let json =
-        include_str!("../../tests/fedramp-automation/dist/content/rev5/baselines/json/FedRAMP_rev5_MODERATE-baseline-resolved-profile_catalog.json");
-    let oscal = serde_json::from_str::<Oscal>(json);
-    assert!(oscal.is_ok());
-}
-
-#[test]
-fn test_rev5_high() {
-    let json =
-        include_str!("../../tests/fedramp-automation/dist/content/rev5/baselines/json/FedRAMP_rev5_HIGH-baseline-resolved-profile_catalog.json");
-    let oscal = serde_json::from_str::<Oscal>(json);
-    assert!(oscal.is_ok());
-}
-
-#[test]
-fn test_rev5_poam() {
-    let json =
-        include_str!("../../tests/fedramp-automation/dist/content/rev5/templates/poam/json/FedRAMP-POAM-OSCAL-Template.json");
-    let oscal = serde_json::from_str::<Oscal>(json);
-    assert!(oscal.is_ok());
-}
-
-#[test]
-fn test_rev5_sap() {
-    let json =
-        include_str!("../../tests/fedramp-automation/dist/content/rev5/templates/sap/json/FedRAMP-SAP-OSCAL-Template.json");
-    let oscal = serde_json::from_str::<Oscal>(json);
-    assert!(oscal.is_ok());
-}
-
-#[test]
-fn test_rev5_sar() {
-    let json =
-        include_str!("../../tests/fedramp-automation/dist/content/rev5/templates/sar/FedRAMP-SAR-OSCAL-Template.json");
-    let oscal = serde_json::from_str::<Oscal>(json);
-    assert!(oscal.is_ok());
-}
-
-#[test]
-fn test_rev5_ssp() {
-    let json =
-        include_str!("../../tests/fedramp-automation/dist/content/rev5/templates/ssp/json/FedRAMP-SSP-OSCAL-Template.json");
-    let oscal = serde_json::from_str::<Oscal>(json);
-    assert!(oscal.is_ok());
-}
-}
-
+pub mod back_matter;
+pub mod capability;
+pub mod catalog;
+pub mod catalog_control;
+pub mod catalog_group;
+pub mod common_parameter;
+pub mod common_part;
+pub mod common_protocol;
+pub mod component_definition;
+pub mod control_implementation;
+pub mod control_implentation;
+pub mod data_types;
+pub mod defined_component;
+pub mod implemented_requirement;
+pub mod import_component_definition;
+pub mod include_all;
+pub mod incorporates_component;
+pub mod metadata;
+pub mod metadata_address;
+pub mod metadata_document_id;
+pub mod metadata_hash;
+pub mod metadata_link;
+pub mod metadata_location;
+pub mod metadata_party;
+pub mod metadata_property;
+pub mod metadata_remarks;
+pub mod metadata_responsible_party;
+pub mod metadata_revision;
+pub mod metadata_role;
+pub mod parameter_constraint;
+pub mod parameter_guideline;
+pub mod parameter_selection;
+pub mod parameter_value;
+pub mod plan_of_action;
+pub mod profile;
+pub mod profile_add;
+pub mod profile_alter;
+pub mod profile_group;
+pub mod profile_import;
+pub mod profile_insert_control;
+pub mod profile_merge;
+pub mod profile_modify;
+pub mod profile_remove;
+pub mod responsible_role;
+pub mod schema_constraint;
+pub mod select_control_by_id;
+pub mod set_parameter;
+pub mod telephone_number;

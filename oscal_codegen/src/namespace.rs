@@ -164,24 +164,6 @@ impl NameSpace {
         }
     }
 
-    pub fn find_mut(&mut self, id: &SchemaId) -> Option<&mut PropertyType> {
-        match self {
-            NameSpace::Leaf { name, child } => match *name == id.name {
-                true => Some(child),
-                false => None,
-            },
-            NameSpace::Node { name: _, children } => {
-                for child in children {
-                    if let Some(prop) = child.find_mut(id) {
-                        return Some(prop);
-                    }
-                }
-
-                None
-            }
-        }
-    }
-
     pub fn is(&self, target: &str) -> bool {
         match self {
             NameSpace::Leaf { name, child: _ } => name == target,

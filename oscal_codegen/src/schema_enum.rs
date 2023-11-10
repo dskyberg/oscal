@@ -11,6 +11,7 @@
 /// context to Serde.
 ///
 use convert_case::{Case, Casing};
+use serde::Serialize;
 use serde_json::Value;
 
 use crate::{
@@ -30,11 +31,13 @@ use crate::{
     SchemaId,
 };
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize)]
 pub struct SchemaEnum {
     pub id: SchemaId,
     pub title: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub description: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub _ref: Option<SchemaId>,
     pub enums: Vec<String>,
     pub enum_ref: SchemaId,
@@ -206,14 +209,17 @@ impl Parse for SchemaEnum {
                }
 
         */
-        Ok(Self {
+        let result = Self {
             id,
             title,
             description,
             _ref,
             enums,
             enum_ref,
-        })
+        };
+        let json = serde_json::to_string_pretty(&result).unwrap();
+        println!("{},", json);
+        Ok(result)
     }
 }
 

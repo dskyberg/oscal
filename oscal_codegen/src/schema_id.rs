@@ -1,8 +1,8 @@
-use convert_case::{Case, Casing};
-
 use crate::ParserError;
+use convert_case::{Case, Casing};
+use serde::Serialize;
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize)]
 pub struct SchemaId {
     /// The ID is a local uri, such as `#/definitions/StringDataTyep`
     pub uri_id: bool,

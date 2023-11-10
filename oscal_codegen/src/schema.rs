@@ -1,9 +1,7 @@
 use convert_case::{Case, Casing};
 use serde_json::{Map, Value};
 
-use crate::extensible::Extensible;
 use crate::file::{append_txt_file, gen_txt_file, read_file_to_string, remove_file};
-use crate::property_type::PropertyType;
 use crate::utils::{str_from_map, try_str_from_map};
 use crate::{Generate, NameSpace, ParserError, Result, SchemaId};
 
@@ -13,6 +11,8 @@ pub struct Schema {
 }
 
 fn parse_definitions(namespaces: &mut NameSpace, schema: &Map<String, Value>) -> Result<()> {
+    let schema_path_root = "#/definitions";
+
     let defs = schema
         .get("definitions")
         .ok_or(ParserError::MissingField("definitions".to_string()))?
@@ -20,18 +20,28 @@ fn parse_definitions(namespaces: &mut NameSpace, schema: &Map<String, Value>) ->
         .ok_or(ParserError::ObjectExpected)?;
 
     for (def_name, value) in defs {
+        // An entry in definitions can be referenced by either its $id or its schema path
+        let schema_path = format!("{}/{}", schema_path_root, def_name);
+
         let mut value = value.clone();
 
-        // This doesn't work recursively
-        let val_as_map = value
-            .as_object_mut()
-            .ok_or_else(|| ParserError::ObjectExpected)?;
+        // Every entry in the definitions map must also be a map
+        let mut val_as_map = value
+            .as_object()
+            .ok_or_else(|| ParserError::ObjectExpected)?
+            .clone();
+        // There are 3 forms that may be present:
+        // * type = object
+        // * type = string
+        // * No type, but has allOf array
+        //   * allOf is used to either extend a omponent (includeds a $ref), or constrain the component (includeds enum)
+        // * No type, but has a #ref
 
         if val_as_map.contains_key("allOf") {
-            flatten_all_of(val_as_map)
+            val_as_map = flatten_all_of(&val_as_map, defs);
         };
 
-        let mut raw_id = try_str_from_map("$id", val_as_map)?.map(|s| s.to_string());
+        let mut raw_id = try_str_from_map("$id", &val_as_map)?.map(|s| s.to_string());
 
         if raw_id.is_none() {
             // No id.  Let's try to spoof it
@@ -40,6 +50,7 @@ fn parse_definitions(namespaces: &mut NameSpace, schema: &Map<String, Value>) ->
             raw_id = Some(_id);
         }
         let raw_id = raw_id.unwrap();
+
         let id = SchemaId::try_from(raw_id.as_str())?;
         let ns = namespaces.upsert(&id);
         ns.add_property(&value, &id, Some(def_name)).map_err(|e| {
@@ -102,50 +113,6 @@ fn parse_schema_to_object(namespaces: &mut NameSpace, schema: &Map<String, Value
 }
 
 impl Schema {
-    pub fn extend(&mut self, value: &Value) -> Result<()> {
-        let obj = value.as_object().ok_or(ParserError::ObjectExpected)?;
-        // Look for the "extensions" key
-        let extensions_val = obj
-            .get("extensions")
-            .ok_or(ParserError::MissingField("extensions".to_string()))?;
-        let extensions = extensions_val
-            .as_array()
-            .ok_or(ParserError::ArrayExpected)?;
-
-        for extension in extensions {
-            let obj = extension.as_object().ok_or(ParserError::ObjectExpected)?;
-
-            let id_val = str_from_map("$id", obj).map_err(|e| {
-                log::error!("Schema extensions must contain an $id");
-                e
-            })?;
-            let id = SchemaId::try_from(id_val).map_err(|e| {
-                log::error!("Failed to parse $id for schema extension");
-                e
-            })?;
-
-            // Find the id in the namespace
-            if let Some(prop) = self.find_mut(&id) {
-                prop.extend_schema(extension)?;
-            }
-        }
-        Ok(())
-    }
-
-    fn find_mut(&mut self, id: &SchemaId) -> Option<&mut PropertyType> {
-        match &mut self.namespaces {
-            NameSpace::Node { name: _, children } => {
-                for child in children {
-                    if let Some(id) = child.find_mut(id) {
-                        return Some(id);
-                    }
-                }
-                None
-            }
-            NameSpace::Leaf { name: _, child: _ } => None,
-        }
-    }
-
     pub fn parse(schema: &Value) -> Result<Self> {
         let mut namespaces = NameSpace::new("src");
         let schema = schema.as_object().ok_or(ParserError::BadSchema)?;
@@ -224,25 +191,62 @@ pub enum OscalError {
 ///   "pattern": "^.+@.+$"
 /// }
 /// ```
-fn flatten_all_of(map: &mut Map<String, Value>) {
-    if !map.contains_key("allOf") {
-        return;
-    }
-    let mut value = map.remove("allOf").unwrap();
+fn flatten_all_of(map: &Map<String, Value>, defs: &Map<String, Value>) -> Map<String, Value> {
+    // The return value
+    let mut new_map = Map::<String, Value>::new();
 
+    // Safe to unwrap.  The calling function checked.
+    let mut value = map.get("allOf").unwrap();
+
+    // allOf as an array
     let array = value
-        .as_array_mut()
+        .as_array()
         .ok_or(ParserError::ArrayExpected)
         .map_err(|e| {
             log::error!("Array Expected");
             e
         })
-        .unwrap()
-        .clone();
+        .unwrap();
+
     for mut array_val in array {
-        let mut obj = array_val.as_object_mut().unwrap().clone();
-        map.append(&mut obj);
+        let obj = array_val.as_object().unwrap();
+        if obj.contains_key("$ref") {
+            let lookup = obj.get("$ref").unwrap().as_str().unwrap();
+            let mut ref_map = find_def_ref(lookup, defs)
+                .unwrap()
+                .as_object()
+                .unwrap()
+                .clone();
+            new_map.append(&mut ref_map);
+            continue;
+        }
+        let mut obj = obj.clone();
+        new_map.append(&mut obj);
     }
+
+    new_map
+}
+
+fn find_def_ref<'a>(lookup: &str, defs: &'a Map<String, Value>) -> Option<&'a Value> {
+    if !lookup.starts_with("#/definitions/") {
+        return None;
+    }
+    let re = regex::Regex::new("^#/definitions/(.*)$").unwrap();
+    let result = re.captures(lookup);
+    if result.is_none() {
+        return None;
+    }
+    let result = result.unwrap();
+    if result.len() != 2 {
+        // This should actually be an error
+        panic!("Malformed $ref");
+    }
+
+    let lookup = &result[1];
+    if defs.contains_key(lookup) {
+        return Some(defs.get(lookup).unwrap());
+    }
+    None
 }
 
 fn generate_tests(contents: &mut String) -> Result<()> {

@@ -26,3 +26,11 @@ The default is to use refs.  To use enums,  turn off default features, and use t
 ```bash
 cargo build --no-default-features --features "enums_as_enums"
 ```
+
+# V2
+Restructure the lib to align better with extensibility, constraints, and validation.
+Top level `definitions` entries with `#id` values are what should be exposed.  These are the only things that legit should fulfill a '#ref'
+
+This means that everything underneath the above structs are locally defined.
+
+There are 127 total entries.
