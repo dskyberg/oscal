@@ -28,7 +28,7 @@ pub struct AssessmentPart {
     pub props: Option<Vec<property::Property>>,
     pub prose: Option<String>,
     // "#assembly_oscal-assessment-common_assessment-part"
-    pub parts: Option<Vec<Box<AssessmentPart>>>,
+    pub parts: Option<Vec<AssessmentPart>>,
     /// "#assembly_oscal-metadata_link"
     pub links: Option<Vec<link::Link>>,
 }

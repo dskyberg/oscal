@@ -185,7 +185,7 @@ pub struct Task {
     pub links: Option<Vec<link::Link>>,
     pub timing: Option<EventTiming>,
     pub dependencies: Option<Vec<TaskDependency>>,
-    pub tasks: Option<Vec<Box<Task>>>,
+    pub tasks: Option<Vec<Task>>,
     pub associated_activities: Option<Vec<AssociatedActivity>>,
     /// "#assembly_oscal-assessment-common_assessment-subject"
     pub subjects: Option<Vec<super::assessment_subject::AssessmentSubject>>,

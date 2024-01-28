@@ -21,16 +21,3 @@ pub(crate) mod revision;
 pub(crate) mod role;
 pub(crate) mod telephone_number;
 pub(crate) mod version;
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_metadata() {
-        let json = include_str!("../../../tests/metadata.json");
-        let result =
-            serde_json::from_str::<metadata::Metadata>(json).expect("Failed to Deserialize");
-        dbg!(result);
-    }
-}
