@@ -1,0 +1,193 @@
+{
+    "title": "[System Name] FedRAMP Plan of Action and Milestones (POA&M)",
+    "published": "2023-07-06T00:00:00Z",
+    "last-modified": "2023-07-06T00:00:00Z",
+    "version": "fedramp2.0.0-oscal1.0.4",
+    "oscal-version": "1.0.4",
+    "props": [
+        {
+            "name": "marking",
+            "value": "Controlled Unclassified Information"
+        },
+        {
+            "name": "resolution-resource",
+            "ns": "https://fedramp.gov/ns/oscal",
+            "value": "ace2963d-ecb4-4be5-bdd0-1f6fd7610f41"
+        }
+    ],
+    "roles": [
+        {
+            "id": "cloud-service-provider",
+            "title": "Cloud Service Provider",
+            "short-name": "CSP"
+        },
+        {
+            "id": "fedramp-pmo",
+            "title": "The FedRAMP Program Management Office (PMO)",
+            "short-name": "CSP"
+        },
+        {
+            "id": "fedramp-jab",
+            "title": "The FedRAMP Joint Authorization Board (JAB)",
+            "short-name": "CSP"
+        },
+        {
+            "id": "prepared-by",
+            "title": "Prepared By",
+            "description": "The primary individual responsible for maintaining the POA&M for this system. Typically the CSP's ISSO."
+        },
+        {
+            "id": "prepared-for",
+            "title": "Prepared For",
+            "description": "The organization for which this POA&M was prepared. Typically the CSP."
+        },
+        {
+            "id": "information-system-security-officer",
+            "title": "System Information System Security Officer (or Equivalent)",
+            "description": "The individual accountable for the security posture of the system on behalf of the system owner."
+        }
+    ],
+    "locations": [
+        {
+            "uuid": "1bd641ff-54a7-40d5-acc9-82eed9d22d4a",
+            "address": {
+                "addr-lines": [
+                    "1234 Main Street"
+                ],
+                "city": "Arlington",
+                "state": "VA"
+            },
+            "remarks": "EXAMPLE - REPLACE"
+        }
+    ],
+    "parties": [
+        {
+            "uuid": "72bf37e1-9f76-4261-886f-8e297599f365",
+            "type": "organization",
+            "name": "Cloud Service Provider (CSP) Name",
+            "short-name": "CSP Acronym/Short Name",
+            "location-uuids": [
+                "1bd641ff-54a7-40d5-acc9-82eed9d22d4a"
+            ],
+            "remarks": "Replace sample CSP information."
+        },
+        {
+            "uuid": "77e0e2c8-2560-4fe9-ac78-c3ff4ffc9f6d",
+            "type": "organization",
+            "name": "Federal Risk and Authorization Management Program: Program Management Office",
+            "short-name": "FedRAMP PMO",
+            "links": [
+                {
+                    "href": "https://fedramp.gov",
+                    "rel": "homepage"
+                },
+                {
+                    "href": "#a2381e87-3d04-4108-a30b-b4d2f36d001f",
+                    "rel": "logo"
+                },
+                {
+                    "href": "#985475ee-d4d6-4581-8fdf-d84d3d8caa48",
+                    "rel": "reference"
+                },
+                {
+                    "href": "#1a23a771-d481-4594-9a1a-71d584fa4123",
+                    "rel": "reference"
+                }
+            ],
+            "email-addresses": [
+                "info@fedramp.gov"
+            ],
+            "addresses": [
+                {
+                    "type": "work",
+                    "addr-lines": [
+                        "1800 F St. NW"
+                    ],
+                    "city": "Washington",
+                    "state": "DC",
+                    "postal-code": "20006",
+                    "country": "US"
+                }
+            ],
+            "remarks": "This party entry must be present in a FedRAMP POAM.\n\nThe uuid may be different; however, the uuid must be associated with the \\\"fedramp-pmo\\\" role in the responsible-party assemblies."
+        },
+        {
+            "uuid": "ca9ba80e-1342-4bfd-b32a-abac468c24b4",
+            "type": "organization",
+            "name": "Federal Risk and Authorization Management Program: Joint Authorization Board",
+            "short-name": "FedRAMP JAB"
+        },
+        {
+            "uuid": "afe665d1-9021-4ad8-8bd2-c15b0f2dcf2d",
+            "type": "person",
+            "name": "[SAMPLE]Person Name 1",
+            "props": [
+                {
+                    "name": "job-title",
+                    "value": "Individual's Title"
+                }
+            ],
+            "email-addresses": [
+                "name@example.com"
+            ],
+            "telephone-numbers": [
+                {
+                    "number": "202-000-0001"
+                }
+            ],
+            "addresses": [
+                {
+                    "type": "work",
+                    "addr-lines": [
+                        "Address Line"
+                    ],
+                    "city": "City",
+                    "state": "ST",
+                    "postal-code": "00000",
+                    "country": "US"
+                }
+            ],
+            "member-of-organizations": [
+                "72bf37e1-9f76-4261-886f-8e297599f365"
+            ]
+        }
+    ],
+    "responsible-parties": [
+        {
+            "role-id": "cloud-service-provider",
+            "party-uuids": [
+                "72bf37e1-9f76-4261-886f-8e297599f365"
+            ]
+        },
+        {
+            "role-id": "fedramp-pmo",
+            "party-uuids": [
+                "8cc0b8e5-9650-4d5f-9796-316f05fa9a2d"
+            ]
+        },
+        {
+            "role-id": "fedramp-jab",
+            "party-uuids": [
+                "ca9ba80e-1342-4bfd-b32a-abac468c24b4"
+            ]
+        },
+        {
+            "role-id": "prepared-by",
+            "party-uuids": [
+                "72bf37e1-9f76-4261-886f-8e297599f365"
+            ]
+        },
+        {
+            "role-id": "prepared-for",
+            "party-uuids": [
+                "72bf37e1-9f76-4261-886f-8e297599f365"
+            ]
+        },
+        {
+            "role-id": "information-system-security-officer",
+            "party-uuids": [
+                "afe665d1-9021-4ad8-8bd2-c15b0f2dcf2d"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,73 @@
+{
+    "components": [
+        {
+            "uuid": "9d194268-a9d1-4c38-839f-9c4aa57bf71e",
+            "type": "software",
+            "title": "XYZ Vulnerability Scanning Tool",
+            "description": "Provide description",
+            "props": [
+                {
+                    "name": "vendor-name",
+                    "ns": "https://fedramp.gov/ns/oscal",
+                    "value": "Vendor Name"
+                },
+                {
+                    "name": "name",
+                    "ns": "https://fedramp.gov/ns/oscal",
+                    "value": "Tool Name"
+                },
+                {
+                    "name": "version",
+                    "value": "1.2.3"
+                }
+            ],
+            "status": {
+                "state": "operational"
+            },
+            "remarks": "This is a scanning tool referenced as a source by a POA&M entry."
+        },
+        {
+            "uuid": "a49ed61e-fca1-4ffa-b5e7-c23a2375a7a0",
+            "type": "virtual",
+            "title": "Component Definition",
+            "description": "A virtual component.",
+            "props": [
+                {
+                    "name": "allows-authenticated-scan",
+                    "value": "yes"
+                }
+            ],
+            "status": {
+                "state": "operational"
+            },
+            "remarks": "Uses the same syntax as SSP components."
+        }
+    ],
+    "inventory-items": [
+        {
+            "uuid": "deb26a75-6d97-4811-ae0e-ae1c710366c1",
+            "description": "An instance of the above component.",
+            "props": [
+                {
+                    "name": "asset-id",
+                    "value": "org-asset-id"
+                },
+                {
+                    "name": "ipv4-address",
+                    "value": "10.10.10.10"
+                },
+                {
+                    "name": "fqdn",
+                    "value": "host.domain.cloud"
+                }
+            ],
+            "implemented-components": [
+                {
+                    "component-uuid": "a49ed61e-fca1-4ffa-b5e7-c23a2375a7a0"
+                }
+            ],
+            "remarks": "Uses the same syntax as SSP inventory-items."
+        }
+    ],
+    "remarks": "Define one component for each scanning tool referenced by a POA&M entry.\n\nDefine components or inventory-items when no OSCAL-based SSP exists, or is not delivered with the POA&M.\n\n# FOR MONTHLY CONMON DELIVERIES\n\nThe CSP may import all SSP components and inventory items into the POA&M's `local-definitions` section to satisfy the system inventory delivery requirement."
+}

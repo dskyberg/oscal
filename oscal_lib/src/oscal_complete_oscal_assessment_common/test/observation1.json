@@ -1,0 +1,32 @@
+{
+    "uuid": "0aa54106-8a63-4953-ac0d-30ff91f8d4ab",
+    "description": "",
+    "methods": [
+        "TEST"
+    ],
+    "types": [
+        "finding"
+    ],
+    "origins": [
+        {
+            "actors": [
+                {
+                    "type": "party",
+                    "actor-uuid": "f4568fda-c6d2-4640-adec-0012015af7d0"
+                },
+                {
+                    "type": "tool",
+                    "actor-uuid": "9d194268-a9d1-4c38-839f-9c4aa57bf71e"
+                }
+            ]
+        }
+    ],
+    "relevant-evidence": [
+        {
+            "href": "./raw_scans/scanner_output.csv",
+            "description": "Optional pointer to the raw scanner output that generated this POA&M entry."
+        }
+    ],
+    "collected": "2020-10-10T00:00:00Z",
+    "remarks": "The origin field identifies the \\\"Weakness Detector Source\\\""
+}

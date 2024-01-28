@@ -1,0 +1,173 @@
+[
+    {
+        "uuid": "0aa54106-8a63-4953-ac0d-30ff91f8d4ab",
+        "description": "",
+        "methods": [
+            "TEST"
+        ],
+        "types": [
+            "finding"
+        ],
+        "origins": [
+            {
+                "actors": [
+                    {
+                        "type": "party",
+                        "actor-uuid": "f4568fda-c6d2-4640-adec-0012015af7d0"
+                    },
+                    {
+                        "type": "tool",
+                        "actor-uuid": "9d194268-a9d1-4c38-839f-9c4aa57bf71e"
+                    }
+                ]
+            }
+        ],
+        "relevant-evidence": [
+            {
+                "href": "./raw_scans/scanner_output.csv",
+                "description": "Optional pointer to the raw scanner output that generated this POA&M entry."
+            }
+        ],
+        "collected": "2020-10-10T00:00:00Z",
+        "remarks": "The origin field identifies the \\\"Weakness Detector Source\\\""
+    },
+    {
+        "uuid": "63fd3d97-26c9-4d4c-8d24-9fbc482b7f52",
+        "description": "[EXAMPLE]Scanner Output.",
+        "methods": [
+            "TEST"
+        ],
+        "types": [
+            "finding"
+        ],
+        "origins": [
+            {
+                "actors": [
+                    {
+                        "type": "party",
+                        "actor-uuid": "f4568fda-c6d2-4640-adec-0012015af7d0"
+                    },
+                    {
+                        "type": "party",
+                        "actor-uuid": "e934d8b5-13e5-4f77-b55e-871e6f2df2fe"
+                    },
+                    {
+                        "type": "tool",
+                        "actor-uuid": "9d194268-a9d1-4c38-839f-9c4aa57bf71e"
+                    }
+                ]
+            }
+        ],
+        "subjects": [
+            {
+                "subject-uuid": "f61f4408-2cb8-444a-a312-bc88412e7c61",
+                "type": "inventory-item"
+            },
+            {
+                "subject-uuid": "02075556-3660-4112-8982-02fc7d6fac00",
+                "type": "inventory-item"
+            },
+            {
+                "subject-uuid": "5efe2c07-9fdf-453a-8457-6471046082fb",
+                "type": "inventory-item"
+            },
+            {
+                "subject-uuid": "75b059f2-a9ba-40b1-a1e0-881196ca1ead",
+                "type": "component"
+            }
+        ],
+        "relevant-evidence": [
+            {
+                "href": "#171b44a2-9b52-4c46-b912-54bd274b2761",
+                "description": "Raw scanner tool output - Infrastructure and OS Scan."
+            }
+        ],
+        "collected": "2020-10-10T00:00:00Z"
+    },
+    {
+        "uuid": "6c103050-d72a-4391-b830-dc669641231c",
+        "title": "Vendor Dependency",
+        "description": "Describe the vendor dependency here.",
+        "methods": [
+            "INTERVIEW"
+        ],
+        "types": [
+            "vendor-dependency"
+        ],
+        "subjects": [
+            {
+                "subject-uuid": "a49ed61e-fca1-4ffa-b5e7-c23a2375a7a0",
+                "type": "component"
+            }
+        ],
+        "collected": "2020-10-10T00:00:00Z"
+    },
+    {
+        "uuid": "9de7cba9-40fc-4c4d-b6af-01bd24f1def6",
+        "title": "Operational Requirement",
+        "description": "Provide the justification for the operational requirement.",
+        "methods": [
+            "EXAMINE"
+        ],
+        "types": [
+            "operational-requirement"
+        ],
+        "relevant-evidence": [
+            {
+                "href": "#53af7193-b25d-4ed2-a82f-5954d2d0df61",
+                "description": "A screen shot showing the system impact when patch is applied."
+            },
+            {
+                "href": "https://vendor.site/article/describing/something.htm",
+                "description": "Vendor detail describing why this happens."
+            }
+        ],
+        "collected": "2020-10-10T00:00:00Z"
+    },
+    {
+        "uuid": "46209140-8263-4e74-b3c9-cead4ffed22c",
+        "title": "False Positive",
+        "description": "Describe the false positive here.",
+        "methods": [
+            "EXAMINE"
+        ],
+        "types": [
+            "false-positive"
+        ],
+        "relevant-evidence": [
+            {
+                "href": "#53af7193-b25d-4ed2-a82f-5954d2d0df61",
+                "description": "A screen shot showing the setting is correct"
+            },
+            {
+                "href": "https://vendor.site/article/describing/something.htm",
+                "description": "Vendor detail describing why this happens."
+            }
+        ],
+        "collected": "2020-10-10T00:00:00Z"
+    },
+    {
+        "uuid": "7acee179-1570-4ea0-94dc-01b8c0a29c0a",
+        "title": "Risk Adjustment",
+        "description": "Describe the risk adjustment justification here.",
+        "methods": [
+            "EXAMINE"
+        ],
+        "types": [
+            "risk-adjustment"
+        ],
+        "relevant-evidence": [
+            {
+                "description": "Describe the risk adjustment evidence here.",
+                "links": [
+                    {
+                        "href": "#53af7193-b25d-4ed2-a82f-5954d2d0df61",
+                        "rel": "evidence"
+                    }
+                ],
+                "remarks": "Attach relevant evidence as a `resource`.\n\nUse a `link` field with a URI fragment to link to the resource using its UUID."
+            }
+        ],
+        "collected": "2020-10-10T00:00:00Z"
+    }
+]
