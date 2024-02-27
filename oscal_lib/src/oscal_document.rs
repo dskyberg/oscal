@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::oscal_complete_oscal_poam::plan_of_action_and_milestones::PlanOfActionAndMilestones;
+use crate::poam::plan_of_action_and_milestones::PlanOfActionAndMilestones;
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
