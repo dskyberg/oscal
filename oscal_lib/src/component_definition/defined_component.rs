@@ -33,7 +33,7 @@ pub struct DefinedComponent {
     #[serde(rename = "type")]
     pub _type: StringDatatype,
     pub title: String,
-    pub desciption: String,
+    pub description: String,
     pub purpose: Option<String>,
     pub props: Option<Vec<Property>>,
     pub links: Option<Vec<Link>>,

@@ -14,7 +14,7 @@ use crate::{
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
 pub struct Statement {
-    pub statemnt_id: TokenDatatype,
+    pub statement_id: TokenDatatype,
     pub uuid: UUIDDatatype,
     pub description: String,
     pub props: Option<Vec<Property>>,

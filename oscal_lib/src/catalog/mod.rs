@@ -22,7 +22,7 @@ pub mod group;
 pub struct Catalog {
     pub uuid: UUIDDatatype,
     pub metadata: Metadata,
-    pub parameters: Option<Vec<Parameter>>,
+    pub params: Option<Vec<Parameter>>,
     pub controls: Option<Vec<Control>>,
     pub groups: Option<Vec<Group>>,
     pub back_matter: Option<BackMatter>,

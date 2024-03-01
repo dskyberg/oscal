@@ -16,7 +16,7 @@ pub struct ParameterSelection {
     ///     "one-or-more"
     /// ]
     pub how_many: Option<TokenDatatype>,
-    pub choice: Option<String>,
+    pub choice: Option<Vec<String>>,
 }
 
 impl SchemaConstraint for ParameterSelection {
