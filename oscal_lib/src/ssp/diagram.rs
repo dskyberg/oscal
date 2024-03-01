@@ -5,12 +5,21 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::SchemaConstraint;
+use crate::{
+    metadata::{Link, Property, Remarks},
+    SchemaConstraint, UUIDDatatype,
+};
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
 pub struct Diagram {
+    pub uuid: UUIDDatatype,
+    pub description: Option<String>,
+    pub props: Option<Vec<Property>>,
+    pub links: Option<Vec<Link>>,
+    pub caption: Option<String>,
+    pub remarks: Option<Remarks>,
 }
 
 impl SchemaConstraint for Diagram {

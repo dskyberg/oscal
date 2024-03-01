@@ -5,12 +5,27 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::SchemaConstraint;
+use crate::{
+    implementation_common::set_parameter::SetParameter,
+    metadata::{Link, Property, Remarks, ResponsibleRole},
+    SchemaConstraint, TokenDatatype, UUIDDatatype,
+};
+
+use super::{by_component::ByComponent, statement::Statement};
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
 pub struct ImplementedRequirement {
+    pub uuid: UUIDDatatype,
+    pub control_id: TokenDatatype,
+    pub props: Option<Vec<Property>>,
+    pub links: Option<Vec<Link>>,
+    pub set_parameters: Option<Vec<SetParameter>>,
+    pub responsible_roles: Option<Vec<ResponsibleRole>>,
+    pub statements: Option<Vec<Statement>>,
+    pub by_components: Option<Vec<ByComponent>>,
+    pub remarks: Option<Remarks>,
 }
 
 impl SchemaConstraint for ImplementedRequirement {

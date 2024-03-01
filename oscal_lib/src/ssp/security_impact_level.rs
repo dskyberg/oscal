@@ -5,12 +5,15 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::SchemaConstraint;
+use crate::{SchemaConstraint, StringDatatype};
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
 pub struct SecurityImpactLevel {
+    pub security_objective_confidentiality: StringDatatype,
+    pub security_objective_integrity: StringDatatype,
+    pub security_objective_availability: StringDatatype,
 }
 
 impl SchemaConstraint for SecurityImpactLevel {

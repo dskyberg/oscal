@@ -17,7 +17,7 @@ pub struct ResponsibleParty {
     pub party_uuids: Vec<PartyUuid>,
     pub props: Option<Vec<Property>>,
     pub links: Option<Vec<Link>>,
-    pub remarks: Option<Vec<Remarks>>,
+    pub remarks: Option<Remarks>,
 }
 
 impl SchemaConstraint for ResponsibleParty {

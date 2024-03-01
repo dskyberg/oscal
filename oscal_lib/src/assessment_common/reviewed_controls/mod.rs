@@ -10,12 +10,10 @@ use crate::{
     SchemaConstraint,
 };
 
-use self::{
-    assessed_control::AssessedControl, control_objective_description::ControlObjectiveDescription,
-};
+use self::{assessed_control::AssessedControl, control_objective::ControlObjective};
 
 pub mod assessed_control;
-pub mod control_objective_description;
+pub mod control_objective;
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
@@ -25,7 +23,7 @@ pub struct ReviewedControls {
     pub props: Option<Vec<Property>>,
     pub links: Option<Vec<Link>>,
     pub control_selections: Vec<AssessedControl>,
-    pub control_objective_selections: Option<Vec<ControlObjectiveDescription>>,
+    pub control_objective_selections: Option<Vec<ControlObjective>>,
     pub remarks: Option<Remarks>,
 }
 

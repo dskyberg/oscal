@@ -5,12 +5,27 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::SchemaConstraint;
+use crate::{
+    metadata::{BackMatter, Metadata},
+    SchemaConstraint, UUIDDatatype,
+};
+
+use super::{
+    control_implementation::ControlImplementation, import_profile::ImportProfile,
+    system_characteristics::SystemCharacteristics, system_implementation::SystemImplementation,
+};
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
 pub struct SystemSecurityPlan {
+    pub uuid: UUIDDatatype,
+    pub metadata: Metadata,
+    pub import_profile: ImportProfile,
+    pub system_characteristics: SystemCharacteristics,
+    pub system_implementation: SystemImplementation,
+    pub control_implementation: ControlImplementation,
+    pub back_matter: Option<BackMatter>,
 }
 
 impl SchemaConstraint for SystemSecurityPlan {

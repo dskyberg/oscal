@@ -146,7 +146,7 @@ pub struct AssociatedActivity {
     /// "#assembly_oscal-metadata_link"
     pub links: Option<Vec<link::Link>>,
     /// "#assembly_oscal-metadata_responsible-role"
-    pub responsible_roles: Vec<responsible_role::ResponsibleRole>,
+    pub responsible_roles: Option<Vec<responsible_role::ResponsibleRole>>,
     /// TODO: "#assembly_oscal-assessment-common_assessment-subject"
     pub subjects: Vec<super::assessment_subject::AssessmentSubject>,
     /// "#field_oscal-metadata_remarks"

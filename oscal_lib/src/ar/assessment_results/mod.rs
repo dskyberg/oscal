@@ -24,7 +24,7 @@ pub struct AssessmentResults {
     pub metadata: Metadata,
     pub import_ap: ImportAp,
     pub local_definitions: Option<LocalDefinitions>,
-    pub results: Result,
+    pub results: Vec<Result>,
     pub back_matter: Option<BackMatter>,
 }
 

@@ -5,12 +5,17 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::SchemaConstraint;
+use crate::{implementation_common::set_parameter::SetParameter, SchemaConstraint};
+
+use super::implemented_requirement::ImplementedRequirement;
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
 pub struct ControlImplementation {
+    pub description: String,
+    pub set_parameters: Option<Vec<SetParameter>>,
+    pub implemented_requirements: Vec<ImplementedRequirement>,
 }
 
 impl SchemaConstraint for ControlImplementation {

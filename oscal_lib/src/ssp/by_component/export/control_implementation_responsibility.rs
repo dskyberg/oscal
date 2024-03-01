@@ -1,41 +1,35 @@
-/// File name: ../oscal_lib/src/oscal_complete_oscal_ssp/statement.rs
-/// pub use oscal_complete_oscal_ssp::*;
-///
-/// pub mod oscal_complete_oscal_ssp;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
 use crate::{
     metadata::{Link, Property, Remarks, ResponsibleRole},
-    SchemaConstraint, TokenDatatype, UUIDDatatype,
+    SchemaConstraint, UUIDDatatype,
 };
-
-use super::by_component::ByComponent;
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
-pub struct Statement {
-    pub statement_id: TokenDatatype,
+pub struct ControlImplementationResponsibility {
     pub uuid: UUIDDatatype,
+    pub provided_uuid: Option<UUIDDatatype>,
+    pub description: String,
     pub props: Option<Vec<Property>>,
     pub links: Option<Vec<Link>>,
     pub responsible_roles: Option<Vec<ResponsibleRole>>,
-    pub by_components: Option<Vec<ByComponent>>,
     pub remarks: Option<Remarks>,
 }
 
-impl SchemaConstraint for Statement {
+impl SchemaConstraint for ControlImplementationResponsibility {
     fn constraint_title() -> &'static str {
-        "Specific Control Statement"
+        "Control Implementation Responsibility"
     }
     fn constraint_description() -> &'static str {
-        r#"Identifies which statements within a control are addressed."#
+        "Describes a control implementation responsibility imposed on a leveraging system."
     }
     fn constraint_id() -> &'static str {
-        "#assembly_oscal-ssp_statement"
+        "#assembly_oscal-ssp_by-component_export_control-implementation-responsibility"
     }
     fn schema_path() -> &'static str {
-        "oscal-complete-oscal-ssp:statement"
+        "oscal-complete-oscal-ssp:by-component:export:control-implementation-responsibility"
     }
 }

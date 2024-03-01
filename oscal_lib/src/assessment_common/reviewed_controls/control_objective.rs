@@ -11,8 +11,8 @@ use crate::{
 #[skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
-pub struct ControlObjectiveDescription {
-    pub description: String,
+pub struct ControlObjective {
+    pub description: Option<String>,
     pub props: Option<Vec<Property>>,
     pub links: Option<Vec<Link>>,
     pub include_all: Option<IncludeAll>,
@@ -21,17 +21,17 @@ pub struct ControlObjectiveDescription {
     pub remarks: Option<Remarks>,
 }
 
-impl SchemaConstraint for ControlObjectiveDescription {
+impl SchemaConstraint for ControlObjective {
     fn constraint_title() -> &'static str {
-        "Reviewed Controls and Control Objectives"
+        "Referenced Control Objectives"
     }
     fn constraint_description() -> &'static str {
-        r#"Identifies the controls being assessed and their control objectives."#
+        "Identifies the control objectives of the assessment. In the assessment plan, these are the planned objectives. In the assessment results, these are the assessed objectives, and reflects any changes from the plan."
     }
     fn constraint_id() -> &'static str {
-        "#assembly_oscal-assessment-common_reviewed-controls:control-objective-description"
+        "#assembly_oscal-assessment-common_reviewed-controls:control-objective"
     }
     fn schema_path() -> &'static str {
-        "oscal-complete-oscal-assessment-common:reviewed-controls:control-objective-description"
+        "oscal-complete-oscal-assessment-common:reviewed-controls:control-objective"
     }
 }

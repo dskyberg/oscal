@@ -1,4 +1,4 @@
-/// File name: ../oscal_lib/src/oscal_complete_oscal_ssp/system_information.rs
+/// File name: ../oscal_lib/src/oscal_complete_oscal_ssp/system_implementation.rs
 /// pub use oscal_complete_oscal_ssp::*;
 ///
 /// pub mod oscal_complete_oscal_ssp;
@@ -10,20 +10,19 @@ use crate::SchemaConstraint;
 #[skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
-pub struct SystemInformation {
-}
+pub struct LeveragedAuthorization {}
 
-impl SchemaConstraint for SystemInformation {
+impl SchemaConstraint for LeveragedAuthorization {
     fn constraint_title() -> &'static str {
-        "System Information"
+        "System Implementation"
     }
     fn constraint_description() -> &'static str {
-        r#"Contains details about all information types that are stored, processed, or transmitted by the system, such as privacy information, and those defined in NIST SP 800-60."#
+        r#"Provides information as to how the system is implemented."#
     }
     fn constraint_id() -> &'static str {
-        "#assembly_oscal-ssp_system-information"
+        "#assembly_oscal-ssp_system-implementation_leveraged-authorization"
     }
     fn schema_path() -> &'static str {
-        "oscal-complete-oscal-ssp:system-information"
+        "oscal-complete-oscal-ssp:system-implementation:leveraged-authorization"
     }
 }

@@ -15,7 +15,7 @@ pub struct AssessedControl {
     pub description: Option<String>,
     pub props: Option<Vec<Property>>,
     pub links: Option<Vec<Link>>,
-    pub include_all: Option<Vec<IncludeAll>>,
+    pub include_all: Option<IncludeAll>,
     pub include_controls: Option<Vec<SelectControlById>>,
     pub exclude_controls: Option<Vec<SelectControlById>>,
     pub remarks: Option<Remarks>,

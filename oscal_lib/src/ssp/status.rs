@@ -5,12 +5,21 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::SchemaConstraint;
+use crate::{metadata::Remarks, SchemaConstraint, StringDatatype};
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
 pub struct Status {
+    /// "enum": [
+    ///     "operational",
+    ///     "under-development",
+    ///     "under-major-modification",
+    ///     "disposition",
+    ///     "other"
+    /// ]
+    pub state: StringDatatype,
+    pub remarks: Option<Remarks>,
 }
 
 impl SchemaConstraint for Status {

@@ -5,12 +5,22 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::SchemaConstraint;
+use crate::{
+    metadata::{Link, Property, Remarks},
+    SchemaConstraint,
+};
+
+use super::diagram::Diagram;
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
 pub struct DataFlow {
+    pub description: String,
+    pub props: Option<Vec<Property>>,
+    pub links: Option<Vec<Link>>,
+    pub diagrams: Option<Vec<Diagram>>,
+    pub remarks: Option<Remarks>,
 }
 
 impl SchemaConstraint for DataFlow {
