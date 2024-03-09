@@ -1,0 +1,51 @@
+[tasks.fluent-uri-rs]
+command = "git"
+args = ["clone", "git@github.com:dskyberg/fluent-uri-rs.git"]
+condition = { files_not_exist = [
+    "${CARGO_MAKE_WORKING_DIRECTORY}/fluent-uri-rs",
+] }
+
+[tasks.fedramp-automation]
+command = "git"
+args = [
+    "clone",
+    "--quiet",
+    "--depth",
+    "1",
+    "git@github.com:GSA/fedramp-automation.git",
+]
+condition = { files_not_exist = [
+    "${CARGO_MAKE_WORKING_DIRECTORY}/fedramp-automation",
+] }
+
+
+[tasks.oscal-content]
+command = "git"
+args = [
+    "clone",
+    "--quiet",
+    "--depth",
+    "1",
+    "--branch",
+    "v1.3.0",
+    "git@github.com:usnistgov/oscal-content.git",
+]
+condition = { files_not_exist = [
+    "${CARGO_MAKE_WORKING_DIRECTORY}/oscal-content",
+] }
+
+[tasks.fetch-test-repos]
+dependencies = ["fedramp-automation", "oscal-content"]
+
+[tasks.fetch-build-repos]
+dependencies = ["fluent-uri-rs"]
+
+[tasks.fetch-all-repos]
+dependencies = ["fetch-test-repos", "fetch-build-repos"]
+
+
+[tasks.run-test]
+script = ["cd oscal_lib", "cargo test"]
+
+[tasks.test-lib]
+dependencies = ["fetch-all-repos", "run-test"]
