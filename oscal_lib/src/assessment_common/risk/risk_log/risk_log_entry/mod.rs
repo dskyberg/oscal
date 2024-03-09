@@ -4,7 +4,7 @@ use serde_with::skip_serializing_none;
 use crate::{
     assessment_common::{logged_by::LoggedBy, risk_status::RiskStatus},
     metadata::{Link, Property, Remarks},
-    DateTimeWithTimezoneDatatype, SchemaConstraint, UUIDDatatype,
+    DateTimeWithTimezoneDatatype, SchemaElement, UUIDDatatype,
 };
 
 use self::risk_response_reference::RiskResponseReference;
@@ -28,15 +28,15 @@ pub struct RiskLogEntry {
     pub remarks: Option<Remarks>,
 }
 
-impl SchemaConstraint for RiskLogEntry {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for RiskLogEntry {
+    fn schema_title() -> &'static str {
         "Risk Log Entry"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         "Identifies an individual risk response that occurred as part of managing an identified risk."
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-assessment-common_risk:risk-log:risk-log-entry"
+    fn schema_id() -> Option<&'static str> {
+        None
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-assessment-common:risk:risk-log:risk-log-entry"

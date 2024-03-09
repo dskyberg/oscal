@@ -7,7 +7,7 @@ use serde_with::skip_serializing_none;
 
 use crate::{
     metadata::{Link, Property, Remarks},
-    SchemaConstraint, UUIDDatatype,
+    SchemaElement, UUIDDatatype,
 };
 
 use super::assessment_part::AssessmentPart;
@@ -24,15 +24,15 @@ pub struct AssessmentMethod {
     pub remarks: Option<Remarks>,
 }
 
-impl SchemaConstraint for AssessmentMethod {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for AssessmentMethod {
+    fn schema_title() -> &'static str {
         "Assessment Method"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"A local definition of a control objective. Uses catalog syntax for control objective and assessment activities."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-assessment-common_assessment-method"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-assessment-common_assessment-method")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-assessment-common:assessment-method"

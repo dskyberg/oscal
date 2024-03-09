@@ -1,8 +1,9 @@
 use serde::{Deserialize, Serialize};
+use std::ops::Deref;
 use std::str::FromStr;
 
-use super::{nc_name::NCName, StringType};
-use crate::{Error, SchemaConstraint};
+use super::nc_name::NCName;
+use crate::{Error, SchemaElement};
 
 /// Wrapper for NCName
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
@@ -29,24 +30,25 @@ impl TryFrom<&str> for TokenDatatype {
     }
 }
 
-impl StringType for TokenDatatype {
-    fn pattern() -> &'static str {
-        r"^(\p{L}|_)(\p{L}|\p{N}|[.\-_])*$"
-    }
-}
-
-impl SchemaConstraint for TokenDatatype {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for TokenDatatype {
+    fn schema_title() -> &'static str {
         "Token"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"A non-colonized name as defined by XML Schema Part 2: Datatypes Second Edition."#
     }
-    fn constraint_id() -> &'static str {
-        "TokenDatatype"
+    fn schema_id() -> Option<&'static str> {
+        None
     }
     fn schema_path() -> &'static str {
         "token"
+    }
+}
+
+impl Deref for TokenDatatype {
+    type Target = str;
+    fn deref(&self) -> &Self::Target {
+        self.0.deref()
     }
 }
 

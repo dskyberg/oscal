@@ -7,7 +7,7 @@ use serde_with::skip_serializing_none;
 
 use crate::{
     metadata::{Link, Property},
-    SchemaConstraint, UUIDDatatype,
+    SchemaElement, UUIDDatatype,
 };
 
 use self::{
@@ -37,15 +37,15 @@ pub struct InformationType {
     pub availability_impact: AvailabilityImpactLevel,
 }
 
-impl SchemaConstraint for InformationType {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for InformationType {
+    fn schema_title() -> &'static str {
         "Information Type"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"Contains details about one information type that is stored, processed, or transmitted by the system, such as privacy information, and those defined in NIST SP 800-60."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-ssp_system-information_information-type"
+    fn schema_id() -> Option<&'static str> {
+        None
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-ssp:system-information:information-type"

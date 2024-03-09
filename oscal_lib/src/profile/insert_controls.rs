@@ -5,7 +5,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{catalog_common::include_all::IncludeAll, SchemaConstraint, TokenDatatype};
+use crate::{catalog_common::include_all::IncludeAll, SchemaElement, TokenDatatype};
 
 use super::select_control_by_id::SelectControlById;
 
@@ -24,15 +24,15 @@ pub struct InsertControls {
     pub exclude_controls: Option<Vec<SelectControlById>>,
 }
 
-impl SchemaConstraint for InsertControls {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for InsertControls {
+    fn schema_title() -> &'static str {
         "Select controls"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"Specifies which controls to use in the containing context."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-profile_insert-controls"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-profile_insert-controls")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-profile:insert-controls"

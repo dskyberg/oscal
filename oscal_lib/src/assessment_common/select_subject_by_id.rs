@@ -7,7 +7,7 @@ use serde_with::skip_serializing_none;
 
 use crate::{
     metadata::{Link, Property, Remarks},
-    SchemaConstraint, TokenDatatype, UUIDDatatype,
+    SchemaElement, TokenDatatype, UUIDDatatype,
 };
 
 #[skip_serializing_none]
@@ -30,15 +30,15 @@ pub struct SelectSubjectById {
     pub remarks: Option<Remarks>,
 }
 
-impl SchemaConstraint for SelectSubjectById {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for SelectSubjectById {
+    fn schema_title() -> &'static str {
         "Select Assessment Subject"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"Identifies a set of assessment subjects to include/exclude by UUID."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-assessment-common_select-subject-by-id"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-assessment-common_select-subject-by-id")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-assessment-common:select-subject-by-id"

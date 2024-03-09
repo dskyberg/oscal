@@ -4,7 +4,7 @@ use serde_with::skip_serializing_none;
 use crate::{
     assessment_common::related_task::RelatedTask,
     metadata::{Link, Property, Remarks},
-    SchemaConstraint, UUIDDatatype,
+    SchemaElement, UUIDDatatype,
 };
 
 #[skip_serializing_none]
@@ -18,15 +18,15 @@ pub struct RiskResponseReference {
     pub remarks: Option<Remarks>,
 }
 
-impl SchemaConstraint for RiskResponseReference {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for RiskResponseReference {
+    fn schema_title() -> &'static str {
         "Risk Response Reference"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         "Identifies an individual risk response that this log entry is for."
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-assessment-common_risk:risk-log:risk-log-entry:related-responses"
+    fn schema_id() -> Option<&'static str> {
+        None
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-assessment-common:risk:risk-log:risk-log-entry:related-responses"

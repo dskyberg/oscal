@@ -5,7 +5,7 @@ use crate::{
     assessment_common::select_objective_by_id::SelectObjectiveById,
     catalog_common::include_all::IncludeAll,
     metadata::{Link, Property, Remarks},
-    SchemaConstraint,
+    SchemaElement,
 };
 
 #[skip_serializing_none]
@@ -21,15 +21,15 @@ pub struct ControlObjective {
     pub remarks: Option<Remarks>,
 }
 
-impl SchemaConstraint for ControlObjective {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for ControlObjective {
+    fn schema_title() -> &'static str {
         "Referenced Control Objectives"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         "Identifies the control objectives of the assessment. In the assessment plan, these are the planned objectives. In the assessment results, these are the assessed objectives, and reflects any changes from the plan."
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-assessment-common_reviewed-controls:control-objective"
+    fn schema_id() -> Option<&'static str> {
+        None
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-assessment-common:reviewed-controls:control-objective"

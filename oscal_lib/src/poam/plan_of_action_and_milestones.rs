@@ -9,7 +9,7 @@ use crate::{
     assessment_common::{import_ssp::ImportSsp, observation::Observation, risk::Risk},
     implementation_common::system_id::SystemId,
     metadata::{BackMatter, Metadata},
-    SchemaConstraint, UUIDDatatype,
+    SchemaElement, UUIDDatatype,
 };
 
 use super::{local_definitions::LocalDefinitions, poam_item::PoamItem};
@@ -29,29 +29,17 @@ pub struct PlanOfActionAndMilestones {
     pub back_matter: Option<BackMatter>,
 }
 
-impl SchemaConstraint for PlanOfActionAndMilestones {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for PlanOfActionAndMilestones {
+    fn schema_title() -> &'static str {
         "Plan of Action and Milestones (POA&M)"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"A plan of action and milestones which identifies initial and residual risks, deviations, and disposition, such as those required by FedRAMP."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-poam_plan-of-action-and-milestones"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-poam_plan-of-action-and-milestones")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-poam:plan-of-action-and-milestones"
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_it() {
-        let json = include_str!("test/poam.json");
-        let result = serde_json::from_str::<PlanOfActionAndMilestones>(json).expect("oops");
-        dbg!(result);
     }
 }

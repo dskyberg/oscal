@@ -5,7 +5,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{SchemaConstraint, StringDatatype, URIDatatype};
+use crate::{SchemaElement, StringDatatype, URIDatatype};
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
@@ -21,15 +21,15 @@ pub struct SystemId {
     pub id: StringDatatype,
 }
 
-impl SchemaConstraint for SystemId {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for SystemId {
+    fn schema_title() -> &'static str {
         "System Identification"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"A human-oriented, globally unique identifier with cross-instance scope that can be used to reference this system identification property elsewhere in this or other OSCAL instances. When referencing an externally defined system identification, the system identification must be used in the context of the external / imported OSCAL instance (e.g., uri-reference). This string should be assigned per-subject, which means it should be consistently used to identify the same system across revisions of the document."#
     }
-    fn constraint_id() -> &'static str {
-        "#field_oscal-implementation-common_system-id"
+    fn schema_id() -> Option<&'static str> {
+        Some("#field_oscal-implementation-common_system-id")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-implementation-common:system-id"

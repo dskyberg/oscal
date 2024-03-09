@@ -8,7 +8,7 @@ use serde_with::skip_serializing_none;
 use crate::{
     catalog_common::include_all::IncludeAll,
     metadata::{Link, Property, Remarks},
-    SchemaConstraint, TokenDatatype,
+    SchemaElement, TokenDatatype,
 };
 
 use super::select_subject_by_id::SelectSubjectById;
@@ -36,15 +36,15 @@ pub struct AssessmentSubject {
     pub remarks: Option<Remarks>,
 }
 
-impl SchemaConstraint for AssessmentSubject {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for AssessmentSubject {
+    fn schema_title() -> &'static str {
         "Subject of Assessment"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"Identifies system elements being assessed, such as components, inventory items, and locations. In the assessment plan, this identifies a planned assessment subject. In the assessment results this is an actual assessment subject, and reflects any changes from the plan. exactly what will be the focus of this assessment. Any subjects not identified in this way are out-of-scope."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-assessment-common_assessment-subject"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-assessment-common_assessment-subject")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-assessment-common:assessment-subject"

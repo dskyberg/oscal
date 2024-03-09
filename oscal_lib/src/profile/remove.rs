@@ -5,7 +5,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{SchemaConstraint, TokenDatatype};
+use crate::{SchemaElement, TokenDatatype};
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
@@ -18,15 +18,15 @@ pub struct Remove {
     pub by_ns: Option<TokenDatatype>,
 }
 
-impl SchemaConstraint for Remove {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for Remove {
+    fn schema_title() -> &'static str {
         "Removal"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"Specifies objects to be removed from a control based on specific aspects of the object that must all match."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-profile_remove"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-profile_remove")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-profile:remove"

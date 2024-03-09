@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{PositiveIntegerDatatype, SchemaConstraint, StringDatatype};
+use crate::{PositiveIntegerDatatype, SchemaElement, StringDatatype};
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
@@ -19,15 +19,15 @@ pub struct FrequencyCondition {
     pub unit: StringDatatype,
 }
 
-impl SchemaConstraint for FrequencyCondition {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for FrequencyCondition {
+    fn schema_title() -> &'static str {
         "Frequency Condition"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         "The task is intended to occur at the specified frequency."
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-assessment-common_task:event-timing"
+    fn schema_id() -> Option<&'static str> {
+        None
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-assessment-common:task:event-timing"

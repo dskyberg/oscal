@@ -7,7 +7,7 @@ use serde_with::skip_serializing_none;
 
 use crate::{
     metadata::{BackMatter, Metadata},
-    SchemaConstraint, UUIDDatatype,
+    SchemaElement, UUIDDatatype,
 };
 
 use super::{
@@ -28,15 +28,15 @@ pub struct SystemSecurityPlan {
     pub back_matter: Option<BackMatter>,
 }
 
-impl SchemaConstraint for SystemSecurityPlan {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for SystemSecurityPlan {
+    fn schema_title() -> &'static str {
         "System Security Plan (SSP)"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"A system security plan, such as those described in NIST SP 800-18"#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-ssp_system-security-plan"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-ssp_system-security-plan")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-ssp:system-security-plan"

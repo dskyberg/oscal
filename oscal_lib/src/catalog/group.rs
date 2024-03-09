@@ -10,7 +10,7 @@ use super::control::Control;
 use crate::{
     catalog_common::{parameter::Parameter, part::Part},
     metadata::{Link, Property},
-    SchemaConstraint, TokenDatatype,
+    SchemaElement, TokenDatatype,
 };
 
 #[skip_serializing_none]
@@ -28,15 +28,15 @@ pub struct Group {
     pub controls: Option<Vec<Control>>,
 }
 
-impl SchemaConstraint for Group {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for Group {
+    fn schema_title() -> &'static str {
         "Control Group"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"A group of controls, or of groups of controls."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-catalog_group"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-catalog_group")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-catalog:group"

@@ -12,7 +12,8 @@ license = "MIT or Apache 2.0"
 
 [dependencies]
 chrono = { version = "0.4", features = ["serde", "alloc", "now", "serde"] }
-fluent-uri = { path = "../../fluent-uri-rs" }
+fluent-uri = { path = "../fluent-uri-rs" }
+rhai = { version = "*", optional = true }
 semver = { version = "1.0.18", features = ["serde"] }
 serde = { version = "1.0.171", features = ["derive"] }
 serde-xml-rs = "0.6.0"
@@ -22,3 +23,6 @@ thiserror = "1.0.43"
 uuid = { version = "1.4.0", features = ["v4", "v5", "serde"] }
 validator = { version = "0.16.1", features = ["derive"] }
 void = "1.0.2"
+
+[features]
+default = ["rhai"]

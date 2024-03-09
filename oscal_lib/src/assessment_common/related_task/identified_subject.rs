@@ -2,7 +2,7 @@ use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
 use crate::{
-    assessment_common::assessment_subject::AssessmentSubject, SchemaConstraint, UUIDDatatype,
+    assessment_common::assessment_subject::AssessmentSubject, SchemaElement, UUIDDatatype,
 };
 
 #[skip_serializing_none]
@@ -13,15 +13,15 @@ pub struct IdentifiedSubject {
     pub subjects: Vec<AssessmentSubject>,
 }
 
-impl SchemaConstraint for IdentifiedSubject {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for IdentifiedSubject {
+    fn schema_title() -> &'static str {
         "Identified Subject"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         "Used to detail assessment subjects that were identfied by this task."
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-assessment-common_related-task:identified-subject"
+    fn schema_id() -> Option<&'static str> {
+        None
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-assessment-common:related-task:identified-subject"

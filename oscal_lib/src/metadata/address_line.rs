@@ -7,7 +7,7 @@ use std::ops::Deref;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{Error, SchemaConstraint, StringDatatype};
+use crate::{Error, SchemaElement, StringDatatype};
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
@@ -29,15 +29,15 @@ impl TryFrom<&str> for AddressLine {
     }
 }
 
-impl SchemaConstraint for AddressLine {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for AddressLine {
+    fn schema_title() -> &'static str {
         "Document Identifier"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         "A single line of an address."
     }
-    fn constraint_id() -> &'static str {
-        "#field_oscal-metadata_addr-line"
+    fn schema_id() -> Option<&'static str> {
+        Some("#field_oscal-metadata_addr-line")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-metadata:addr-line"

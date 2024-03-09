@@ -2,7 +2,7 @@ use serde::{Deserialize, Serialize};
 use std::ops::Deref;
 
 use super::{DecimalType, NumberType};
-use crate::SchemaConstraint;
+use crate::SchemaElement;
 
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 #[serde(transparent)]
@@ -23,15 +23,15 @@ impl From<f64> for DecimalDatatype {
 
 impl DecimalType for DecimalDatatype {}
 
-impl SchemaConstraint for DecimalDatatype {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for DecimalDatatype {
+    fn schema_title() -> &'static str {
         "Decimal"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         "A real number expressed using a whole and optional fractional part separated by a period."
     }
-    fn constraint_id() -> &'static str {
-        "DecimalDatatype"
+    fn schema_id() -> Option<&'static str> {
+        None
     }
     fn schema_path() -> &'static str {
         "decimal"
@@ -61,15 +61,15 @@ impl NumberType for IntegerDatatype {
     }
 }
 
-impl SchemaConstraint for IntegerDatatype {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for IntegerDatatype {
+    fn schema_title() -> &'static str {
         "Integer"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         "In XML Schema this is represented as a restriction on the built-in type integer as follows:"
     }
-    fn constraint_id() -> &'static str {
-        "IntegerDatatype"
+    fn schema_id() -> Option<&'static str> {
+        None
     }
     fn schema_path() -> &'static str {
         "integer"
@@ -99,15 +99,15 @@ impl NumberType for NonNegativeIntegerDatatype {
     }
 }
 
-impl SchemaConstraint for NonNegativeIntegerDatatype {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for NonNegativeIntegerDatatype {
+    fn schema_title() -> &'static str {
         "NonNegative Integer"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         "An integer value that is equal to or greater than 0."
     }
-    fn constraint_id() -> &'static str {
-        "NonNegativeIntegerDatatype"
+    fn schema_id() -> Option<&'static str> {
+        None
     }
     fn schema_path() -> &'static str {
         "non-negative-integer"
@@ -137,15 +137,15 @@ impl NumberType for PositiveIntegerDatatype {
     }
 }
 
-impl SchemaConstraint for PositiveIntegerDatatype {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for PositiveIntegerDatatype {
+    fn schema_title() -> &'static str {
         "Positive Integer"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         "An integer value that is greater than 0."
     }
-    fn constraint_id() -> &'static str {
-        "PositiveIntegerDatatype"
+    fn schema_id() -> Option<&'static str> {
+        None
     }
     fn schema_path() -> &'static str {
         "positive-integer"

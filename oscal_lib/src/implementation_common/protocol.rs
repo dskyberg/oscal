@@ -5,7 +5,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{SchemaConstraint, StringDatatype, UUIDDatatype};
+use crate::{SchemaElement, StringDatatype, UUIDDatatype};
 
 use super::port_range::PortRange;
 
@@ -19,15 +19,15 @@ pub struct Protocol {
     pub port_ranges: Option<Vec<PortRange>>,
 }
 
-impl SchemaConstraint for Protocol {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for Protocol {
+    fn schema_title() -> &'static str {
         "Service Protocol Information"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"Information about the protocol used to provide a service."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-implementation-common_protocol"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-implementation-common_protocol")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-implementation-common:protocol"

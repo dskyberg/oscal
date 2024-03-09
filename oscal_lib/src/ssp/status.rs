@@ -5,7 +5,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{metadata::Remarks, SchemaConstraint, StringDatatype};
+use crate::{metadata::Remarks, SchemaElement, StringDatatype};
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
@@ -22,15 +22,15 @@ pub struct Status {
     pub remarks: Option<Remarks>,
 }
 
-impl SchemaConstraint for Status {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for Status {
+    fn schema_title() -> &'static str {
         "Status"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"Describes the operational status of the system."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-ssp_status"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-ssp_status")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-ssp:status"

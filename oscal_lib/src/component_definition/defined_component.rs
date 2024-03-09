@@ -7,7 +7,7 @@ use serde_with::skip_serializing_none;
 
 use crate::{
     implementation_common::protocol::Protocol, metadata::Link, metadata::Property,
-    metadata::Remarks, metadata::ResponsibleRole, SchemaConstraint, StringDatatype, UUIDDatatype,
+    metadata::Remarks, metadata::ResponsibleRole, SchemaElement, StringDatatype, UUIDDatatype,
 };
 
 use super::control_implementation::ControlImplementation;
@@ -43,15 +43,15 @@ pub struct DefinedComponent {
     pub remark: Option<Remarks>,
 }
 
-impl SchemaConstraint for DefinedComponent {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for DefinedComponent {
+    fn schema_title() -> &'static str {
         "Component"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"A defined component that can be part of an implemented system."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-component-definition_defined-component"
+    fn schema_id() -> Option<&'static str> {
+        None
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-component-definition:defined-component"

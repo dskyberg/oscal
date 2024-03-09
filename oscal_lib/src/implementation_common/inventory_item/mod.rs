@@ -7,7 +7,7 @@ use serde_with::skip_serializing_none;
 
 use crate::{
     metadata::{Link, Property, Remarks, ResponsibleParty},
-    SchemaConstraint, UUIDDatatype,
+    SchemaElement, UUIDDatatype,
 };
 
 use self::implemented_component::ImplementedComponent;
@@ -27,15 +27,15 @@ pub struct InventoryItem {
     pub remarks: Option<Remarks>,
 }
 
-impl SchemaConstraint for InventoryItem {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for InventoryItem {
+    fn schema_title() -> &'static str {
         "Inventory Item"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"A single managed inventory item within the system."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-implementation-common_inventory-item"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-implementation-common_inventory-item")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-implementation-common:inventory-item"

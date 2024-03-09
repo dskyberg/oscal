@@ -5,7 +5,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{catalog_common::include_all::IncludeAll, SchemaConstraint, URIReferenceDatatype};
+use crate::{catalog_common::include_all::IncludeAll, SchemaElement, URIReferenceDatatype};
 
 use super::select_control_by_id::SelectControlById;
 
@@ -19,15 +19,15 @@ pub struct Import {
     pub exclude_controls: Option<Vec<SelectControlById>>,
 }
 
-impl SchemaConstraint for Import {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for Import {
+    fn schema_title() -> &'static str {
         "Import resource"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"The import designates a catalog or profile to be included (referenced and potentially modified) by this profile. The import also identifies which controls to select using the include-all, include-controls, and exclude-controls directives."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-profile_import"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-profile_import")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-profile:import"

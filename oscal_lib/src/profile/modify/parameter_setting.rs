@@ -7,7 +7,7 @@ use crate::{
         parameter_selection::ParameterSelection, parameter_value::ParameterValue,
     },
     metadata::{Link, Property},
-    SchemaConstraint, TokenDatatype,
+    SchemaElement, TokenDatatype,
 };
 
 #[skip_serializing_none]
@@ -27,15 +27,15 @@ pub struct ParameterSetting {
     pub select: Option<ParameterSelection>,
 }
 
-impl SchemaConstraint for ParameterSetting {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for ParameterSetting {
+    fn schema_title() -> &'static str {
         "Parameter Setting"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         "A parameter setting, to be propagated to points of insertion"
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-profile_modify_set_parameter"
+    fn schema_id() -> Option<&'static str> {
+        None
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-profile:modify:set_parameter"

@@ -8,7 +8,7 @@ use serde_with::skip_serializing_none;
 use crate::{
     catalog_common::part::Part,
     metadata::{Link, Property},
-    SchemaConstraint, TokenDatatype,
+    SchemaElement, TokenDatatype,
 };
 
 #[skip_serializing_none]
@@ -22,15 +22,15 @@ pub struct LocalObjective {
     pub parts: Vec<Part>,
 }
 
-impl SchemaConstraint for LocalObjective {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for LocalObjective {
+    fn schema_title() -> &'static str {
         "Assessment-Specific Control Objective"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"A local definition of a control objective for this assessment. Uses catalog syntax for control objective and assessment actions."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-assessment-common_local-objective"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-assessment-common_local-objective")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-assessment-common:local-objective"

@@ -5,7 +5,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::SchemaConstraint;
+use crate::SchemaElement;
 
 use super::alter::Alter;
 
@@ -21,15 +21,15 @@ pub struct Modify {
     pub alters: Option<Vec<Alter>>,
 }
 
-impl SchemaConstraint for Modify {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for Modify {
+    fn schema_title() -> &'static str {
         "Modify controls"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"Set parameters or amend controls in resolution"#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-profile_modify"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-profile_modify")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-profile:modify"

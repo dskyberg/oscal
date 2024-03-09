@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{Base64Datatype, SchemaConstraint, StringDatatype, URIReferenceDatatype};
+use crate::{Base64Datatype, SchemaElement, StringDatatype, URIReferenceDatatype};
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
@@ -12,17 +12,17 @@ pub struct Base64 {
     value: Base64Datatype,
 }
 
-impl SchemaConstraint for Base64 {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for Base64 {
+    fn schema_title() -> &'static str {
         "Base64"
     }
 
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         "The Base64 alphabet in RFC 2045 - aligned with XSD."
     }
 
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-metadata_back-matter:resource:bse64"
+    fn schema_id() -> Option<&'static str> {
+        None
     }
 
     fn schema_path() -> &'static str {

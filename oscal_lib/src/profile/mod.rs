@@ -5,7 +5,12 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::SchemaConstraint;
+use crate::{
+    metadata::{BackMatter, Metadata},
+    SchemaElement, UUIDDatatype,
+};
+
+use self::{import::Import, merge::Merge, modify::Modify};
 
 pub mod add;
 pub mod alter;
@@ -20,17 +25,24 @@ pub mod select_control_by_id;
 #[skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
-pub struct Profile {}
+pub struct Profile {
+    pub uuid: UUIDDatatype,
+    pub metadata: Metadata,
+    pub imports: Vec<Import>,
+    pub merge: Option<Merge>,
+    pub modify: Option<Modify>,
+    pub back_mater: Option<BackMatter>,
+}
 
-impl SchemaConstraint for Profile {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for Profile {
+    fn schema_title() -> &'static str {
         "Profile"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"Each OSCAL profile is defined by a Profile element"#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-profile_profile"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-profile_profile")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-profile:profile"

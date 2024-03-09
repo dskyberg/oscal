@@ -7,7 +7,7 @@ use serde_with::skip_serializing_none;
 
 use crate::{
     metadata::{Link, Property},
-    DateTimeWithTimezoneDatatype, SchemaConstraint, UUIDDatatype,
+    DateTimeWithTimezoneDatatype, SchemaElement, UUIDDatatype,
 };
 
 use super::{
@@ -43,36 +43,17 @@ pub struct Risk {
     pub related_observations: Option<Vec<RelatedObservation>>,
 }
 
-impl SchemaConstraint for Risk {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for Risk {
+    fn schema_title() -> &'static str {
         "Identified Risk"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"An identified risk."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-assessment-common_risk"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-assessment-common_risk")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-assessment-common:risk"
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_1() {
-        let json = include_str!("../../../../tests/assessment_common/risk1.json");
-        let result = serde_json::from_str::<Risk>(json).expect("oops");
-        dbg!(result);
-    }
-
-    #[test]
-    fn test_array() {
-        let json = include_str!("../../../../tests/assessment_common/risks.json");
-        let result = serde_json::from_str::<Vec<Risk>>(json).expect("oops");
-        dbg!(result);
     }
 }

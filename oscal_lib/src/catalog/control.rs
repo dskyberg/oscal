@@ -8,7 +8,7 @@ use serde_with::skip_serializing_none;
 use crate::{
     catalog_common::{parameter::Parameter, part::Part},
     metadata::{Link, Property},
-    SchemaConstraint, TokenDatatype,
+    SchemaElement, TokenDatatype,
 };
 
 #[skip_serializing_none]
@@ -25,15 +25,15 @@ pub struct Control {
     pub controls: Option<Vec<Control>>,
 }
 
-impl SchemaConstraint for Control {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for Control {
+    fn schema_title() -> &'static str {
         "Control"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"A structured information object representing a security or privacy control. Each security or privacy control within the Catalog is defined by a distinct control instance."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-catalog_control"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-catalog_control")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-catalog:control"

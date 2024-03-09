@@ -1,8 +1,7 @@
 use serde::{Deserialize, Serialize};
 use std::ops::Deref;
 
-use super::StringType;
-use crate::{Error, SchemaConstraint};
+use crate::{Error, SchemaElement};
 use std::str::FromStr;
 
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
@@ -36,21 +35,15 @@ impl FromStr for StringDatatype {
     }
 }
 
-impl StringType for StringDatatype {
-    fn pattern() -> &'static str {
-        r"^\S(.*\S)?$"
-    }
-}
-
-impl SchemaConstraint for StringDatatype {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for StringDatatype {
+    fn schema_title() -> &'static str {
         ""
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#""#
     }
-    fn constraint_id() -> &'static str {
-        ""
+    fn schema_id() -> Option<&'static str> {
+        None
     }
     fn schema_path() -> &'static str {
         "StringDatatype"
@@ -82,24 +75,15 @@ impl FromStr for Base64Datatype {
     }
 }
 
-impl StringType for Base64Datatype {
-    fn pattern() -> &'static str {
-        r"^[0-9A-Za-z+/]+={0,2}$"
-    }
-    fn content_encoding() -> Option<&'static str> {
-        Some("base64")
-    }
-}
-
-impl SchemaConstraint for Base64Datatype {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for Base64Datatype {
+    fn schema_title() -> &'static str {
         ""
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"A string representing arbitrary binary data encoded using the Base 64 algorithm as defined by RFC4648"#
     }
-    fn constraint_id() -> &'static str {
-        ""
+    fn schema_id() -> Option<&'static str> {
+        None
     }
     fn schema_path() -> &'static str {
         "base64"
@@ -110,25 +94,15 @@ impl SchemaConstraint for Base64Datatype {
 #[serde(transparent)]
 pub struct EmailAddress(String);
 
-impl StringType for EmailAddress {
-    fn pattern() -> &'static str {
-        r#"^.+@.+$"#
-    }
-
-    fn format() -> Option<&'static str> {
-        Some("email")
-    }
-}
-
-impl SchemaConstraint for EmailAddress {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for EmailAddress {
+    fn schema_title() -> &'static str {
         "Email Address"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         "An email address string formatted according to RFC6531"
     }
-    fn constraint_id() -> &'static str {
-        ""
+    fn schema_id() -> Option<&'static str> {
+        None
     }
     fn schema_path() -> &'static str {
         "email-address"

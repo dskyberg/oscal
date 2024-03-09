@@ -1,21 +1,21 @@
 use serde::{Deserialize, Serialize};
 use std::ops::Deref;
 
-use crate::{Error, SchemaConstraint, StringDatatype};
+use crate::{Error, SchemaElement, StringDatatype};
 
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 #[serde(transparent)]
 pub struct Version(StringDatatype);
 
-impl SchemaConstraint for Version {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for Version {
+    fn schema_title() -> &'static str {
         "Document Version"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         "A string used to distinguish the current version of the document from other previous (and future) versions."
     }
-    fn constraint_id() -> &'static str {
-        "#field_oscal-metadata_version"
+    fn schema_id() -> Option<&'static str> {
+        Some("#field_oscal-metadata_version")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-metadata:version"

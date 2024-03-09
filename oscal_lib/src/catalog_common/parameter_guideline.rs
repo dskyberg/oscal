@@ -5,7 +5,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::SchemaConstraint;
+use crate::SchemaElement;
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
@@ -14,15 +14,15 @@ pub struct ParameterGuideline {
     pub prose: String,
 }
 
-impl SchemaConstraint for ParameterGuideline {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for ParameterGuideline {
+    fn schema_title() -> &'static str {
         "Guideline"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"A prose statement that provides a recommendation for the use of a parameter."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-catalog-common_parameter-guideline"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-catalog-common_parameter-guideline")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-catalog-common:parameter-guideline"

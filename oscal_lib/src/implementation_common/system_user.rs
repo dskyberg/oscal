@@ -7,7 +7,7 @@ use serde_with::skip_serializing_none;
 
 use crate::{
     metadata::{Link, Property, Remarks, RoleId},
-    SchemaConstraint, StringDatatype, UUIDDatatype,
+    SchemaElement, StringDatatype, UUIDDatatype,
 };
 
 use super::authorized_privilege::AuthorizedPrivilege;
@@ -27,15 +27,15 @@ pub struct SystemUser {
     pub remarks: Option<Remarks>,
 }
 
-impl SchemaConstraint for SystemUser {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for SystemUser {
+    fn schema_title() -> &'static str {
         "System User"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"A type of user that interacts with the system based on an associated role."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-implementation-common_system-user"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-implementation-common_system-user")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-implementation-common:system-user"

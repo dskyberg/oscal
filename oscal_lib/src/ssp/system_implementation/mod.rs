@@ -8,7 +8,7 @@ use serde_with::skip_serializing_none;
 use crate::{
     implementation_common::{InventoryItem, SystemComponent, SystemUser},
     metadata::{Link, Property, Remarks},
-    SchemaConstraint,
+    SchemaElement,
 };
 
 use self::leveraged_authorization::LeveragedAuthorization;
@@ -28,15 +28,15 @@ pub struct SystemImplementation {
     pub remarks: Option<Remarks>,
 }
 
-impl SchemaConstraint for SystemImplementation {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for SystemImplementation {
+    fn schema_title() -> &'static str {
         "System Implementation"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"Provides information as to how the system is implemented."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-ssp_system-implementation"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-ssp_system-implementation")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-ssp:system-implementation"

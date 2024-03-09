@@ -5,7 +5,7 @@
 use serde::{Deserialize, Serialize};
 use std::ops::Deref;
 
-use crate::{Error, SchemaConstraint, StringDatatype};
+use crate::{Error, SchemaElement, StringDatatype};
 
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 pub struct Pattern(StringDatatype);
@@ -25,15 +25,15 @@ impl TryFrom<&str> for Pattern {
     }
 }
 
-impl SchemaConstraint for Pattern {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for Pattern {
+    fn schema_title() -> &'static str {
         "Match Controls by Pattern"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         "Select controls by (regular expression) match on ID"
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-profile_select-control-by-id_pattern"
+    fn schema_id() -> Option<&'static str> {
+        None
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-profile:select-control-by-id_pattern"

@@ -3,7 +3,7 @@ use serde_with::skip_serializing_none;
 
 use crate::{
     metadata::{Link, Property, Remarks},
-    SchemaConstraint, UUIDDatatype,
+    SchemaElement, UUIDDatatype,
 };
 
 use self::uses_component::UsesComponent;
@@ -22,15 +22,15 @@ pub struct AssessmentPlatform {
     pub remarks: Option<Remarks>,
 }
 
-impl SchemaConstraint for AssessmentPlatform {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for AssessmentPlatform {
+    fn schema_title() -> &'static str {
         "Assessment Platform"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         "Used to represent the toolset used to perform aspects of the assessment."
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-assessment-common_assessment-assets:assessment-platforrm"
+    fn schema_id() -> Option<&'static str> {
+        None
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-assessment-common:assessment-assets:assessment-platforrm"

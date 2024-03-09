@@ -2,8 +2,7 @@ use fluent_uri::Uri;
 use serde::{Deserialize, Serialize};
 use std::str::FromStr;
 
-use super::StringType;
-use crate::{Error, SchemaConstraint};
+use crate::{Error, SchemaElement, Validate};
 
 /// Repesents an absolute URI, with schema.  For relative paths,
 /// use [URIReferenceDatatype].
@@ -36,29 +35,22 @@ impl FromStr for URIDatatype {
     }
 }
 
-impl StringType for URIDatatype {
-    fn pattern() -> &'static str {
-        r"^[a-zA-Z][a-zA-Z0-9+\-.]+:.+$"
-    }
-
-    fn format() -> Option<&'static str> {
-        Some("uri")
-    }
-}
-
-impl SchemaConstraint for URIDatatype {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for URIDatatype {
+    fn schema_title() -> &'static str {
         "URI"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"A universal resource identifier (URI) formatted according to RFC3986."#
     }
-    fn constraint_id() -> &'static str {
-        "URIDatatype"
+    fn schema_id() -> Option<&'static str> {
+        None
     }
     fn schema_path() -> &'static str {
         "uri"
     }
+}
+
+impl Validate for URIDatatype {
     fn validate(value: &str) -> Result<(), Error> {
         let _ = Self::new_if_valid(value)?;
         Ok(())
@@ -90,21 +82,15 @@ impl FromStr for URIReferenceDatatype {
     }
 }
 
-impl StringType for URIReferenceDatatype {
-    fn format() -> Option<&'static str> {
-        Some("uri-reference")
-    }
-}
-
-impl SchemaConstraint for URIReferenceDatatype {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for URIReferenceDatatype {
+    fn schema_title() -> &'static str {
         ""
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#""#
     }
-    fn constraint_id() -> &'static str {
-        ""
+    fn schema_id() -> Option<&'static str> {
+        None
     }
     fn schema_path() -> &'static str {
         "URIReferenceDatatype"

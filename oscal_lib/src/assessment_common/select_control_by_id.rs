@@ -5,7 +5,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{SchemaConstraint, TokenDatatype};
+use crate::{SchemaElement, TokenDatatype};
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
@@ -15,15 +15,15 @@ pub struct SelectControlById {
     pub statement_ids: Option<Vec<TokenDatatype>>,
 }
 
-impl SchemaConstraint for SelectControlById {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for SelectControlById {
+    fn schema_title() -> &'static str {
         "Select Control"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"Used to select a control for inclusion/exclusion based on one or more control identifiers. A set of statement identifiers can be used to target the inclusion/exclusion to only specific control statements providing more granularity over the specific statements that are within the asessment scope."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-assessment-common_select-control-by-id"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-assessment-common_select-control-by-id")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-assessment-common:select-control-by-id"

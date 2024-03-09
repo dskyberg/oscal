@@ -8,7 +8,7 @@ use serde_with::skip_serializing_none;
 use crate::{
     assessment_common::{finding_target::FindingTarget, origin::Origin},
     metadata::{Link, Property, Remarks},
-    SchemaConstraint, UUIDDatatype,
+    SchemaElement, UUIDDatatype,
 };
 
 use self::{related_observation::RelatedObservation, related_risk::RelatedRisk};
@@ -33,17 +33,17 @@ pub struct Finding {
     pub remarks: Option<Remarks>,
 }
 
-impl SchemaConstraint for Finding {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for Finding {
+    fn schema_title() -> &'static str {
         "Finding"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"Describes an individual finding."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-ar_finding"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-ar_finding")
     }
     fn schema_path() -> &'static str {
-        "oscal-complete-oscal-ar:finding"
+        "#/definitions/oscal-complete-oscal-ar:finding"
     }
 }

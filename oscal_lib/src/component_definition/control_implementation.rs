@@ -9,7 +9,7 @@ use super::implemented_requirement::ImplementedRequirement;
 
 use crate::{
     implementation_common::set_parameter::SetParameter, metadata::Link, metadata::Property,
-    SchemaConstraint, URIReferenceDatatype, UUIDDatatype,
+    SchemaElement, URIReferenceDatatype, UUIDDatatype,
 };
 
 #[skip_serializing_none]
@@ -25,15 +25,15 @@ pub struct ControlImplementation {
     pub implemented_requirements: Vec<ImplementedRequirement>,
 }
 
-impl SchemaConstraint for ControlImplementation {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for ControlImplementation {
+    fn schema_title() -> &'static str {
         "Control Implementation Set"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"Defines how the component or capability supports a set of controls."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-component-definition_control-implementation"
+    fn schema_id() -> Option<&'static str> {
+        None
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-component-definition:control-implementation"

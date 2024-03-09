@@ -7,20 +7,19 @@ use chrono::prelude::*;
 use serde::{Deserialize, Serialize};
 use std::{ops::Deref, str::FromStr};
 
-use super::StringType;
-use crate::{Error, SchemaConstraint};
+use crate::{Error, SchemaElement};
 
 /// A Naive date with no timezone.
 /// All dates are UTC based.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 #[serde(transparent)]
-pub struct DateDatatype(NaiveDate);
+pub struct DateDatatype(String);
 
 impl DateDatatype {
     /// Create a new date.
     /// The date is created from the current UTC date.
     pub fn new() -> Self {
-        Self(Utc::now().date_naive())
+        Self(Utc::now().date_naive().to_string())
     }
 }
 
@@ -31,7 +30,7 @@ impl Default for DateDatatype {
 }
 
 impl Deref for DateDatatype {
-    type Target = NaiveDate;
+    type Target = str;
     fn deref(&self) -> &Self::Target {
         &self.0
     }
@@ -41,31 +40,25 @@ impl TryFrom<&str> for DateDatatype {
     type Error = Error;
     fn try_from(value: &str) -> Result<Self, Self::Error> {
         let result = chrono::NaiveDate::parse_from_str(value, "%Y-%m-%d")?;
-        Ok(Self(result))
+        Ok(Self(result.to_string()))
     }
 }
 
 impl ToString for DateDatatype {
     fn to_string(&self) -> String {
-        self.0.to_string()
+        self.0.clone()
     }
 }
 
-impl StringType for DateDatatype {
-    fn pattern() -> &'static str {
-        r"^(((2000|2400|2800|(19|2[0-9](0[48]|[2468][048]|[13579][26])))-02-29)|(((19|2[0-9])[0-9]{2})-02-(0[1-9]|1[0-9]|2[0-8]))|(((19|2[0-9])[0-9]{2})-(0[13578]|10|12)-(0[1-9]|[12][0-9]|3[01]))|(((19|2[0-9])[0-9]{2})-(0[469]|11)-(0[1-9]|[12][0-9]|30)))(Z|[+-][0-9]{2}:[0-9]{2})?$"
-    }
-}
-
-impl SchemaConstraint for DateDatatype {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for DateDatatype {
+    fn schema_title() -> &'static str {
         ""
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"A string representing a 24-hour period, optionally qualified by a timezone. This is the same as date-with-timezone, except the timezone portion is optional."#
     }
-    fn constraint_id() -> &'static str {
-        ""
+    fn schema_id() -> Option<&'static str> {
+        None
     }
     fn schema_path() -> &'static str {
         "date"
@@ -74,13 +67,13 @@ impl SchemaConstraint for DateDatatype {
 
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 #[serde(transparent)]
-pub struct DateTimeDatatype(NaiveDateTime);
+pub struct DateTimeDatatype(String);
 
 impl TryFrom<&str> for DateTimeDatatype {
     type Error = Error;
     fn try_from(value: &str) -> Result<Self, Self::Error> {
         let result = value.parse::<NaiveDateTime>()?;
-        Ok(Self(result))
+        Ok(Self(result.to_string()))
     }
 }
 
@@ -89,25 +82,19 @@ impl FromStr for DateTimeDatatype {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         let result = s.parse::<NaiveDateTime>()?;
-        Ok(Self(result))
+        Ok(Self(result.to_string()))
     }
 }
 
-impl StringType for DateTimeDatatype {
-    fn pattern() -> &'static str {
-        r#"^(((2000|2400|2800|(19|2[0-9](0[48]|[2468][048]|[13579][26])))-02-29)|(((19|2[0-9])[0-9]{2})-02-(0[1-9]|1[0-9]|2[0-8]))|(((19|2[0-9])[0-9]{2})-(0[13578]|10|12)-(0[1-9]|[12][0-9]|3[01]))|(((19|2[0-9])[0-9]{2})-(0[469]|11)-(0[1-9]|[12][0-9]|30)))T(2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9])(\\.[0-9]+)?(Z|(-((0[0-9]|1[0-2]):00|0[39]:30)|\\+((0[0-9]|1[0-4]):00|(0[34569]|10):30|(0[58]|12):45)))?$"#
-    }
-}
-
-impl SchemaConstraint for DateTimeDatatype {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for DateTimeDatatype {
+    fn schema_title() -> &'static str {
         ""
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"A string representing a point in time, optionally qualified by a timezone. This date and time value is formatted according to “date-time” as defined RFC3339, except the timezone (time-offset) is optional."#
     }
-    fn constraint_id() -> &'static str {
-        ""
+    fn schema_id() -> Option<&'static str> {
+        None
     }
     fn schema_path() -> &'static str {
         "date-time"
@@ -116,12 +103,12 @@ impl SchemaConstraint for DateTimeDatatype {
 
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 #[serde(transparent)]
-pub struct DateTimeWithTimezoneDatatype(DateTime<Utc>);
+pub struct DateTimeWithTimezoneDatatype(String);
 
 impl DateTimeWithTimezoneDatatype {
     pub fn new() -> Self {
         let utc: DateTime<Utc> = Utc::now();
-        Self(utc)
+        Self(utc.to_string())
     }
 }
 
@@ -131,11 +118,18 @@ impl Default for DateTimeWithTimezoneDatatype {
     }
 }
 
+impl Deref for DateTimeWithTimezoneDatatype {
+    type Target = str;
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
+}
+
 impl TryFrom<&str> for DateTimeWithTimezoneDatatype {
     type Error = Error;
     fn try_from(value: &str) -> Result<Self, Self::Error> {
         let result = value.parse::<DateTime<Utc>>()?;
-        Ok(Self(result))
+        Ok(Self(result.to_string()))
     }
 }
 
@@ -144,25 +138,19 @@ impl FromStr for DateTimeWithTimezoneDatatype {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         let result = s.parse::<DateTime<Utc>>()?;
-        Ok(Self(result))
+        Ok(Self(result.to_string()))
     }
 }
 
-impl StringType for DateTimeWithTimezoneDatatype {
-    fn pattern() -> &'static str {
-        r"^(((2000|2400|2800|(19|2[0-9](0[48]|[2468][048]|[13579][26])))-02-29)|(((19|2[0-9])[0-9]{2})-02-(0[1-9]|1[0-9]|2[0-8]))|(((19|2[0-9])[0-9]{2})-(0[13578]|10|12)-(0[1-9]|[12][0-9]|3[01]))|(((19|2[0-9])[0-9]{2})-(0[469]|11)-(0[1-9]|[12][0-9]|30)))T(2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9])(\.[0-9]*[1-9])?(Z|(-((0[0-9]|1[0-2]):00|0[39]:30)|\+((0[0-9]|1[0-4]):00|(0[34569]|10):30|(0[58]|12):45)))$"
-    }
-}
-
-impl SchemaConstraint for DateTimeWithTimezoneDatatype {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for DateTimeWithTimezoneDatatype {
+    fn schema_title() -> &'static str {
         ""
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"A string representing a point in time in a given timezone. This date and time value is formatted according to “date-time” as defined RFC3339"#
     }
-    fn constraint_id() -> &'static str {
-        ""
+    fn schema_id() -> Option<&'static str> {
+        None
     }
     fn schema_path() -> &'static str {
         "date-time-with-timezone"
@@ -198,25 +186,15 @@ impl From<&str> for DateTimeDuration {
     }
 }
 
-impl StringType for DateTimeDuration {
-    fn pattern() -> &'static str {
-        r#"^-?P([0-9]+D(T(([0-9]+H([0-9]+M)?(([0-9]+|[0-9]+(\\.[0-9]+)?)S)?)|([0-9]+M(([0-9]+|[0-9]+(\\.[0-9]+)?)S)?)|([0-9]+|[0-9]+(\\.[0-9]+)?)S))?)|T(([0-9]+H([0-9]+M)?(([0-9]+|[0-9]+(\\.[0-9]+)?)S)?)|([0-9]+M(([0-9]+|[0-9]+(\\.[0-9]+)?)S)?)|([0-9]+|[0-9]+(\\.[0-9]+)?)S)$"#
-    }
-
-    fn format() -> Option<&'static str> {
-        Some("date")
-    }
-}
-
-impl SchemaConstraint for DateTimeDuration {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for DateTimeDuration {
+    fn schema_title() -> &'static str {
         ""
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"An amount of time quantified in days, hours, minutes, and seconds based on ISO-8601 durations (see also RFC3339 appendix A)."#
     }
-    fn constraint_id() -> &'static str {
-        ""
+    fn schema_id() -> Option<&'static str> {
+        None
     }
     fn schema_path() -> &'static str {
         "date-time-duration"

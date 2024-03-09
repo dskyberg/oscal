@@ -8,7 +8,7 @@ use serde_with::skip_serializing_none;
 use crate::{
     implementation_common::implementation_status::ImplementationStatus,
     metadata::{Link, Property, Remarks},
-    SchemaConstraint, TokenDatatype,
+    SchemaElement, TokenDatatype,
 };
 
 use self::objective_status::ObjectiveStatus;
@@ -31,15 +31,15 @@ pub struct FindingTarget {
     pub remarks: Option<Remarks>,
 }
 
-impl SchemaConstraint for FindingTarget {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for FindingTarget {
+    fn schema_title() -> &'static str {
         "Objective Status"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"Captures an assessor's conclusions regarding the degree to which an objective is satisfied."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-assessment-common_finding-target"
+    fn schema_id() -> Option<&'static str> {
+        None
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-assessment-common:finding-target"

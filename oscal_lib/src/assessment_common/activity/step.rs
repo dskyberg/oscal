@@ -7,7 +7,7 @@ use serde_with::skip_serializing_none;
 
 use crate::{
     metadata::{Link, Property, Remarks, ResponsibleRole},
-    SchemaConstraint, UUIDDatatype,
+    SchemaElement, UUIDDatatype,
 };
 
 use crate::assessment_common::reviewed_controls::ReviewedControls;
@@ -26,15 +26,15 @@ pub struct Step {
     pub remarks: Option<Remarks>,
 }
 
-impl SchemaConstraint for Step {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for Step {
+    fn schema_title() -> &'static str {
         "Step"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         "Identifies an individual step in a series of steps related to an activity, such as an assessment test or examination procedure."
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-assessment-common_activity:step"
+    fn schema_id() -> Option<&'static str> {
+        None
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-assessment-common:activity:step"

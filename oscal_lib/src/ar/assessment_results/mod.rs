@@ -7,7 +7,7 @@ use serde_with::skip_serializing_none;
 
 use crate::{
     metadata::{BackMatter, Metadata},
-    SchemaConstraint, UUIDDatatype,
+    SchemaElement, UUIDDatatype,
 };
 
 use super::{import_ap::ImportAp, result::Result};
@@ -28,17 +28,17 @@ pub struct AssessmentResults {
     pub back_matter: Option<BackMatter>,
 }
 
-impl SchemaConstraint for AssessmentResults {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for AssessmentResults {
+    fn schema_title() -> &'static str {
         "Security Assessment Results (SAR)"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"Security assessment results, such as those provided by a FedRAMP assessor in the FedRAMP Security Assessment Report."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-ar_assessment-results"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-ar_assessment-results")
     }
     fn schema_path() -> &'static str {
-        "oscal-complete-oscal-ar:assessment-results"
+        "#/definitions/oscal-complete-oscal-ar:assessment-results"
     }
 }

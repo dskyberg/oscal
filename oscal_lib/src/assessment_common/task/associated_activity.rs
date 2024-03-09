@@ -4,7 +4,7 @@ use serde_with::skip_serializing_none;
 use crate::{
     assessment_common::assessment_subject::AssessmentSubject,
     metadata::{Link, Property, Remarks, ResponsibleRole},
-    SchemaConstraint, UUIDDatatype,
+    SchemaElement, UUIDDatatype,
 };
 
 #[skip_serializing_none]
@@ -19,15 +19,15 @@ pub struct AssociatedActivity {
     pub remarks: Option<Remarks>,
 }
 
-impl SchemaConstraint for AssociatedActivity {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for AssociatedActivity {
+    fn schema_title() -> &'static str {
         "Associated Activity"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         "Identifies an individual activity to be performed as part of a task."
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-assessment-common_task:associated-activity"
+    fn schema_id() -> Option<&'static str> {
+        None
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-assessment-common:task:associated-activity"

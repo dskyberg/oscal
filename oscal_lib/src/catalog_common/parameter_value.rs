@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 use std::ops::Deref;
 
-use crate::{Error, SchemaConstraint, StringDatatype};
+use crate::{Error, SchemaElement, StringDatatype};
 
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 pub struct ParameterValue(StringDatatype);
@@ -21,15 +21,15 @@ impl TryFrom<&str> for ParameterValue {
     }
 }
 
-impl SchemaConstraint for ParameterValue {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for ParameterValue {
+    fn schema_title() -> &'static str {
         "Parameter Value"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         "A parameter value or set of values."
     }
-    fn constraint_id() -> &'static str {
-        "#field_oscal-catalog-common_parameter-value"
+    fn schema_id() -> Option<&'static str> {
+        Some("#field_oscal-catalog-common_parameter-value")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-catalog-common:parameter-value"

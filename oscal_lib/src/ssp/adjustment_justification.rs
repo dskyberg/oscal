@@ -1,7 +1,7 @@
 /// File name: ../oscal_lib/src/oscal_complete_oscal_ssp/adjustment_justification.rs
 use serde::{Deserialize, Serialize};
 
-use crate::{SchemaConstraint, StringType};
+use crate::SchemaElement;
 
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 #[serde(transparent)]
@@ -20,17 +20,15 @@ impl From<&str> for AdjustmentJustification {
     }
 }
 
-impl StringType for AdjustmentJustification {}
-
-impl SchemaConstraint for AdjustmentJustification {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for AdjustmentJustification {
+    fn schema_title() -> &'static str {
         "Adjustment Justification"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"If the selected security level is different from the base security level, this contains the justification for the change."#
     }
-    fn constraint_id() -> &'static str {
-        "#field_oscal-ssp_adjustment-justification"
+    fn schema_id() -> Option<&'static str> {
+        Some("#field_oscal-ssp_adjustment-justification")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-ssp:adjustment-justification"

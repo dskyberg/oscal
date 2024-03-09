@@ -5,7 +5,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{metadata::Remarks, SchemaConstraint, URIReferenceDatatype};
+use crate::{metadata::Remarks, SchemaElement, URIReferenceDatatype};
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
@@ -15,15 +15,15 @@ pub struct ImportProfile {
     pub remarks: Option<Remarks>,
 }
 
-impl SchemaConstraint for ImportProfile {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for ImportProfile {
+    fn schema_title() -> &'static str {
         "Import Profile"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"Used to import the OSCAL profile representing the system's control baseline."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-ssp_import-profile"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-ssp_import-profile")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-ssp:import-profile"

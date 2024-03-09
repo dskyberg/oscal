@@ -5,7 +5,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{SchemaConstraint, StringDatatype};
+use crate::{SchemaElement, StringDatatype};
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
@@ -21,15 +21,15 @@ pub struct TelephoneNumber {
     pub number: StringDatatype,
 }
 
-impl SchemaConstraint for TelephoneNumber {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for TelephoneNumber {
+    fn schema_title() -> &'static str {
         "Telephone Number"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"Contact number by telephone."#
     }
-    fn constraint_id() -> &'static str {
-        "#field_oscal-metadata_telephone-number"
+    fn schema_id() -> Option<&'static str> {
+        Some("#field_oscal-metadata_telephone-number")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-metadata:telephone-number"

@@ -4,7 +4,7 @@ use serde_with::skip_serializing_none;
 use crate::{
     assessment_common::subject_reference::SubjectReference,
     metadata::{Link, Property},
-    SchemaConstraint, UUIDDatatype,
+    SchemaElement, UUIDDatatype,
 };
 
 #[skip_serializing_none]
@@ -19,15 +19,15 @@ pub struct MitigatingFactor {
     pub subjects: Option<Vec<SubjectReference>>,
 }
 
-impl SchemaConstraint for MitigatingFactor {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for MitigatingFactor {
+    fn schema_title() -> &'static str {
         "Mitigating Factor"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         "Describes an existing mitigating factor that may affect the overall determination of the risk, with an optional link to an implementation statement in the SSP."
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-assessment-common_risk:mitigating-factor"
+    fn schema_id() -> Option<&'static str> {
+        None
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-assessment-common:risk:mitigating-factor"

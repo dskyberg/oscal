@@ -8,7 +8,7 @@ use serde_with::skip_serializing_none;
 use crate::{
     catalog_common::parameter::Parameter,
     metadata::{BackMatter, Metadata},
-    SchemaConstraint, UUIDDatatype,
+    SchemaElement, UUIDDatatype,
 };
 
 use self::{control::Control, group::Group};
@@ -28,15 +28,15 @@ pub struct Catalog {
     pub back_matter: Option<BackMatter>,
 }
 
-impl SchemaConstraint for Catalog {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for Catalog {
+    fn schema_title() -> &'static str {
         "Catalog"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"A collection of controls."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-catalog_catalog"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-catalog_catalog")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-catalog:catalog"

@@ -12,7 +12,7 @@ use crate::{
     },
     metadata::BackMatter,
     metadata::Metadata,
-    SchemaConstraint, UUIDDatatype,
+    SchemaElement, UUIDDatatype,
 };
 
 use self::{local_definitions::LocalDefinitions, terms_and_conditions::TermsAndConditions};
@@ -35,17 +35,17 @@ pub struct AssessmentPlan {
     pub back_matter: Option<BackMatter>,
 }
 
-impl SchemaConstraint for AssessmentPlan {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for AssessmentPlan {
+    fn schema_title() -> &'static str {
         "Security Assessment Plan (SAP)"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"An assessment plan, such as those provided by a FedRAMP assessor."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-ap_assessment-plan"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-ap_assessment-plan")
     }
     fn schema_path() -> &'static str {
-        "oscal-complete-oscal-ap:assessment-plan"
+        "#/definitions/oscal-complete-oscal-ap:assessment-plan"
     }
 }

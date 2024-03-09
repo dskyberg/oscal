@@ -2,7 +2,7 @@
 use serde::{Deserialize, Serialize};
 use std::ops::Deref;
 
-use crate::{Error, SchemaConstraint, StringDatatype};
+use crate::{Error, SchemaElement, StringDatatype};
 
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 pub struct Base(StringDatatype);
@@ -22,15 +22,15 @@ impl TryFrom<&str> for Base {
     }
 }
 
-impl SchemaConstraint for Base {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for Base {
+    fn schema_title() -> &'static str {
         "Base Level (Confidentiality, Integrity, or Availability)"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         "The prescribed base (Confidentiality, Integrity, or Availability) security impact level."
     }
-    fn constraint_id() -> &'static str {
-        "#field_oscal-ssp_base"
+    fn schema_id() -> Option<&'static str> {
+        Some("#field_oscal-ssp_base")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-ssp:base"

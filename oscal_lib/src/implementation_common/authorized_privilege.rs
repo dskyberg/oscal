@@ -5,7 +5,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::SchemaConstraint;
+use crate::SchemaElement;
 
 use super::function_performed::FunctionPerformed;
 
@@ -18,15 +18,15 @@ pub struct AuthorizedPrivilege {
     pub functions_performed: Vec<FunctionPerformed>,
 }
 
-impl SchemaConstraint for AuthorizedPrivilege {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for AuthorizedPrivilege {
+    fn schema_title() -> &'static str {
         "Privilege"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"Identifies a specific system privilege held by the user, along with an associated description and/or rationale for the privilege."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-implementation-common_authorized-privilege"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-implementation-common_authorized-privilege")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-implementation-common:authorized-privilege"

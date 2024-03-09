@@ -5,28 +5,28 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::SchemaConstraint;
+use crate::SchemaElement;
 
-use self::back_matter_resource::BackMatterResource;
+use self::resource::Resource;
 
-pub mod back_matter_resource;
+pub mod resource;
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
 pub struct BackMatter {
-    pub resources: Vec<BackMatterResource>,
+    pub resources: Vec<Resource>,
 }
 
-impl SchemaConstraint for BackMatter {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for BackMatter {
+    fn schema_title() -> &'static str {
         "Back matter"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"A collection of resources, which may be included directly or by reference."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-metadata_back-matter"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-metadata_back-matter")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-metadata:back-matter"

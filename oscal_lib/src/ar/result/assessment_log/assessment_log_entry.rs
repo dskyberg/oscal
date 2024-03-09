@@ -4,7 +4,7 @@ use serde_with::skip_serializing_none;
 use crate::{
     assessment_common::{logged_by::LoggedBy, related_task::RelatedTask},
     metadata::{Link, Property, Remarks},
-    DateTimeWithTimezoneDatatype, SchemaConstraint, UUIDDatatype,
+    DateTimeWithTimezoneDatatype, SchemaElement, UUIDDatatype,
 };
 
 #[skip_serializing_none]
@@ -23,15 +23,15 @@ pub struct AssessmentLogEntry {
     pub remarks: Option<Remarks>,
 }
 
-impl SchemaConstraint for AssessmentLogEntry {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for AssessmentLogEntry {
+    fn schema_title() -> &'static str {
         "Assessment Log Entry"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         "Identifies the result of an action and/or task that occurred as part of executing an assessment plan or an assessment event that occurred in producing the assessment results."
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-ar_result_assessment-log-entry"
+    fn schema_id() -> Option<&'static str> {
+        None
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-ar:result:assessment-log-entry"

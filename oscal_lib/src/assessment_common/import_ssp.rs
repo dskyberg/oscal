@@ -5,7 +5,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{metadata::Remarks, SchemaConstraint, URIReferenceDatatype};
+use crate::{metadata::Remarks, SchemaElement, URIReferenceDatatype};
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
@@ -15,15 +15,15 @@ pub struct ImportSsp {
     remarks: Option<Remarks>,
 }
 
-impl SchemaConstraint for ImportSsp {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for ImportSsp {
+    fn schema_title() -> &'static str {
         "Import System Security Plan"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"Used by the assessment plan and POA&M to import information about the system."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-assessment-common_import-ssp"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-assessment-common_import-ssp")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-assessment-common:import-ssp"

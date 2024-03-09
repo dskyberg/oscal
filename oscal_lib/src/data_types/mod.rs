@@ -15,22 +15,6 @@ pub mod token;
 pub mod uris;
 pub mod uuid;
 
-/// Default pattern for StringType
-#[allow(dead_code)]
-const DEFAULT_PATTERN: &str = "^\\S(.*\\S)?$";
-
-pub trait StringType {
-    fn pattern() -> &'static str {
-        DEFAULT_PATTERN
-    }
-    fn format() -> Option<&'static str> {
-        None
-    }
-    fn content_encoding() -> Option<&'static str> {
-        None
-    }
-}
-
 pub trait NumberType {
     fn minimum() -> Option<i64> {
         None

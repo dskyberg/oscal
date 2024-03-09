@@ -8,7 +8,7 @@ use serde_with::skip_serializing_none;
 use crate::{
     metadata::{Link, Property},
     ssp::{adjustment_justification::AdjustmentJustification, base::Base, selected::Selected},
-    SchemaConstraint,
+    SchemaElement,
 };
 
 #[skip_serializing_none]
@@ -22,15 +22,15 @@ pub struct IntegrityImpactLevel {
     pub adjustment_justification: Option<AdjustmentJustification>,
 }
 
-impl SchemaConstraint for IntegrityImpactLevel {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for IntegrityImpactLevel {
+    fn schema_title() -> &'static str {
         "Integrity Impact Level"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         "The expected level of impact resulting from the unauthorized modification of the described information."
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-ssp_system-information_information-type_integrity-impact-level"
+    fn schema_id() -> Option<&'static str> {
+        None
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-ssp:system-information:information-type:integrity-impact-level"

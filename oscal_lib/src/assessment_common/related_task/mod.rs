@@ -7,7 +7,7 @@ use serde_with::skip_serializing_none;
 
 use crate::{
     metadata::{Link, Property, Remarks, ResponsibleParty},
-    SchemaConstraint, UUIDDatatype,
+    SchemaElement, UUIDDatatype,
 };
 
 use super::assessment_subject::AssessmentSubject;
@@ -29,15 +29,15 @@ pub struct RelatedTask {
     pub remarks: Option<Remarks>,
 }
 
-impl SchemaConstraint for RelatedTask {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for RelatedTask {
+    fn schema_title() -> &'static str {
         "Task Reference"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"Identifies an individual task for which the containing object is a consequence of."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-assessment-common_related-task"
+    fn schema_id() -> Option<&'static str> {
+        None
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-assessment-common:related-task"

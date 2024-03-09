@@ -7,7 +7,7 @@ use serde_with::skip_serializing_none;
 
 use crate::{
     metadata::{Link, Property},
-    SchemaConstraint,
+    SchemaElement,
 };
 
 use super::origin::Origin;
@@ -26,15 +26,15 @@ pub struct Characterization {
     pub facets: Vec<Facet>,
 }
 
-impl SchemaConstraint for Characterization {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for Characterization {
+    fn schema_title() -> &'static str {
         "Characterization"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"A collection of descriptive data about the containing object from a specific origin."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-assessment-common_characterization"
+    fn schema_id() -> Option<&'static str> {
+        None
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-assessment-common:characterization"

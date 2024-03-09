@@ -5,7 +5,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{SchemaConstraint, TokenDatatype};
+use crate::{SchemaElement, TokenDatatype};
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
@@ -14,15 +14,15 @@ pub struct SelectObjectiveById {
     pub objective_id: TokenDatatype,
 }
 
-impl SchemaConstraint for SelectObjectiveById {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for SelectObjectiveById {
+    fn schema_title() -> &'static str {
         "Select Objective"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"Used to select a control objective for inclusion/exclusion based on the control objective's identifier."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-assessment-common_select-objective-by-id"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-assessment-common_select-objective-by-id")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-assessment-common:select-objective-by-id"

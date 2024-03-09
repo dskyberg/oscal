@@ -7,7 +7,7 @@ use serde_with::skip_serializing_none;
 
 use crate::{
     metadata::{link, property, remarks, responsible_role},
-    SchemaConstraint, TokenDatatype, UUIDDatatype,
+    SchemaElement, TokenDatatype, UUIDDatatype,
 };
 
 use self::{
@@ -48,15 +48,15 @@ pub struct Task {
     pub remarks: Option<remarks::Remarks>,
 }
 
-impl SchemaConstraint for Task {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for Task {
+    fn schema_title() -> &'static str {
         "Task"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"Represents a scheduled event or milestone, which may be associated with a series of assessment actions."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-assessment-common_task"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-assessment-common_task")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-assessment-common:task"

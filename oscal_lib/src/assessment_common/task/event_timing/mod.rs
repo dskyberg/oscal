@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::SchemaConstraint;
+use crate::SchemaElement;
 
 use self::{
     frequency_condition::FrequencyCondition, on_date_condition::OnDateCondition,
@@ -21,15 +21,15 @@ pub struct EventTiming {
     pub at_frequency: Option<FrequencyCondition>,
 }
 
-impl SchemaConstraint for EventTiming {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for EventTiming {
+    fn schema_title() -> &'static str {
         "Event Timing"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         "The timing under which the task is intended to occur."
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-assessment-common_task:event-timing"
+    fn schema_id() -> Option<&'static str> {
+        None
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-assessment-common:task:event-timing"

@@ -4,7 +4,7 @@ use serde_with::skip_serializing_none;
 use crate::{
     assessment_common::subject_reference::SubjectReference,
     metadata::{Link, Property, Remarks},
-    SchemaConstraint, UUIDDatatype,
+    SchemaElement, UUIDDatatype,
 };
 #[skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
@@ -19,15 +19,15 @@ pub struct RequiredAsset {
     pub remarks: Option<Remarks>,
 }
 
-impl SchemaConstraint for RequiredAsset {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for RequiredAsset {
+    fn schema_title() -> &'static str {
         "Required Asset"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         "Identifies an asset required to achieve remediation."
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-assessment-common_response:required-asset"
+    fn schema_id() -> Option<&'static str> {
+        None
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-assessment-common:response:required-asset"

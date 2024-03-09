@@ -5,7 +5,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{implementation_common::system_component::SystemComponent, SchemaConstraint};
+use crate::{implementation_common::system_component::SystemComponent, SchemaElement};
 
 use self::assessment_platform::AssessmentPlatform;
 
@@ -19,15 +19,15 @@ pub struct AssessmentAssets {
     pub assessment_platforms: Vec<AssessmentPlatform>,
 }
 
-impl SchemaConstraint for AssessmentAssets {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for AssessmentAssets {
+    fn schema_title() -> &'static str {
         "Assessment Assets"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"Identifies the assets used to perform this assessment, such as the assessment team, scanning tools, and assumptions."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-assessment-common_assessment-assets"
+    fn schema_id() -> Option<&'static str> {
+        None
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-assessment-common:assessment-assets"

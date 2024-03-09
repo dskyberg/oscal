@@ -7,7 +7,7 @@ use serde_with::skip_serializing_none;
 
 use crate::{
     metadata::{Link, Property, Remarks},
-    DateTimeWithTimezoneDatatype, SchemaConstraint, StringDatatype, TokenDatatype, UUIDDatatype,
+    DateTimeWithTimezoneDatatype, SchemaElement, StringDatatype, TokenDatatype, UUIDDatatype,
 };
 
 use super::{origin::Origin, subject_reference::SubjectReference};
@@ -47,36 +47,17 @@ pub struct Observation {
     pub remarks: Option<Remarks>,
 }
 
-impl SchemaConstraint for Observation {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for Observation {
+    fn schema_title() -> &'static str {
         "Observation"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"Describes an individual observation."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-assessment-common_observation"
+    fn schema_id() -> Option<&'static str> {
+        None
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-assessment-common:observation"
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_1() {
-        let json = include_str!("../../../../tests/assessment_common/observation1.json");
-        let result = serde_json::from_str::<Observation>(json).expect("oops");
-        dbg!(result);
-    }
-
-    #[test]
-    fn test_array() {
-        let json = include_str!("../../../../tests/assessment_common/observations.json");
-        let result = serde_json::from_str::<Vec<Observation>>(json).expect("oops");
-        dbg!(result);
     }
 }

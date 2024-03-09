@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 use std::ops::Deref;
 
-use crate::{Error, SchemaConstraint, StringDatatype};
+use crate::{Error, SchemaElement, StringDatatype};
 
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 pub struct FunctionPerformed(StringDatatype);
@@ -21,15 +21,15 @@ impl TryFrom<&str> for FunctionPerformed {
     }
 }
 
-impl SchemaConstraint for FunctionPerformed {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for FunctionPerformed {
+    fn schema_title() -> &'static str {
         "Functions Performed"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         "Describes a function performed for a given authorized privilege by this user class."
     }
-    fn constraint_id() -> &'static str {
-        "#field_oscal-implementation-common_function-performed"
+    fn schema_id() -> Option<&'static str> {
+        Some("#field_oscal-implementation-common_function-performed")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-implementation-common:function-performed"

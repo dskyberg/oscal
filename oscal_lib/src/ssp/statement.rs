@@ -7,7 +7,7 @@ use serde_with::skip_serializing_none;
 
 use crate::{
     metadata::{Link, Property, Remarks, ResponsibleRole},
-    SchemaConstraint, TokenDatatype, UUIDDatatype,
+    SchemaElement, TokenDatatype, UUIDDatatype,
 };
 
 use super::by_component::ByComponent;
@@ -25,15 +25,15 @@ pub struct Statement {
     pub remarks: Option<Remarks>,
 }
 
-impl SchemaConstraint for Statement {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for Statement {
+    fn schema_title() -> &'static str {
         "Specific Control Statement"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"Identifies which statements within a control are addressed."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-ssp_statement"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-ssp_statement")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-ssp:statement"

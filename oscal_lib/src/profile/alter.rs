@@ -5,7 +5,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{SchemaConstraint, TokenDatatype};
+use crate::{SchemaElement, TokenDatatype};
 
 use super::{add::Add, remove::Remove};
 
@@ -18,15 +18,15 @@ pub struct Alter {
     pub adds: Option<Vec<Add>>,
 }
 
-impl SchemaConstraint for Alter {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for Alter {
+    fn schema_title() -> &'static str {
         "Alteration"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"An Alter element specifies changes to be made to an included control when a profile is resolved."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-profile_alter"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-profile_alter")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-profile:alter"

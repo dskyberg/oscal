@@ -1,6 +1,7 @@
 pub use data_types::*;
 pub use error::*;
-pub use schema_constraint::*;
+pub use schema_element::SchemaElement;
+pub use validate::Validate;
 
 pub mod ap;
 pub mod ar;
@@ -15,5 +16,6 @@ pub mod metadata;
 pub mod oscal_document;
 pub mod poam;
 pub mod profile;
-pub mod schema_constraint;
+pub mod schema_element;
 pub mod ssp;
+pub mod validate;

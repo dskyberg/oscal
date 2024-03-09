@@ -5,7 +5,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{SchemaConstraint, StringDatatype, TokenDatatype, URIReferenceDatatype};
+use crate::{SchemaElement, StringDatatype, TokenDatatype, URIReferenceDatatype};
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
@@ -18,15 +18,15 @@ pub struct Link {
     pub text: Option<String>,
 }
 
-impl SchemaConstraint for Link {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for Link {
+    fn schema_title() -> &'static str {
         "Link"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"A reference to a local or remote resource"#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-metadata_link"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-metadata_link")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-metadata:link"

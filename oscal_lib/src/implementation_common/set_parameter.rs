@@ -5,7 +5,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{metadata::Remarks, SchemaConstraint, StringDatatype, TokenDatatype};
+use crate::{metadata::Remarks, SchemaElement, StringDatatype, TokenDatatype};
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
@@ -16,15 +16,15 @@ pub struct SetParameter {
     pub remarks: Option<Remarks>,
 }
 
-impl SchemaConstraint for SetParameter {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for SetParameter {
+    fn schema_title() -> &'static str {
         "Set Parameter Value"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"Identifies the parameter that will be set by the enclosed value."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-implementation-common_set-parameter"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-implementation-common_set-parameter")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-implementation-common:set-parameter"

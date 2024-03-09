@@ -7,7 +7,7 @@ use serde_with::skip_serializing_none;
 
 use crate::{
     metadata::{Link, Property},
-    SchemaConstraint, TokenDatatype, URIDatatype, UUIDDatatype,
+    SchemaElement, TokenDatatype, URIDatatype, UUIDDatatype,
 };
 
 #[skip_serializing_none]
@@ -30,15 +30,15 @@ pub struct AssessmentPart {
     pub links: Option<Vec<Link>>,
 }
 
-impl SchemaConstraint for AssessmentPart {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for AssessmentPart {
+    fn schema_title() -> &'static str {
         "Assessment Part"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"A partition of an assessment plan or results or a child of another part."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-assessment-common_assessment-part"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-assessment-common_assessment-part")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-assessment-common:assessment-part"

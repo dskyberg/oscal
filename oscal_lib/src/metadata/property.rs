@@ -5,7 +5,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{SchemaConstraint, StringDatatype, TokenDatatype, URIDatatype, UUIDDatatype};
+use crate::{SchemaElement, StringDatatype, TokenDatatype, URIDatatype, UUIDDatatype};
 
 use super::Remarks;
 
@@ -48,15 +48,15 @@ impl Property {
     }
 }
 
-impl SchemaConstraint for Property {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for Property {
+    fn schema_title() -> &'static str {
         "Property"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"An attribute, characteristic, or quality of the containing object expressed as a namespace qualified name/value pair. The value of a property is a simple scalar value, which may be expressed as a list of values."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-metadata_property"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-metadata_property")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-metadata:property"

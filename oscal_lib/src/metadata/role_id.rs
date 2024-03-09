@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-use crate::{Error, SchemaConstraint, TokenDatatype};
+use crate::{Error, SchemaElement, TokenDatatype};
 
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 pub struct RoleId(TokenDatatype);
@@ -12,15 +12,15 @@ impl TryFrom<&str> for RoleId {
     }
 }
 
-impl SchemaConstraint for RoleId {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for RoleId {
+    fn schema_title() -> &'static str {
         "Role Identifier Reference"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         "A human-oriented identifier reference to roles served by the user."
     }
-    fn constraint_id() -> &'static str {
-        "#field_oscal-metadata_role-id"
+    fn schema_id() -> Option<&'static str> {
+        Some("#field_oscal-metadata_role-id")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-metadata:role-id"

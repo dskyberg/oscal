@@ -3,7 +3,7 @@ use serde_with::skip_serializing_none;
 
 use crate::{
     metadata::{Link, Property, Remarks},
-    SchemaConstraint,
+    SchemaElement,
 };
 
 use self::{
@@ -26,15 +26,15 @@ pub struct Export {
     pub remarks: Option<Remarks>,
 }
 
-impl SchemaConstraint for Export {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for Export {
+    fn schema_title() -> &'static str {
         "Export"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         "Identifies content intended for external consumption, such as with leveraged organizations."
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-ssp_by-component_export"
+    fn schema_id() -> Option<&'static str> {
+        None
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-ssp:by-component:export"

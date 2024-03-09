@@ -7,7 +7,7 @@ use serde_with::skip_serializing_none;
 
 use crate::{
     metadata::{Link, Property},
-    SchemaConstraint, TokenDatatype, URIDatatype,
+    SchemaElement, TokenDatatype, URIDatatype,
 };
 
 #[skip_serializing_none]
@@ -24,15 +24,15 @@ pub struct Part {
     pub links: Option<Vec<Link>>,
 }
 
-impl SchemaConstraint for Part {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for Part {
+    fn schema_title() -> &'static str {
         "Part"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"A partition of a control's definition or a child of another part."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-catalog-common_part"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-catalog-common_part")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-catalog-common:part"

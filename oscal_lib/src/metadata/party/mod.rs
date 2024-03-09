@@ -5,33 +5,11 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{EmailAddress, SchemaConstraint, StringDatatype, URIDatatype, UUIDDatatype};
+use crate::{EmailAddress, SchemaElement, StringDatatype, UUIDDatatype};
 
-#[skip_serializing_none]
-#[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
-#[serde(rename_all = "kebab-case")]
-pub struct ExternalIdentifier {
-    /// enum: ["http://orcid.org/"]
-    pub schema: URIDatatype,
-    pub id: StringDatatype,
-}
+use self::external_identifier::ExternalIdentifier;
 
-impl SchemaConstraint for ExternalIdentifier {
-    fn constraint_title() -> &'static str {
-        "Party External Identifier"
-    }
-
-    fn constraint_description() -> &'static str {
-        "An identifier for a person or organization using a designated scheme. e.g. an Open Researcher and Contributor ID (ORCID)"
-    }
-
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-metadata_party:external-ids"
-    }
-    fn schema_path() -> &'static str {
-        "oscal-complete-oscal-metadata:party/external-ids"
-    }
-}
+pub mod external_identifier;
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
@@ -64,15 +42,15 @@ pub struct Party {
     pub remarks: Option<super::remarks::Remarks>,
 }
 
-impl SchemaConstraint for Party {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for Party {
+    fn schema_title() -> &'static str {
         "Party (organization or person)"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"A responsible entity which is either a person or an organization."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-metadata_party"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-metadata_party")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-metadata:party"

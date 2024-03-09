@@ -5,7 +5,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{SchemaConstraint, UUIDDatatype};
+use crate::{SchemaElement, UUIDDatatype};
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
@@ -15,15 +15,15 @@ pub struct IncorporatesComponent {
     pub description: String,
 }
 
-impl SchemaConstraint for IncorporatesComponent {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for IncorporatesComponent {
+    fn schema_title() -> &'static str {
         "Incorporates Component"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"TBD"#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-component-definition_incorporates-component"
+    fn schema_id() -> Option<&'static str> {
+        None
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-component-definition:incorporates-component"

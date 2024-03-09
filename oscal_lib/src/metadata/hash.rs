@@ -5,7 +5,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{SchemaConstraint, StringDatatype};
+use crate::{SchemaElement, StringDatatype};
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
@@ -25,15 +25,15 @@ pub struct Hash {
     pub value: StringDatatype,
 }
 
-impl SchemaConstraint for Hash {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for Hash {
+    fn schema_title() -> &'static str {
         "Hash"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"A representation of a cryptographic digest generated over a resource using a specified hash algorithm."#
     }
-    fn constraint_id() -> &'static str {
-        "#field_oscal-metadata_hash"
+    fn schema_id() -> Option<&'static str> {
+        Some("#field_oscal-metadata_hash")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-metadata:hash"

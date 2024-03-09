@@ -7,7 +7,7 @@ use serde_with::skip_serializing_none;
 
 use crate::{
     metadata::{Link, Property, Remarks},
-    SchemaConstraint,
+    SchemaElement,
 };
 
 use self::{assessed_control::AssessedControl, control_objective::ControlObjective};
@@ -27,15 +27,15 @@ pub struct ReviewedControls {
     pub remarks: Option<Remarks>,
 }
 
-impl SchemaConstraint for ReviewedControls {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for ReviewedControls {
+    fn schema_title() -> &'static str {
         "Reviewed Controls and Control Objectives"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"Identifies the controls being assessed and their control objectives."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-assessment-common_reviewed-controls"
+    fn schema_id() -> Option<&'static str> {
+        None
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-assessment-common:reviewed-controls"

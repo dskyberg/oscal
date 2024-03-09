@@ -7,7 +7,7 @@ use serde_with::skip_serializing_none;
 
 use crate::{
     metadata::{Link, Property, Remarks},
-    SchemaConstraint, UUIDDatatype,
+    SchemaElement, UUIDDatatype,
 };
 
 use self::assessment_subject_source::AssessmentSubjectSource;
@@ -26,15 +26,15 @@ pub struct AssessmentSubjectPlaceholder {
     pub remarks: Option<Remarks>,
 }
 
-impl SchemaConstraint for AssessmentSubjectPlaceholder {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for AssessmentSubjectPlaceholder {
+    fn schema_title() -> &'static str {
         "Assessment Subject Placeholder"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"Used when the assessment subjects will be determined as part of one or more other assessment activities. These assessment subjects will be recorded in the assessment results in the assessment log."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-assessment-common_assessment-subject-placeholder"
+    fn schema_id() -> Option<&'static str> {
+        None
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-assessment-common:assessment-subject-placeholder"

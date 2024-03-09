@@ -5,7 +5,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::SchemaConstraint;
+use crate::SchemaElement;
 
 pub use address::Address;
 pub use address_line::AddressLine;
@@ -25,9 +25,9 @@ pub use responsible_party::ResponsibleParty;
 pub use responsible_role::ResponsibleRole;
 pub use revision::Revision;
 pub use role::Role;
+pub use role_id::RoleId;
 pub use telephone_number::TelephoneNumber;
 pub use version::Version;
-pub use role_id::RoleId;
 
 pub mod address;
 pub mod address_line;
@@ -48,9 +48,9 @@ pub mod responsible_party;
 pub mod responsible_role;
 pub mod revision;
 pub mod role;
+pub mod role_id;
 pub mod telephone_number;
 pub mod version;
-pub mod role_id;
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
@@ -72,15 +72,15 @@ pub struct Metadata {
     pub remark: Option<Vec<Remarks>>,
 }
 
-impl SchemaConstraint for Metadata {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for Metadata {
+    fn schema_title() -> &'static str {
         "Publication metadata"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"Provides information about the publication and availability of the containing document."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-metadata_metadata"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-metadata_metadata")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-metadata:metadata"

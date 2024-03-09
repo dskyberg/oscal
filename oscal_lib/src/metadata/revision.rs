@@ -5,9 +5,9 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::SchemaConstraint;
+use crate::SchemaElement;
 
-use super::{Published, LastModified, Version, OscalVersion, Property, Link, Remarks};
+use super::{LastModified, Link, OscalVersion, Property, Published, Remarks, Version};
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
@@ -23,15 +23,15 @@ pub struct Revision {
     pub remarks: Option<Remarks>,
 }
 
-impl SchemaConstraint for Revision {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for Revision {
+    fn schema_title() -> &'static str {
         "Revision History Entry"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"An entry in a sequential list of revisions to the containing document in reverse chronological order (i.e., most recent previous revision first)."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-metadata_revision"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-metadata_revision")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-metadata:revision"

@@ -5,7 +5,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::SchemaConstraint;
+use crate::SchemaElement;
 
 use super::{origin_actor, related_task::RelatedTask};
 
@@ -17,15 +17,15 @@ pub struct Origin {
     pub related_tasks: Option<Vec<RelatedTask>>,
 }
 
-impl SchemaConstraint for Origin {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for Origin {
+    fn schema_title() -> &'static str {
         "Origin"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"Identifies the source of the finding, such as a tool, interviewed person, or activity."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-assessment-common_origin"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-assessment-common_origin")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-assessment-common:origin"

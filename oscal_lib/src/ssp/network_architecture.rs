@@ -7,7 +7,7 @@ use serde_with::skip_serializing_none;
 
 use crate::{
     metadata::{Link, Property, Remarks},
-    SchemaConstraint,
+    SchemaElement,
 };
 
 use super::diagram::Diagram;
@@ -23,15 +23,15 @@ pub struct NetworkArchitecture {
     pub remarks: Option<Remarks>,
 }
 
-impl SchemaConstraint for NetworkArchitecture {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for NetworkArchitecture {
+    fn schema_title() -> &'static str {
         "Network Architecture"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"A description of the system's network architecture, optionally supplemented by diagrams that illustrate the network architecture."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-ssp_network-architecture"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-ssp_network-architecture")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-ssp:network-architecture"

@@ -5,7 +5,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{SchemaConstraint, StringDatatype};
+use crate::{SchemaElement, StringDatatype};
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
@@ -16,15 +16,15 @@ pub struct SecurityImpactLevel {
     pub security_objective_availability: StringDatatype,
 }
 
-impl SchemaConstraint for SecurityImpactLevel {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for SecurityImpactLevel {
+    fn schema_title() -> &'static str {
         "Security Impact Level"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"The overall level of expected impact resulting from unauthorized disclosure, modification, or loss of access to information."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-ssp_security-impact-level"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-ssp_security-impact-level")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-ssp:security-impact-level"

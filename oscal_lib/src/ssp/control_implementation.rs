@@ -5,7 +5,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{implementation_common::set_parameter::SetParameter, SchemaConstraint};
+use crate::{implementation_common::set_parameter::SetParameter, SchemaElement};
 
 use super::implemented_requirement::ImplementedRequirement;
 
@@ -18,15 +18,15 @@ pub struct ControlImplementation {
     pub implemented_requirements: Vec<ImplementedRequirement>,
 }
 
-impl SchemaConstraint for ControlImplementation {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for ControlImplementation {
+    fn schema_title() -> &'static str {
         "Control Implementation"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"Describes how the system satisfies a set of controls."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-ssp_control-implementation"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-ssp_control-implementation")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-ssp:control-implementation"

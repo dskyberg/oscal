@@ -8,7 +8,7 @@ use serde_with::skip_serializing_none;
 use crate::{
     implementation_common::set_parameter::SetParameter,
     metadata::{Link, Property, Remarks, ResponsibleRole},
-    SchemaConstraint, TokenDatatype, UUIDDatatype,
+    SchemaElement, TokenDatatype, UUIDDatatype,
 };
 
 use super::{by_component::ByComponent, statement::Statement};
@@ -28,15 +28,15 @@ pub struct ImplementedRequirement {
     pub remarks: Option<Remarks>,
 }
 
-impl SchemaConstraint for ImplementedRequirement {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for ImplementedRequirement {
+    fn schema_title() -> &'static str {
         "Control-based Requirement"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"Describes how the system satisfies the requirements of an individual control."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-ssp_implemented-requirement"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-ssp_implemented-requirement")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-ssp:implemented-requirement"

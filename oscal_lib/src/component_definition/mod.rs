@@ -7,7 +7,7 @@ use serde_with::skip_serializing_none;
 
 use crate::{
     metadata::{BackMatter, Metadata},
-    SchemaConstraint, UUIDDatatype,
+    SchemaElement, UUIDDatatype,
 };
 
 use self::{
@@ -35,15 +35,15 @@ pub struct ComponentDefinition {
     pub back_matter: Option<BackMatter>,
 }
 
-impl SchemaConstraint for ComponentDefinition {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for ComponentDefinition {
+    fn schema_title() -> &'static str {
         "Component Definition"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"A collection of component descriptions, which may optionally be grouped by capability."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-component-definition_component-definition"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-component-definition_component-definition")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-component-definition:component-definition"

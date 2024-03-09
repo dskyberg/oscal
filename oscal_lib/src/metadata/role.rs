@@ -5,7 +5,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{SchemaConstraint, StringDatatype, TokenDatatype};
+use crate::{SchemaElement, StringDatatype, TokenDatatype};
 
 use super::{Link, Property, Remarks};
 
@@ -22,15 +22,15 @@ pub struct Role {
     pub remarks: Option<Remarks>,
 }
 
-impl SchemaConstraint for Role {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for Role {
+    fn schema_title() -> &'static str {
         "Role"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"Defines a function assumed or expected to be assumed by a party in a specific situation."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-metadata_role"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-metadata_role")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-metadata:role"

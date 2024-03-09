@@ -5,7 +5,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{SchemaConstraint, StringDatatype, TokenDatatype};
+use crate::{SchemaElement, StringDatatype, TokenDatatype};
 
 use super::address_line::AddressLine;
 
@@ -25,15 +25,15 @@ pub struct Address {
     pub postal_code: Option<StringDatatype>,
 }
 
-impl SchemaConstraint for Address {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for Address {
+    fn schema_title() -> &'static str {
         "Address"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"A postal address for the location."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-metadata_address"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-metadata_address")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-metadata:address"

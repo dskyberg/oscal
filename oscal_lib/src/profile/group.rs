@@ -8,7 +8,7 @@ use serde_with::skip_serializing_none;
 use crate::{
     catalog_common::{parameter::Parameter, part::Part},
     metadata::{Link, Property},
-    SchemaConstraint, TokenDatatype,
+    SchemaElement, TokenDatatype,
 };
 
 use super::insert_controls::InsertControls;
@@ -28,15 +28,15 @@ pub struct Group {
     pub insert_controls: Option<Vec<InsertControls>>,
 }
 
-impl SchemaConstraint for Group {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for Group {
+    fn schema_title() -> &'static str {
         "Control group"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"A group of (selected) controls or of groups of controls"#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-profile_group"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-profile_group")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-profile:group"

@@ -7,7 +7,7 @@ use serde_with::skip_serializing_none;
 
 use crate::{
     metadata::{Link, Property, Remarks},
-    SchemaConstraint, TokenDatatype,
+    SchemaElement, TokenDatatype,
 };
 
 use super::{
@@ -33,15 +33,15 @@ pub struct Parameter {
     pub remarks: Option<Remarks>,
 }
 
-impl SchemaConstraint for Parameter {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for Parameter {
+    fn schema_title() -> &'static str {
         "Parameter"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"Parameters provide a mechanism for the dynamic assignment of value(s) in a control."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-catalog-common_parameter"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-catalog-common_parameter")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-catalog-common:parameter"

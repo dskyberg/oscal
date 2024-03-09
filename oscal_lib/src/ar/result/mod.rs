@@ -10,7 +10,7 @@ use crate::{
         observation::Observation, reviewed_controls::ReviewedControls, risk::Risk,
     },
     metadata::{Link, Property, Remarks},
-    DateTimeWithTimezoneDatatype, SchemaConstraint, UUIDDatatype,
+    DateTimeWithTimezoneDatatype, SchemaElement, UUIDDatatype,
 };
 
 use super::finding::Finding;
@@ -45,15 +45,15 @@ pub struct Result {
     pub remarks: Option<Remarks>,
 }
 
-impl SchemaConstraint for Result {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for Result {
+    fn schema_title() -> &'static str {
         "Assessment Result"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"Used by the assessment results and POA&M. In the assessment results, this identifies all of the assessment observations and findings, initial and residual risks, deviations, and disposition. In the POA&M, this identifies initial and residual risks, deviations, and disposition."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-ar_result"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-ar_result")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-ar:result"

@@ -7,7 +7,7 @@ use serde_with::skip_serializing_none;
 
 use crate::{
     metadata::{Link, Property, Remarks, ResponsibleParty},
-    SchemaConstraint, UUIDDatatype,
+    SchemaElement, UUIDDatatype,
 };
 
 use super::reviewed_controls::ReviewedControls;
@@ -35,15 +35,15 @@ pub struct Activity {
     pub remarks: Option<Remarks>,
 }
 
-impl SchemaConstraint for Activity {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for Activity {
+    fn schema_title() -> &'static str {
         "Activity"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"Identifies an assessment or related process that can be performed. In the assessment plan, this is an intended activity which may be associated with an assessment task. In the assessment results, this an activity that was actually performed as part of an assessment."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-assessment-common_activity"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-assessment-common_activity")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-assessment-common:activity"

@@ -1,22 +1,22 @@
 use serde::{Deserialize, Serialize};
 
-use crate::{Error, SchemaConstraint, TokenDatatype};
+use crate::{Error, SchemaElement, TokenDatatype};
 
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 #[serde(transparent)]
 pub struct RiskStatus(TokenDatatype);
 
-impl SchemaConstraint for RiskStatus {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for RiskStatus {
+    fn schema_title() -> &'static str {
         "Risk Status"
     }
 
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         "Describes the status of the associated risk."
     }
 
-    fn constraint_id() -> &'static str {
-        "#field_oscal-assessment-common_risk-status"
+    fn schema_id() -> Option<&'static str> {
+        Some("#field_oscal-assessment-common_risk-status")
     }
 
     fn schema_path() -> &'static str {

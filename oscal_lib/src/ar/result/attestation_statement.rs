@@ -2,8 +2,7 @@ use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
 use crate::{
-    assessment_common::assessment_part::AssessmentPart, metadata::ResponsibleParty,
-    SchemaConstraint,
+    assessment_common::assessment_part::AssessmentPart, metadata::ResponsibleParty, SchemaElement,
 };
 
 #[skip_serializing_none]
@@ -14,17 +13,17 @@ pub struct AttestationStatement {
     pub parts: Vec<AssessmentPart>,
 }
 
-impl SchemaConstraint for AttestationStatement {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for AttestationStatement {
+    fn schema_title() -> &'static str {
         "Attestation Statements"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         "A set of textual statements, typically written by the assessor."
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-ar_result_attestation-statement"
+    fn schema_id() -> Option<&'static str> {
+        None
     }
     fn schema_path() -> &'static str {
-        "oscal-complete-oscal-ar:result:attestation"
+        "#/definitions/oscal-complete-oscal-ar:result/attestation"
     }
 }

@@ -5,7 +5,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{SchemaConstraint, StringDatatype, URIDatatype};
+use crate::{SchemaElement, StringDatatype, URIDatatype};
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
@@ -18,15 +18,15 @@ pub struct InformationTypeCategorization {
     pub information_type_ids: Option<Vec<StringDatatype>>,
 }
 
-impl SchemaConstraint for InformationTypeCategorization {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for InformationTypeCategorization {
+    fn schema_title() -> &'static str {
         "Information Type Categorization"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         "A set of information type identifiers qualified by the given identification system used, such as NIST SP 800-60."
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-ssp_system-information_information-type_information-type-characterization"
+    fn schema_id() -> Option<&'static str> {
+        None
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-ssp:system-information:information-type:information-type-characterization"

@@ -6,7 +6,7 @@ use crate::{
     implementation_common::{
         inventory_item::InventoryItem, system_component::SystemComponent, system_user::SystemUser,
     },
-    SchemaConstraint,
+    SchemaElement,
 };
 
 #[skip_serializing_none]
@@ -20,17 +20,17 @@ pub struct LocalDefinitions {
     pub tasks: Option<Vec<Task>>,
 }
 
-impl SchemaConstraint for LocalDefinitions {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for LocalDefinitions {
+    fn schema_title() -> &'static str {
         "Local Definitions"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         "Used to define data objects that are used in the assessment plan, that do not appear in the referenced SSP."
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-ar_result_local-definition"
+    fn schema_id() -> Option<&'static str> {
+        None
     }
     fn schema_path() -> &'static str {
-        "oscal-complete-oscal-ar:result:local-definition"
+        "#/definitions/oscal-complete-oscal-ar:result/local-definitions"
     }
 }

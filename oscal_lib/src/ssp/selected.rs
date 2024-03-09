@@ -2,7 +2,7 @@
 use serde::{Deserialize, Serialize};
 use std::ops::Deref;
 
-use crate::{Error, SchemaConstraint, StringDatatype};
+use crate::{Error, SchemaElement, StringDatatype};
 
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 pub struct Selected(StringDatatype);
@@ -22,15 +22,15 @@ impl TryFrom<&str> for Selected {
     }
 }
 
-impl SchemaConstraint for Selected {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for Selected {
+    fn schema_title() -> &'static str {
         "Selected Level (Confidentiality, Integrity, or Availability)"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         "The selected (Confidentiality, Integrity, or Availability) security impact level."
     }
-    fn constraint_id() -> &'static str {
-        "#field_oscal-ssp_selected"
+    fn schema_id() -> Option<&'static str> {
+        Some("#field_oscal-ssp_selected")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-ssp:selected"

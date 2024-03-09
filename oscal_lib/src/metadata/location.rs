@@ -5,7 +5,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use super::{Address, Link, Property, Remarks, SchemaConstraint, TelephoneNumber};
+use super::{Address, Link, Property, Remarks, SchemaElement, TelephoneNumber};
 use crate::{EmailAddress, URIDatatype, UUIDDatatype};
 
 #[skip_serializing_none]
@@ -23,15 +23,15 @@ pub struct Location {
     pub remarks: Option<Remarks>,
 }
 
-impl SchemaConstraint for Location {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for Location {
+    fn schema_title() -> &'static str {
         "Location"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"A location, with associated metadata that can be referenced."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-metadata_location"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-metadata_location")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-metadata:location"

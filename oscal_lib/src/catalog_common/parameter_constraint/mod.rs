@@ -5,7 +5,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::SchemaConstraint;
+use crate::SchemaElement;
 
 use self::constraint_test::ConstraintTest;
 
@@ -19,15 +19,15 @@ pub struct ParameterConstraint {
     pub tests: Option<Vec<ConstraintTest>>,
 }
 
-impl SchemaConstraint for ParameterConstraint {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for ParameterConstraint {
+    fn schema_title() -> &'static str {
         "Constraint"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"A formal or informal expression of a constraint or test"#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-catalog-common_parameter-constraint"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-catalog-common_parameter-constraint")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-catalog-common:parameter-constraint"

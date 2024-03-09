@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-use crate::{DateTimeWithTimezoneDatatype, Error, SchemaConstraint};
+use crate::{DateTimeWithTimezoneDatatype, Error, SchemaElement};
 
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 #[serde(transparent)]
@@ -30,15 +30,15 @@ impl From<&DateTimeWithTimezoneDatatype> for Published {
     }
 }
 
-impl SchemaConstraint for Published {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for Published {
+    fn schema_title() -> &'static str {
         "Publication Timestamp"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         "The date and time the document was published. The date-time value must be formatted according to RFC 3339 with full time and time zone included."
     }
-    fn constraint_id() -> &'static str {
-        "#field_oscal-metadata_published"
+    fn schema_id() -> Option<&'static str> {
+        Some("#field_oscal-metadata_published")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-metadata:published"

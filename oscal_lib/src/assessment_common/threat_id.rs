@@ -5,7 +5,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{SchemaConstraint, URIDatatype, URIReferenceDatatype};
+use crate::{SchemaElement, URIDatatype, URIReferenceDatatype};
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
@@ -20,15 +20,15 @@ pub struct ThreatId {
     pub id: URIDatatype,
 }
 
-impl SchemaConstraint for ThreatId {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for ThreatId {
+    fn schema_title() -> &'static str {
         "Threat ID"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"A pointer, by ID, to an externally-defined threat."#
     }
-    fn constraint_id() -> &'static str {
-        "#field_oscal-assessment-common_threat-id"
+    fn schema_id() -> Option<&'static str> {
+        Some("#field_oscal-assessment-common_threat-id")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-assessment-common:threat-id"

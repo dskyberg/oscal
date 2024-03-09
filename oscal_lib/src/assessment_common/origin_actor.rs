@@ -7,7 +7,7 @@ use serde_with::skip_serializing_none;
 
 use crate::{
     metadata::{Link, Property},
-    SchemaConstraint, TokenDatatype, UUIDDatatype,
+    SchemaElement, TokenDatatype, UUIDDatatype,
 };
 
 #[skip_serializing_none]
@@ -27,15 +27,15 @@ pub struct OriginActor {
     pub links: Option<Vec<Link>>,
 }
 
-impl SchemaConstraint for OriginActor {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for OriginActor {
+    fn schema_title() -> &'static str {
         "Originating Actor"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"The actor that produces an observation, a finding, or a risk. One or more actor type can be used to specify a person that is using a tool."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-assessment-common_origin-actor"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-assessment-common_origin-actor")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-assessment-common:origin-actor"

@@ -5,7 +5,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{SchemaConstraint, TokenDatatype, UUIDDatatype};
+use crate::{SchemaElement, TokenDatatype, UUIDDatatype};
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
@@ -15,15 +15,15 @@ pub struct LoggedBy {
     pub role_id: Option<TokenDatatype>,
 }
 
-impl SchemaConstraint for LoggedBy {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for LoggedBy {
+    fn schema_title() -> &'static str {
         "Logged By"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"Used to indicate who created a log entry in what role."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-assessment-common_logged-by"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-assessment-common_logged-by")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-assessment-common:logged-by"

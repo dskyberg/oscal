@@ -5,7 +5,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{SchemaConstraint, StringDatatype, URIDatatype};
+use crate::{SchemaElement, StringDatatype, URIDatatype};
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
@@ -18,15 +18,15 @@ pub struct DocumentId {
     pub scheme: Option<URIDatatype>,
 }
 
-impl SchemaConstraint for DocumentId {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for DocumentId {
+    fn schema_title() -> &'static str {
         "Document Identifier"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"A document identifier qualified by an identifier scheme. A document identifier provides a globally unique identifier with a cross-instance scope that is used for a group of documents that are to be treated as different versions of the same document. If this element does not appear, or if the value of this element is empty, the value of "document-id" is equal to the value of the "uuid" flag of the top-level root element."#
     }
-    fn constraint_id() -> &'static str {
-        "#field_oscal-metadata_document-id"
+    fn schema_id() -> Option<&'static str> {
+        Some("#field_oscal-metadata_document-id")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-metadata:document-id"

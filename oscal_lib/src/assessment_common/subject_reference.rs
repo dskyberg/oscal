@@ -7,7 +7,7 @@ use serde_with::skip_serializing_none;
 
 use crate::{
     metadata::{Link, Property, Remarks},
-    SchemaConstraint, TokenDatatype, UUIDDatatype,
+    SchemaElement, TokenDatatype, UUIDDatatype,
 };
 
 #[skip_serializing_none]
@@ -31,15 +31,15 @@ pub struct SubjectReference {
     pub remarks: Option<Remarks>,
 }
 
-impl SchemaConstraint for SubjectReference {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for SubjectReference {
+    fn schema_title() -> &'static str {
         "Identifies the Subject"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"A human-oriented identifier reference to a resource. Use type to indicate whether the identified resource is a component, inventory item, location, user, or something else."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-assessment-common_subject-reference"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-assessment-common_subject-reference")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-assessment-common:subject-reference"

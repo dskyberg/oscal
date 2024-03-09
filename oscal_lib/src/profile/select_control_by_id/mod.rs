@@ -5,7 +5,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{SchemaConstraint, TokenDatatype};
+use crate::{SchemaElement, TokenDatatype};
 
 use self::pattern::Pattern;
 
@@ -24,15 +24,15 @@ pub struct SelectControlById {
     pub matching: Option<Vec<Pattern>>,
 }
 
-impl SchemaConstraint for SelectControlById {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for SelectControlById {
+    fn schema_title() -> &'static str {
         "Call"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"Call a control by its ID"#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-profile_select-control-by-id"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-profile_select-control-by-id")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-profile:select-control-by-id"

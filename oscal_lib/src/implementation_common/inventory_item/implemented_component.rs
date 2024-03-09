@@ -3,7 +3,7 @@ use serde_with::skip_serializing_none;
 
 use crate::{
     metadata::{Link, Property, Remarks, ResponsibleParty},
-    SchemaConstraint, UUIDDatatype,
+    SchemaElement, UUIDDatatype,
 };
 
 #[skip_serializing_none]
@@ -16,17 +16,17 @@ pub struct ImplementedComponent {
     pub responsible_parties: Option<Vec<ResponsibleParty>>,
     pub remarks: Option<Remarks>,
 }
-impl SchemaConstraint for ImplementedComponent {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for ImplementedComponent {
+    fn schema_title() -> &'static str {
         "Implemented Component"
     }
 
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         "The set of components that are implemented in a given system inventory item."
     }
 
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-implementation-common_inventory-item:implemented-component"
+    fn schema_id() -> Option<&'static str> {
+        None
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-implementation-common:inventory-item:implemented-component"

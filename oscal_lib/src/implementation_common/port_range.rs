@@ -5,7 +5,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{NonNegativeIntegerDatatype, SchemaConstraint, TokenDatatype};
+use crate::{NonNegativeIntegerDatatype, SchemaElement, TokenDatatype};
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
@@ -20,15 +20,15 @@ pub struct PortRange {
     pub transport: TokenDatatype,
 }
 
-impl SchemaConstraint for PortRange {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for PortRange {
+    fn schema_title() -> &'static str {
         "Port Range"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"Where applicable this is the IPv4 port range on which the service operates."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-implementation-common_port-range"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-implementation-common_port-range")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-implementation-common:port-range"

@@ -5,7 +5,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{metadata::Remarks, SchemaConstraint, TokenDatatype};
+use crate::{metadata::Remarks, SchemaElement, TokenDatatype};
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
@@ -22,15 +22,15 @@ pub struct ImplementationStatus {
     pub remarks: Option<Remarks>,
 }
 
-impl SchemaConstraint for ImplementationStatus {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for ImplementationStatus {
+    fn schema_title() -> &'static str {
         "Implementation Status"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"Indicates the degree to which the a given control is implemented."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-implementation-common_implementation-status"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-implementation-common_implementation-status")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-implementation-common:implementation-status"

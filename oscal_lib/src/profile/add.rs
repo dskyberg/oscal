@@ -8,7 +8,7 @@ use serde_with::skip_serializing_none;
 use crate::{
     catalog_common::{parameter::Parameter, part::Part},
     metadata::{Link, Property},
-    SchemaConstraint, TokenDatatype,
+    SchemaElement, TokenDatatype,
 };
 
 #[skip_serializing_none]
@@ -30,15 +30,15 @@ pub struct Add {
     pub parts: Option<Vec<Part>>,
 }
 
-impl SchemaConstraint for Add {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for Add {
+    fn schema_title() -> &'static str {
         "Addition"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"Specifies contents to be added into controls, in resolution"#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-profile_add"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-profile_add")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-profile:add"

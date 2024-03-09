@@ -7,7 +7,7 @@ use serde_with::skip_serializing_none;
 
 use crate::{
     metadata::{Link, Property, Remarks},
-    SchemaConstraint,
+    SchemaElement,
 };
 
 use super::diagram::Diagram;
@@ -23,15 +23,15 @@ pub struct DataFlow {
     pub remarks: Option<Remarks>,
 }
 
-impl SchemaConstraint for DataFlow {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for DataFlow {
+    fn schema_title() -> &'static str {
         "Data Flow"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"A description of the logical flow of information within the system and across its boundaries, optionally supplemented by diagrams that illustrate these flows."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-ssp_data-flow"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-ssp_data-flow")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-ssp:data-flow"

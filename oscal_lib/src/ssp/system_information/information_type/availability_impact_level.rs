@@ -8,7 +8,7 @@ use serde_with::skip_serializing_none;
 use crate::{
     metadata::{Link, Property},
     ssp::{adjustment_justification::AdjustmentJustification, base::Base, selected::Selected},
-    SchemaConstraint,
+    SchemaElement,
 };
 
 #[skip_serializing_none]
@@ -22,15 +22,15 @@ pub struct AvailabilityImpactLevel {
     pub adjustment_justification: Option<AdjustmentJustification>,
 }
 
-impl SchemaConstraint for AvailabilityImpactLevel {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for AvailabilityImpactLevel {
+    fn schema_title() -> &'static str {
         "Availability Impact Level"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         "The expected level of impact resulting from the disruption of access to or use of the described information or the information system."
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-ssp_system-information_information-type_availability-impact-level"
+    fn schema_id() -> Option<&'static str> {
+        None
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-ssp:system-information:information-type:availability-impact-level"

@@ -8,7 +8,7 @@ use serde_with::skip_serializing_none;
 use crate::{
     implementation_common::system_id::SystemId,
     metadata::{Link, Property, Remarks, ResponsibleParty},
-    SchemaConstraint, StringDatatype,
+    SchemaElement, StringDatatype,
 };
 
 use super::{
@@ -40,15 +40,15 @@ pub struct SystemCharacteristics {
     pub remarks: Option<Remarks>,
 }
 
-impl SchemaConstraint for SystemCharacteristics {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for SystemCharacteristics {
+    fn schema_title() -> &'static str {
         "System Characteristics"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"Contains the characteristics of the system, such as its name, purpose, and security impact level."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-ssp_system-characteristics"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-ssp_system-characteristics")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-ssp:system-characteristics"

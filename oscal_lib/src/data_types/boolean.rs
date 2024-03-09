@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 use std::ops::Deref;
 
-use crate::{Error, SchemaConstraint};
+use crate::{Error, SchemaElement, Validate};
 
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 #[serde(transparent)]
@@ -20,20 +20,22 @@ impl From<bool> for BooleanDatatype {
     }
 }
 
-impl SchemaConstraint for BooleanDatatype {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for BooleanDatatype {
+    fn schema_title() -> &'static str {
         ""
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"A boolean value"#
     }
-    fn constraint_id() -> &'static str {
-        ""
+    fn schema_id() -> Option<&'static str> {
+        None
     }
     fn schema_path() -> &'static str {
         "boolean"
     }
+}
 
+impl Validate for BooleanDatatype {
     fn validate(value: &str) -> Result<(), Error> {
         let _ = serde_json::from_str::<bool>(value).map_err(|_| Error::BooleanParse)?;
         Ok(())

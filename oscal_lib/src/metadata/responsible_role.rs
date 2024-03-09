@@ -5,7 +5,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{SchemaConstraint, TokenDatatype};
+use crate::{SchemaElement, TokenDatatype};
 
 use super::{party_uuid::PartyUuid, Link, Property, Remarks};
 
@@ -20,15 +20,15 @@ pub struct ResponsibleRole {
     pub remarks: Option<Remarks>,
 }
 
-impl SchemaConstraint for ResponsibleRole {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for ResponsibleRole {
+    fn schema_title() -> &'static str {
         "Responsible Role"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"A reference to one or more roles with responsibility for performing a function relative to the containing object."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-metadata_responsible-role"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-metadata_responsible-role")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-metadata:responsible-role"

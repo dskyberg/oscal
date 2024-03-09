@@ -5,7 +5,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{BooleanDatatype, SchemaConstraint};
+use crate::{BooleanDatatype, SchemaElement};
 
 use self::{custom_grouping::CustomGrouping, flat::Flat, method::Method};
 
@@ -28,15 +28,15 @@ pub struct Merge {
     pub custom: Option<CustomGrouping>,
 }
 
-impl SchemaConstraint for Merge {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for Merge {
+    fn schema_title() -> &'static str {
         "Merge controls"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"A Merge element provides structuring directives that drive how controls are organized after resolution."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-profile_merge"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-profile_merge")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-profile:merge"

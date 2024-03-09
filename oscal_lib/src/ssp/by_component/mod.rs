@@ -10,7 +10,7 @@ use crate::{
         implementation_status::ImplementationStatus, set_parameter::SetParameter,
     },
     metadata::{Link, Property, Remarks, ResponsibleRole},
-    SchemaConstraint, UUIDDatatype,
+    SchemaElement, UUIDDatatype,
 };
 
 use self::{
@@ -40,15 +40,15 @@ pub struct ByComponent {
     pub remarks: Option<Remarks>,
 }
 
-impl SchemaConstraint for ByComponent {
-    fn constraint_title() -> &'static str {
+impl SchemaElement for ByComponent {
+    fn schema_title() -> &'static str {
         "Component Control Implementation"
     }
-    fn constraint_description() -> &'static str {
+    fn schema_description() -> &'static str {
         r#"Defines how the referenced component implements a set of controls."#
     }
-    fn constraint_id() -> &'static str {
-        "#assembly_oscal-ssp_by-component"
+    fn schema_id() -> Option<&'static str> {
+        Some("#assembly_oscal-ssp_by-component")
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-ssp:by-component"
