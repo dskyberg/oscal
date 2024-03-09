@@ -97,6 +97,22 @@ mod tests {
     }
 
     #[test]
+    fn test_fedramp_automation_catalog() {
+        let json = include_str!("../../fedramp-automation/dist/content/rev5/baselines/json/FedRAMP_rev5_HIGH-baseline-resolved-profile_catalog.json");
+
+        // Deserialize the OSCAL doc
+        let result = serde_json::from_str::<OscalDocumentType>(json);
+        assert!(result.is_ok());
+        let result: OscalDocumentType = result.unwrap();
+        let OscalDocumentType::Catalog(catalog) = result else {
+            panic!("Not a SAR");
+        };
+        let doc = OscalDocumentType::Catalog(catalog);
+        let result = serde_json::to_string_pretty(&doc);
+        assert!(result.is_ok());
+    }
+
+    #[test]
     fn test_oscal_content_catalog() {
         let json = include_str!("../../oscal-content/examples/catalog/json/basic-catalog.json");
 

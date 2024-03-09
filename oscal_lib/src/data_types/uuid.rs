@@ -60,7 +60,7 @@ impl SchemaElement for UUIDDatatype {
 
 impl Validate for UUIDDatatype {
     fn validate(value: &str) -> Result<(), Error> {
-        let _ = uuid::Uuid::parse_str(value);
+        let _ = uuid::Uuid::parse_str(value)?;
         Ok(())
     }
 }
