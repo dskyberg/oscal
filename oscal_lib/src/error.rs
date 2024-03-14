@@ -18,4 +18,6 @@ pub enum Error {
     NCNameIllegalFirstChar,
     #[error("NCName illegal  char")]
     NCNameIllegalChar,
+    #[error("Failed downcast")]
+    FailedDowncast,
 }
