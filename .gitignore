@@ -1,6 +1,7 @@
 Cargo.lock
 .DS_Store
 **/target
+**/output
 **/.vscode
 /oscal-content
 /fedramp-automation
