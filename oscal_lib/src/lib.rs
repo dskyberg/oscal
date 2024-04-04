@@ -1,5 +1,6 @@
 pub use data_types::*;
 pub use error::*;
+pub use rulable::Rulable;
 pub use schema_element::SchemaElement;
 pub use validate::Validate;
 
@@ -16,6 +17,7 @@ pub mod metadata;
 pub mod oscal_document;
 pub mod poam;
 pub mod profile;
+pub mod rulable;
 pub mod schema_element;
 pub mod ssp;
 pub mod validate;

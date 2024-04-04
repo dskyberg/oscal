@@ -9,7 +9,7 @@ use crate::{
     assessment_common::{import_ssp::ImportSsp, observation::Observation, risk::Risk},
     implementation_common::system_id::SystemId,
     metadata::{BackMatter, Metadata},
-    SchemaElement, UUIDDatatype,
+    Rulable, SchemaElement, UUIDDatatype,
 };
 
 use super::{local_definitions::LocalDefinitions, poam_item::PoamItem};
@@ -41,5 +41,26 @@ impl SchemaElement for PlanOfActionAndMilestones {
     }
     fn schema_path() -> &'static str {
         "oscal-complete-oscal-poam:plan-of-action-and-milestones"
+    }
+}
+
+use crate::{oscal_document::OscalDocumentType, Error};
+use std::{any::Any, sync::Arc};
+
+impl Rulable for PlanOfActionAndMilestones {
+    fn from_arc_any(any: Arc<dyn Any + Sync + Send>) -> Result<Arc<Self>, Error> {
+        any.downcast::<PlanOfActionAndMilestones>()
+            .map_err(|_| Error::FailedDowncast("POAM"))
+    }
+    fn to_arc_any(self) -> Arc<dyn Any> {
+        Arc::new(self)
+    }
+    fn parse_json(json: &str) -> Result<Arc<dyn Any + Sync + Send>, Error> {
+        let oscal_doc = serde_json::from_str::<OscalDocumentType>(json)
+            .map_err(|e| Error::JsonParse(e.to_string()))?;
+        match oscal_doc {
+            OscalDocumentType::PlanOfActionAndMilestones(poam) => Ok(Arc::new(*poam)),
+            _ => Err(Error::JsonParse(String::from("Not a POAM"))),
+        }
     }
 }
