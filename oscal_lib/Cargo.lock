@@ -183,6 +183,7 @@ checksum = "5443807d6dff69373d433ab9ef5378ad8df50ca6298caf15de6e52e24aaf54d5"
 [[package]]
 name = "fluent-uri"
 version = "0.1.4"
+source = "git+https://github.com/dskyberg/fluent-uri-rs.git#789a3cfdd068df0331980ff4c7c66140e2dcf0bb"
 dependencies = [
  "bitflags 1.3.2",
  "serde",

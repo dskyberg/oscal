@@ -12,7 +12,7 @@ license = "MIT OR Apache 2.0"
 
 [dependencies]
 chrono = { version = "0.4", features = ["serde", "alloc", "now", "serde"] }
-fluent-uri = { path = "../fluent-uri-rs" }
+fluent-uri = { git = "https://github.com/dskyberg/fluent-uri-rs.git" }
 rhai = { version = "*", optional = true }
 semver = { version = "1.0.18", features = ["serde"] }
 serde = { version = "1.0.171", features = ["derive"] }
