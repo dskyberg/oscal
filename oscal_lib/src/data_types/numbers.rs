@@ -55,11 +55,7 @@ impl From<i64> for IntegerDatatype {
     }
 }
 
-impl NumberType for IntegerDatatype {
-    fn minimum() -> Option<i64> {
-        Some(0)
-    }
-}
+impl NumberType for IntegerDatatype {}
 
 impl SchemaElement for IntegerDatatype {
     fn schema_title() -> &'static str {
