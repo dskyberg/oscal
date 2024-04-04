@@ -18,6 +18,8 @@ pub enum Error {
     NCNameIllegalFirstChar,
     #[error("NCName illegal  char")]
     NCNameIllegalChar,
-    #[error("Failed downcast")]
-    FailedDowncast,
+    #[error("Failed downcast {0}")]
+    FailedDowncast(&'static str),
+    #[error("JSON Parse error: {0}")]
+    JsonParse(String),
 }
